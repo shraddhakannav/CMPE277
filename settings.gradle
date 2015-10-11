@@ -1,1 +1,1 @@
-include ':app', ':cmpe277module'
+include ':app'

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CMPE277.iml" filepath="$PROJECT_DIR$/CMPE277.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cmpe277module/cmpe277module.iml" filepath="$PROJECT_DIR$/cmpe277module/cmpe277module.iml" />
     </modules>
   </component>
 </project>
