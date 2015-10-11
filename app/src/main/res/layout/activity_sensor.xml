@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.shraddha.cmpe277.SensorActivity">
+
+   <TableLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+       <TableRow>
+           <TextView
+               android:id="@+id/TemperatureSensorLabel"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:text="@string/TemperatureSensorLabel"/>
+
+           <TextView
+               android:id="@+id/TemperatureSensorValue"
+               android:layout_marginLeft="30dp"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:hint="@string/placeholder"/>
+
+       </TableRow>
+
+       <TableRow>
+           <TextView
+               android:id="@+id/PressureSensorLabel"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:text="@string/PressureSensorLabel"/>
+
+           <TextView
+               android:id="@+id/PressureSensorValue"
+               android:layout_marginLeft="30dp"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:hint="@string/placeholder"/>
+
+       </TableRow>
+
+       <TableRow>
+           <TextView
+               android:id="@+id/LightSensorLabel"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:text="@string/LightSensorLabel"/>
+
+           <TextView
+               android:id="@+id/LightSensorValue"
+               android:layout_marginLeft="30dp"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:hint="@string/placeholder"/>
+
+       </TableRow>
+       <TableRow>
+           <TextView
+               android:id="@+id/HumiditySensorLabel"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:text="@string/HumiditySensorLabel"/>
+
+           <TextView
+               android:id="@+id/HumiditySensorValue"
+               android:layout_marginLeft="30dp"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:hint="@string/placeholder"/>
+
+       </TableRow>
+
+   </TableLayout>
+
+</RelativeLayout>
