@@ -12,6 +12,8 @@ import com.google.api.server.spi.config.ApiNamespace;
 
 import javax.inject.Named;
 
+import sun.management.Sensor;
+
 /**
  * An endpoint class we are exposing
  */
@@ -35,6 +37,11 @@ public class MyEndpoint {
         response.setData("Hi, " + name);
 
         return response;
+    }
+
+    @ApiMethod(name = "sensorlist")
+    public Sensor sensorList() {
+        return null;
     }
 
 }
