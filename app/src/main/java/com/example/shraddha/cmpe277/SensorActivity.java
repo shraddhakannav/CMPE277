@@ -5,23 +5,20 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.List;
 
-import static android.app.PendingIntent.getActivity;
-
 public class SensorActivity extends AppCompatActivity  {//implements SensorEventListener
+    TextView mTempSensorValue;
+    TextView mPresSensorValue;
     private SensorManager mSensorManager;
     private Sensor mTemperatureSensor;
     private SensorEventListener sensorEventListener;
-    TextView mTempSensorValue;
-    TextView mPresSensorValue;
     private float mTempValue;
     private float mPressureValue;
     private long mTempTimeStamp;
@@ -96,7 +93,7 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sensor, menu);
+        //getMenuInflater().inflate(R.menu.menu_sensor, menu);
         return true;
     }
 
