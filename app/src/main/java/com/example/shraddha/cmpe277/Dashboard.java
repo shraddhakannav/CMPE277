@@ -1,22 +1,28 @@
 package com.example.shraddha.cmpe277;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-import static android.app.PendingIntent.getActivity;
+public class Dashboard extends AppCompatActivity implements SensorEventListener {
 
-public class SensorActivity extends AppCompatActivity  {//implements SensorEventListener
     private SensorManager mSensorManager;
     private Sensor mTemperatureSensor;
     private SensorEventListener sensorEventListener;
@@ -36,14 +42,18 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sensor);
-        // Get the text fields to set the values from the sensors.
-        mPresSensorValue = (TextView)findViewById(R.id.PressureSensorValue);
-        mTempSensorValue = (TextView)findViewById(R.id.TemperatureSensorValue);
-        mLightSensorValue =(TextView)findViewById(R.id.LightSensorValue);
-        mHumiditySensorValue =(TextView)findViewById(R.id.HumiditySensorValue);
+        setContentView(R.layout.dashboard);
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        // Informational : To check the sensors in a device.
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
+
+//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View v,
+//                                    int position, long id) {
+//                Toast.makeText(Dashboard.this, "" + position,
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         getListofSensors();
         sensorEventListener = new SensorEventListener() {
@@ -91,12 +101,14 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
         for(Sensor s : deviceSensors){
             System.out.println(s.getName());
         }
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sensor, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -115,6 +127,60 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    public class ImageAdapter extends BaseAdapter {
+        private Context mContext;
+
+        public ImageAdapter(Context c) {
+            mContext = c;
+        }
+
+        public int getCount() {
+            return mThumbIds.length;
+        }
+
+        public Object getItem(int position) {
+            return null;
+        }
+
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        // create a new ImageView for each item referenced by the Adapter
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ImageView imageView = new ImageView(mContext);;
+            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(8, 8, 8, 8);
+            imageView.setBackgroundColor(Color.CYAN);
+            imageView.setImageResource(mThumbIds[position]);
+
+            return imageView;
+        }
+
+        // references to our images
+        private Integer[] mThumbIds = {
+                R.drawable.temp,
+                R.drawable.light,
+                R.drawable.pressure,
+                R.drawable.magnetic,
+        };
+    }
+
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -130,6 +196,4 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
         mSensorManager.unregisterListener(sensorEventListener);
 
     }
-
-
 }

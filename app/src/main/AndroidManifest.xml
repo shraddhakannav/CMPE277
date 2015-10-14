@@ -24,6 +24,9 @@
             android:name=".SensorActivity"
             android:label="@string/title_activity_sensor" >
         </activity>
+        <activity android:name=".Dashboard" />
+        <activity android:name=".UserDisplayList" />
+
     </application>
 
 </manifest>

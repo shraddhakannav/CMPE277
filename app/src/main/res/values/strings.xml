@@ -12,4 +12,5 @@
     <string name="LightSensorLabel">Light Sensor</string>
     <string name="HumiditySensorLabel">Humidity Sensor</string>
     <string name="placeholder">Unavailable</string>
+    <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
 </resources>
