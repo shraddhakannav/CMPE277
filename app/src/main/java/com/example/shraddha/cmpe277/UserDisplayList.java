@@ -32,7 +32,7 @@ public class UserDisplayList extends ActionBarActivity {
         images.add(R.drawable.pressure);
         images.add(R.drawable.temp);
 
-        CustomAdapter adapter = new CustomAdapter(this,images,texts);
+        CustomAdapter adapter = new CustomAdapter(this, images, texts);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new ListClickHandler());
 

@@ -5,8 +5,35 @@ package com.example.shraddha.cmpe277.backend;
  */
 public class Sensor {
 
+    private long sensor_id;
+
     private String name;
-    private String description;
+    private String type;
+    private long device_id;
+
+    public long getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(long device_id) {
+        this.device_id = device_id;
+    }
+
+    public long getSensor_id() {
+        return sensor_id;
+    }
+
+    public void setSensor_id(long sensor_id) {
+        this.sensor_id = sensor_id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getName() {
         return name;
@@ -16,16 +43,8 @@ public class Sensor {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void Sensor(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public void Sensor(long device_id) {
+        this.device_id = device_id;
     }
 }

@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       Button button_test= (Button) findViewById(R.id.userbtn);
+        Button button_test = (Button) findViewById(R.id.userbtn);
 
         // add a onclick listner to button here
         button_test.setOnClickListener(new View.OnClickListener() {
@@ -48,4 +48,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-  }
+}

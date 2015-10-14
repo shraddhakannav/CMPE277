@@ -32,13 +32,12 @@ public class SensorEndpoint {
      * @return The <code>Sensor</code> associated with <code>id</code>.
      */
     @ApiMethod(name = "getSensor")
-    public Sensor getSensor(@Named("id") Long id) {
+    public Sensor getSensor(@Named("id") long id) {
         // TODO: Implement this function
         logger.info("Calling getSensor method");
         Sensor sensor = new Sensor();
+        sensor.setSensor_id(id);
         sensor.setName("Humidity");
-        sensor.setDescription("Available");
-
         return sensor;
     }
 
