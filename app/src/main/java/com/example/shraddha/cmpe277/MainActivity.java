@@ -1,12 +1,12 @@
 package com.example.shraddha.cmpe277;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,10 +14,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public void onSubmitClick(View view) {
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "CMPE 277"));
+       Button button_test= (Button) findViewById(R.id.userbtn);
+
+        // add a onclick listner to button here
+        button_test.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UserDisplayList.class);
+                startActivity(intent); //<<< start Activity here
+            }
+        });
     }
 
     @Override
@@ -41,4 +47,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+
+  }

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shraddha.cmpe277" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,14 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <uses-feature android:name="android.hardware.bluetooth" />
-        <uses-feature android:name="android.hardware.camera" />
-
-        <activity
-            android:name=".SensorActivity"
-            android:label="@string/title_activity_sensor" >
-        </activity>
+        <activity android:name=".Dashboard" />
+        <activity android:name=".UserDisplayList" />
     </application>
 
 </manifest>
