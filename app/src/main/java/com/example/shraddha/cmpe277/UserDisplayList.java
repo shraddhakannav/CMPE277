@@ -57,7 +57,7 @@ public class UserDisplayList extends ActionBarActivity {
                 startActivity(i);
             }
             if (position == 2) {
-                Intent i = new Intent(UserDisplayList.this, Maps.class);
+                Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
 
                 startActivity(i);
 
