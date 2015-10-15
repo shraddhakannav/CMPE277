@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -57,6 +58,8 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+
+        setUpMap();
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         // data
@@ -141,7 +144,7 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         sensordata.setSensortype(type);
         sensordata.setLatitude(latitude);
         sensordata.setLongitude(longitude);
-        sensordata.setValue(value + "");
+        sensordata.setValue(value);
 
         new InsertSensorDataAsyncTask().execute(new Pair<Context, SensorData>(this, sensordata));
     }
@@ -219,8 +222,23 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
 
     @Override
     public void onLocationChanged(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+
+        setUpMap();
+
+    }
+
+    private void setUpMap() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        Location myLocation = locationManager.getLastKnownLocation(provider);
+
+        if (myLocation != null) {
+
+            latitude = myLocation.getLatitude();
+            longitude = myLocation.getLongitude();
+        }
     }
 
     @Override

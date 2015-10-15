@@ -75,5 +75,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(30));
         googleMap.addMarker(new MarkerOptions().position(latlang).title("You are here"));
+
+        GlobalValues.setLatitude(latitude);
+        GlobalValues.setLongitude(longitude);
     }
 }

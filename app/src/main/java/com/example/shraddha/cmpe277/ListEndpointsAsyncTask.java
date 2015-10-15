@@ -44,7 +44,7 @@ public class ListEndpointsAsyncTask extends AsyncTask<Context, Void, List<Sensor
     protected void onPostExecute(List<SensorData> list) {
         if (list != null)
             for (SensorData t : list) {
-                Toast.makeText(context, t.getValue(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, t.getValue() + "", Toast.LENGTH_LONG).show();
             }
         else
             Toast.makeText(context, "No Users", Toast.LENGTH_LONG).show();

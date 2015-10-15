@@ -2,6 +2,7 @@ package com.example.shraddha.cmpe277;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -33,7 +34,15 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
             statusDetails.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG);
+                    if (e == null) {
+                        // Saved successfully.
+                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // The save failed.
+                        Toast.makeText(context, "Failed to Save", Toast.LENGTH_SHORT).show();
+                        Log.d(getClass().getSimpleName(), "User update error: " + e);
+                        e.printStackTrace();
+                    }
                 }
             });
 
