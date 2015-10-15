@@ -36,8 +36,7 @@ public class SensorEndpoint {
         // TODO: Implement this function
         logger.info("Calling getSensor method");
         Sensor sensor = new Sensor();
-        sensor.setSensor_id(id);
-        sensor.setName("Humidity");
+        sensor.setName("Mysensor");
         return sensor;
     }
 
@@ -53,4 +52,6 @@ public class SensorEndpoint {
         logger.info("Calling insertSensor method");
         return sensor;
     }
+
+
 }

@@ -63,7 +63,7 @@ public class UserDisplayList extends ActionBarActivity {
 
             }
             if (position == 3) {
-                Intent i = new Intent(UserDisplayList.this, Report.class);
+                Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
 
                 startActivity(i);
 

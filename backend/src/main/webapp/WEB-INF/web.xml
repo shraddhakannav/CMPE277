@@ -5,8 +5,8 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.example.shraddha.cmpe277.backend.MyEndpoint,
-                com.example.shraddha.cmpe277.backend.SensorEndpoint
+            <param-value>com.example.shraddha.cmpe277.backend.SensorEndpoint,
+                com.example.shraddha.cmpe277.backend.UserEndpoint
             </param-value>
         </init-param>
     </servlet>

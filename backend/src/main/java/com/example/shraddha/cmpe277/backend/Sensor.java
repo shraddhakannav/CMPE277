@@ -6,7 +6,6 @@ package com.example.shraddha.cmpe277.backend;
 public class Sensor {
 
     private long sensor_id;
-
     private String name;
     private String type;
     private long device_id;

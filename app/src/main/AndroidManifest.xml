@@ -28,8 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Dashboard" />
-        <activity android:name=".UserDisplayList" />
+        <activity
+            android:name=".SensorActivity"
+            android:label="@string/title_activity_sensor" />
+        <activity
+            android:name=".UserDisplayList"
+            android:label="@string/title_activity_userdisplay" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -44,6 +48,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.shraddha.cmpe277.UserDisplayList" />
+        </activity>
+        <activity
+            android:name=".SensorRegistration"
+            android:label="@string/title_activity_sensor_registration"
+            android:parentActivityName=".UserDisplayList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shraddha.cmpe277.UserDisplayList" />
+        </activity>
+        <activity
+            android:name=".IndividualSensor"
+            android:label="@string/title_activity_individual_sensor"
+            android:parentActivityName=".SensorRegistration">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shraddha.cmpe277.SensorRegistration" />
         </activity>
     </application>
 

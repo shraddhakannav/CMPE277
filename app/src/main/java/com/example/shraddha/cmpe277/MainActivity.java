@@ -8,12 +8,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.Parse;
+
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private static String TAG = "Main Activity";
+
+    private String APPLICATION_ID = "SauyeeY2Qa9qhwldPqG9MOgTokl6uepNliHK4jZE";
+    private String CLIENT_KEY = "3z5vqgwhTRsoo69LkFlLqww9p2nk6ZIa6uIbHc4k";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
+
 
         Button button_test = (Button) findViewById(R.id.userbtn);
 
@@ -22,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UserDisplayList.class);
                 startActivity(intent); //<<< start Activity here
+
             }
         });
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
