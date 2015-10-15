@@ -5,6 +5,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,9 +13,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    List<SensorData> sensors;
+    List<Double> latitudes = new ArrayList<Double>();
+    List<Double> longitudes = new ArrayList<Double>();
     private GoogleMap googleMap;
     private double latitude;
     private double longitude;
@@ -25,6 +35,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         setUpMapIfNeeded();
+        markAllSensor();
+    }
+
+    private void markAllSensor() {
+
+        getParseData("Light");
+        for (SensorData data : sensors) {
+
+            if (!latitudes.contains(data.getLatitude()) && !longitudes.contains(data.getLongitude())) {
+                latitudes.add(data.getLatitude());
+                longitudes.add(data.getLongitude());
+                addMarker(data);
+            }
+        }
     }
 
     private void setUpMapIfNeeded() {
@@ -78,5 +102,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         GlobalValues.setLatitude(latitude);
         GlobalValues.setLongitude(longitude);
+    }
+
+    public void addMarker(SensorData sensor) {
+        LatLng latlang = new LatLng(sensor.getLatitude(), sensor.getLongitude());
+        googleMap.addMarker(new MarkerOptions().position(latlang).title("" + sensor.getValue()));
+    }
+
+
+    public void getParseData(String sensortype) {
+
+        sensors = new ArrayList<SensorData>();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("SensorData");
+        query.whereEqualTo("sensortype", sensortype);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, com.parse.ParseException e) {
+                if (e == null) {
+                    sensors.clear();
+                    for (ParseObject object : list) {
+                        SensorData sensor = new SensorData();
+                        sensor.setSensortype(object.getString("sensortype"));
+                        sensor.setLatitude(object.getParseGeoPoint("location").getLatitude());
+                        sensor.setLongitude(object.getParseGeoPoint("location").getLatitude());
+                        sensor.setValue(object.getDouble("value"));
+                        sensors.add(sensor);
+                    }
+                    Log.d("score", "Retrieved " + list.size() + " Sensors are up");
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 }

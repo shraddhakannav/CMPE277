@@ -1,7 +1,5 @@
 package com.example.shraddha.cmpe277;
 
-import java.sql.Date;
-
 /**
  * Created by Shraddha on 10/14/15.
  */
@@ -13,7 +11,7 @@ public class SensorData {
     private double longitude;
 
     private double value;
-    private Date time;
+
 
     public int getId() {
         return id;
@@ -55,11 +53,4 @@ public class SensorData {
         this.value = value;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
 }
