@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +17,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Dashboard extends AppCompatActivity implements SensorEventListener {
@@ -38,14 +42,17 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
     private long mLightTimeStamp;
     private TextView mHumiditySensorValue;
     private TextView mLightSensorValue;
+    private float mSensorValues[]={0,0,0,0};
+    DecimalFormat decimalFormat = new DecimalFormat("####.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
+        final ImageAdapter imageAdapter = new ImageAdapter(this);
+        gridview.setAdapter(imageAdapter);
 
 //        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View v,
@@ -62,26 +69,31 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
                 Sensor sensor = event.sensor;
                 if(sensor.getType()==Sensor.TYPE_AMBIENT_TEMPERATURE )
                 {
-                    mTempValue = event.values[0];
+                    mSensorValues[0] = event.values[0];
                     mTempTimeStamp = event.timestamp;
+                    imageAdapter.notifyDataSetChanged();
+
 
                 }
                 else if (sensor.getType()==Sensor.TYPE_PRESSURE){
-                    mPressureValue = event.values[0];
+                    mSensorValues[1] = Float.valueOf(decimalFormat.format(event.values[0]));
                     mPressureTimeStamp = event.timestamp;
-                    System.out.println("Pressure value" + mPressureValue);
-                    mPresSensorValue.setText(Float.toString(mPressureValue));
+                    System.out.println("pressure value" + mPressureValue);
+                    imageAdapter.notifyDataSetChanged();
+
                 }
                 else if (sensor.getType()==Sensor.TYPE_RELATIVE_HUMIDITY){
-                    mHumidityValue = event.values[0];
+                    mSensorValues[2] = event.values[0];
                     mHumidityTimeStamp = event.timestamp;
+                    imageAdapter.notifyDataSetChanged();
                 }
 
                 else if (sensor.getType()==Sensor.TYPE_LIGHT){
-                    mLightValue = event.values[0];
+                    mSensorValues[3] = event.values[0];
                     mLightTimeStamp = event.timestamp;
                     System.out.println("Illumination" + mLightValue);
-                    mLightSensorValue.setText(Float.toString(mLightValue));
+                    imageAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -127,8 +139,6 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public class ImageAdapter extends BaseAdapter {
         private Context mContext;
 
@@ -137,7 +147,8 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         }
 
         public int getCount() {
-            return mThumbIds.length;
+           // return mThumbIds.length;
+            return mSensorValues.length;
         }
 
         public Object getItem(int position) {
@@ -151,25 +162,62 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            ImageView imageView = new ImageView(mContext);;
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 200));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-            imageView.setBackgroundColor(Color.CYAN);
-            imageView.setImageResource(mThumbIds[position]);
+            LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            return imageView;
+            View gridView;
+
+            if (convertView == null) {
+
+                gridView = new View(mContext);
+            }
+
+                // get layout from grid_item.xml ( Defined Below )
+
+                gridView = inflater.inflate( R.layout.custom_grid_item , null);
+
+                RelativeLayout relativeLayout =
+                    (RelativeLayout) gridView.findViewById(R.id.custom_grid_item_table);
+            relativeLayout.setLayoutParams(new GridView.LayoutParams(365, 365));
+                // textView.setsc(textView.ScaleType.CENTER_CROP);
+            relativeLayout.setPadding(8, 8, 8, 8);
+            relativeLayout.setBackgroundColor(getResources().getColor(gridColors[position]));
+
+
+                TextView sensorLabel = (TextView) gridView.findViewById(R.id.SensorLabel);
+                sensorLabel.setText(gridSensorLabels[position]);
+
+                TextView sensorValue = (TextView) gridView.findViewById(R.id.SensorValue);
+                sensorValue.setText(Float.toString(mSensorValues[position]));
+
+                TextView unit = (TextView) gridView.findViewById(R.id.Unit);
+                unit.setText(gridSensorUnits[position]);
+
+                return gridView;
         }
 
         // references to our images
-        private Integer[] mThumbIds = {
-                R.drawable.temp,
-                R.drawable.light,
-                R.drawable.pressure,
-                R.drawable.magnetic,
+        //private Integer[] mThumbIds = {
+        //        R.drawable.temp,
+        //        R.drawable.light,
+        //        R.drawable.pressure,
+        //        R.drawable.magnetic,
+        //};
+
+        private int[] gridColors={
+            R.color.green,
+           R.color.orange,
+            R.color.blue,
+            R.color.red
+        };
+
+        private String gridSensorLabels[] ={
+            "Temperature","pressure","Humidity","Light"
+        };
+
+        private String gridSensorUnits[] ={
+            "°C","hPA","%","lx"
         };
     }
-
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -180,7 +228,6 @@ public class Dashboard extends AppCompatActivity implements SensorEventListener 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
     @Override
     public void onResume() {
         super.onResume();

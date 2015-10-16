@@ -59,7 +59,7 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
                 else if (sensor.getType()==Sensor.TYPE_PRESSURE){
                     mPressureValue = event.values[0];
                     mPressureTimeStamp = event.timestamp;
-                    System.out.println("Pressure value" + mPressureValue);
+                    System.out.println("pressure value" + mPressureValue);
                     mPresSensorValue.setText(Float.toString(mPressureValue));
                 }
                 else if (sensor.getType()==Sensor.TYPE_RELATIVE_HUMIDITY){
@@ -96,7 +96,7 @@ public class SensorActivity extends AppCompatActivity  {//implements SensorEvent
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sensor, menu);
+    //    getMenuInflater().inflate(R.menu.menu_sensor, menu);
         return true;
     }
 

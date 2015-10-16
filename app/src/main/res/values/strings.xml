@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CMPE277</string>
+    <string name="app_name">Sense</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -13,4 +13,6 @@
     <string name="HumiditySensorLabel">Humidity Sensor</string>
     <string name="placeholder">Unavailable</string>
     <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
+    <string name="sampleText">Text goes here</string>
+    <string name="user_type">Tell us who you are...</string>
 </resources>
