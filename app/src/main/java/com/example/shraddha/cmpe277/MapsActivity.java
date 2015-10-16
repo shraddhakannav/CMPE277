@@ -9,11 +9,12 @@ import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.parse.FindCallback;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    List<SensorData> sensors;
+    List<ParseObject> sensors = new ArrayList<ParseObject>();
     List<Double> latitudes = new ArrayList<Double>();
     List<Double> longitudes = new ArrayList<Double>();
     private GoogleMap googleMap;
@@ -34,31 +35,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        setUpMapIfNeeded();
-        markAllSensor();
-    }
+        getParseData("");
 
-    private void markAllSensor() {
-
-        getParseData("Light");
-        for (SensorData data : sensors) {
-
-            if (!latitudes.contains(data.getLatitude()) && !longitudes.contains(data.getLongitude())) {
-                latitudes.add(data.getLatitude());
-                longitudes.add(data.getLongitude());
-                addMarker(data);
-            }
-        }
-    }
-
-    private void setUpMapIfNeeded() {
-
-        if (googleMap == null) {
-            googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-            if (googleMap != null) {
-                setUpMap();
-            }
-        }
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     private void setUpMap() {
@@ -70,13 +51,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Location location = locationManager.getLastKnownLocation(provider);
 
-        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         if (location != null) {
 
             latitude = location.getLatitude();
             longitude = location.getLongitude();
         }
+
+        LatLng latlang = new LatLng(latitude, longitude);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
+        addMarker(latitude, longitude, R.drawable.pinkmarker);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 15));
+
+        GlobalValues.setLatitude(latitude);
+        GlobalValues.setLongitude(longitude);
     }
 
 
@@ -94,45 +83,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap map) {
-        LatLng latlang = new LatLng(latitude, longitude);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
+        googleMap = map;
+        setUpMap();
 
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(30));
-        googleMap.addMarker(new MarkerOptions().position(latlang).title("You are here"));
+        try {
+            Log.d("Sensors", sensors.toString());
+            for (ParseObject data : sensors) {
+                Log.d("Sensors", data.getString("sensortype"));
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(data.getParseGeoPoint("location").getLatitude(), data.getParseGeoPoint("location").getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.bluemarker)));
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         GlobalValues.setLatitude(latitude);
         GlobalValues.setLongitude(longitude);
     }
 
-    public void addMarker(SensorData sensor) {
-        LatLng latlang = new LatLng(sensor.getLatitude(), sensor.getLongitude());
-        googleMap.addMarker(new MarkerOptions().position(latlang).title("" + sensor.getValue()));
+    public void addMarker(double latitude, double longitude, int icon) {
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).icon(BitmapDescriptorFactory.fromResource(icon)));
     }
 
 
     public void getParseData(String sensortype) {
 
-        sensors = new ArrayList<SensorData>();
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("SensorData");
-        query.whereEqualTo("sensortype", sensortype);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, com.parse.ParseException e) {
-                if (e == null) {
-                    sensors.clear();
-                    for (ParseObject object : list) {
-                        SensorData sensor = new SensorData();
-                        sensor.setSensortype(object.getString("sensortype"));
-                        sensor.setLatitude(object.getParseGeoPoint("location").getLatitude());
-                        sensor.setLongitude(object.getParseGeoPoint("location").getLatitude());
-                        sensor.setValue(object.getDouble("value"));
-                        sensors.add(sensor);
-                    }
-                    Log.d("score", "Retrieved " + list.size() + " Sensors are up");
-                } else {
-                    Log.d("score", "Error: " + e.getMessage());
-                }
-            }
-        });
+        try {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("SensorData");
+            if (sensortype != null && !sensortype.isEmpty())
+                query.whereEqualTo("sensortype", sensortype);
+            sensors = query.find();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getNearbyLocation(ParseGeoPoint location, int kilometers) {
+        ParseQuery query = new ParseQuery("PlaceObject");
+        query.whereNear("location", location);
+        query.setLimit(10);
+
+//        query.findInBackground(new FindCallback() {
+//            @Override
+//            public void done(List list, ParseException e) {
+//
+//            }
+//        });
+
     }
 }

@@ -1,6 +1,5 @@
 package com.example.shraddha.cmpe277;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -35,28 +34,25 @@ public class SensorRegistration extends AppCompatActivity {
         list = (ListView) findViewById(R.id.sensorslist);
         list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        list.setOnItemClickListener(getItemClickListener());
 
+    }
+
+    private AdapterView.OnItemClickListener getItemClickListener() {
+        return new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Sensor selecteditem = sensors.get(position);
-
-                Fragment f = new Fragment();
-
-                Intent intent = new Intent(SensorRegistration.this, IndividualSensor.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SensorRegistration.this, SensorDetails.class);
+                intent.putExtra("sensortype", sensors.get(position).getType());
                 startActivity(intent);
-
-                Toast.makeText(getApplicationContext(), selecteditem.getName(), Toast.LENGTH_SHORT).show();
             }
-        });
+        };
     }
 
     public List<Sensor> getListOfAvailableSensors() {
         sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         for (Sensor s : sensors) {
             itemname.add(s.getName());
-//            s.getPower();
             imgid.add(R.drawable.light);
             System.out.println(s.getName());
         }
@@ -65,7 +61,6 @@ public class SensorRegistration extends AppCompatActivity {
 
 
     public void submitRegistration(View view) {
-
         Toast.makeText(this, "Successful registration", Toast.LENGTH_LONG);
     }
 

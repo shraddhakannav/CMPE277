@@ -52,7 +52,7 @@ public class UserDisplayList extends ActionBarActivity {
                 startActivity(i);
             }
             if (position == 1) {
-                Intent i = new Intent(UserDisplayList.this, SensorActivity.class);
+                Intent i = new Intent(UserDisplayList.this, Dashboard.class);
 
                 startActivity(i);
             }
@@ -63,7 +63,7 @@ public class UserDisplayList extends ActionBarActivity {
 
             }
             if (position == 3) {
-                Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
+                Intent i = new Intent(UserDisplayList.this, SensorActivity.class);
 
                 startActivity(i);
 

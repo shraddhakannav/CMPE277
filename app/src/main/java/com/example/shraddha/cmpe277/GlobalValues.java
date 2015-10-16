@@ -8,6 +8,7 @@ public class GlobalValues {
     private static double latitude;
 
     private static double longitude;
+    private static String deviceId;
 
     public static double getLatitude() {
         return latitude;
@@ -23,5 +24,13 @@ public class GlobalValues {
 
     public static void setLongitude(double longitude) {
         GlobalValues.longitude = longitude;
+    }
+
+    public static String getDeviceId() {
+        return deviceId;
+    }
+
+    public static void setDeviceId(String deviceId) {
+        GlobalValues.deviceId = deviceId;
     }
 }

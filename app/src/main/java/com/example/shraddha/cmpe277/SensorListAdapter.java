@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +25,6 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
         super(context, R.layout.sensorlist, sensors);
 
         this.sensors = sensors;
-
         this.context = context;
     }
 
@@ -36,15 +34,12 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.itemname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView extratxt = (TextView) rowView.findViewById(R.id.desc);
-
-        final CheckBox toggleButton = (CheckBox) rowView.findViewById(R.id.checkBox);
-        toggleButton.setOnCheckedChangeListener(getOnChangeListener());
+        TextView extract = (TextView) rowView.findViewById(R.id.desc);
 
         Sensor sensor = sensors.get(position);
         txtTitle.setText(sensor.getName());
         imageView.setImageResource(R.drawable.pressure);
-        extratxt.setText("Description: " + sensor.getPower());
+        extract.setText("Description: " + sensor.getPower());
         return rowView;
 
     }
@@ -58,7 +53,6 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
 
 
                 } else {
-                    // Delete registered Sensor
                 }
             }
         };

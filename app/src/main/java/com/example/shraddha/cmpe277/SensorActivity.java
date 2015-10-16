@@ -194,8 +194,8 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
                     }
 
                     if (i % 20 == 0 && threadRunning) {
-                        insertSensorDataInstance("LIGHT", mLightValue);
-                        insertSensorDataInstance("PRESSURE", mPressureValue);
+                        insertSensorDataInstance(Sensor.STRING_TYPE_LIGHT, mLightValue);
+                        insertSensorDataInstance(Sensor.STRING_TYPE_PRESSURE, mPressureValue);
                     }
                 }
             }

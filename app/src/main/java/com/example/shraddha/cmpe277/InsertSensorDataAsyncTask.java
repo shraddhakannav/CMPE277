@@ -36,7 +36,7 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
                 public void done(ParseException e) {
                     if (e == null) {
                         // Saved successfully.
-                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Saved Sensor Data", Toast.LENGTH_SHORT).show();
                     } else {
                         // The save failed.
                         Toast.makeText(context, "Failed to Save", Toast.LENGTH_SHORT).show();
