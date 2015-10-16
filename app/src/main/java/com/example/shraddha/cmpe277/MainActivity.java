@@ -1,22 +1,16 @@
 package com.example.shraddha.cmpe277;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.parse.Parse;
 
-
 public class MainActivity extends AppCompatActivity {
-
 
     private static String TAG = "Main Activity";
 
@@ -27,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getDeviceId();
 
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
@@ -44,46 +36,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    public void registerMe(View view) {
-
-        showCustomDialog();
-    }
-
-    protected void showCustomDialog() {
-        // TODO Auto-generated method stub
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.activity_register_me_dialog);
-
-        final EditText editText = (EditText) dialog.findViewById(R.id.phone);
-        Button button = (Button) dialog.findViewById(R.id.registerphonebtn);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                editText.getText();
-
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-
-    public String getDeviceId() {
-
-        String android_id = Settings.Secure.getString(this.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-
-        GlobalValues.setDeviceId(android_id);
-
-
-        return android_id;
     }
 
 
@@ -109,4 +61,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-}
+  }

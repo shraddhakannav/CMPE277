@@ -24,4 +24,7 @@
     <string name="title_activity_sensor_details">SensorDetails</string>
     <string name="title_activity_register_me_dialog">RegisterMeDialog</string>
 
+    <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
+    <string name="sampleText">Text goes here</string>
+    <string name="user_type">Tell us who you are...</string>
 </resources>

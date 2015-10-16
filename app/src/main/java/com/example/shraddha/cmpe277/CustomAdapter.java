@@ -20,7 +20,8 @@ public class CustomAdapter extends ArrayAdapter<Integer> {
     private ArrayList<String> texts;
     private LayoutInflater inflater;
 
-    public CustomAdapter(Context c, ArrayList<Integer> imgs, ArrayList<String> txts) {
+    public CustomAdapter(Context c, ArrayList<Integer> imgs,ArrayList<String> txts)
+    {
         super(c, R.layout.single_card, imgs);
         images = imgs;
         texts = txts;
@@ -28,21 +29,22 @@ public class CustomAdapter extends ArrayAdapter<Integer> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
 
-        View vi = convertView;
-        if (convertView == null) {
-            vi = inflater.inflate((R.layout.single_card), parent, false);
-        }
-        TextView title = (TextView) vi.findViewById(R.id.info_text);
-        ImageView imgView = (ImageView) vi.findViewById(R.id.some_image);
-
-        title.setText(texts.get(position));
-        imgView.setImageResource(images.get(position));
-
-        return vi;
-
+    View vi = convertView;
+    if (convertView == null)
+    {
+        vi = inflater.inflate((R.layout.single_card), parent, false);
     }
+    TextView title = (TextView) vi.findViewById(R.id.info_text);
+    ImageView imgView = (ImageView) vi.findViewById(R.id.some_image);
+
+    title.setText(texts.get(position));
+    imgView.setImageResource(images.get(position));
+
+    return vi;
+
+}
 }
 
 

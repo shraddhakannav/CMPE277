@@ -27,12 +27,12 @@ public class UserDisplayList extends ActionBarActivity {
         texts.add("Dashboard");
         texts.add("Maps");
         texts.add("Reports");
-        images.add(R.drawable.light);
-        images.add(R.drawable.magnetic);
-        images.add(R.drawable.pressure);
-        images.add(R.drawable.temp);
+        images.add(R.drawable.sensorregistration);
+        images.add(R.drawable.dashboard);
+        images.add(R.drawable.maps);
+        images.add(R.drawable.reports);
 
-        CustomAdapter adapter = new CustomAdapter(this, images, texts);
+        CustomAdapter adapter = new CustomAdapter(this,images,texts);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new ListClickHandler());
 

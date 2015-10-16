@@ -29,6 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap googleMap;
     private double latitude;
     private double longitude;
+    int zoomlevel = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng latlang = new LatLng(latitude, longitude);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlang));
         addMarker(latitude, longitude, R.drawable.pinkmarker);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, 15));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlang, zoomlevel));
 
         GlobalValues.setLatitude(latitude);
         GlobalValues.setLongitude(longitude);

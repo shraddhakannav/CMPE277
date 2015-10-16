@@ -1,47 +1,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/backimage"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@color/welcomecolor"
     tools:context=".MainActivity">
 
 
-    <TextView
+    <TextView android:text="@string/app_name"
+        android:textSize="45dp"
+
+        android:textColor="#FFFFFF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Welcome to CMPE 277 Android app"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-thin"
+
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sensor"
+        android:layout_gravity="center"/>
+
+    <TextView android:text="@string/user_type"
+        android:textSize="23dp"
+
         android:textColor="#FFFFFF"
-        android:textSize="20dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-thin"
+
+        />
 
     <Button
         android:id="@+id/userbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:text="Smartphone User"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_width="@dimen/welcome_button_width"
+        android:layout_height="30dp"
+        android:layout_marginTop="50dp"
         android:onClick="userClick"
-        android:text="User"
-        android:textAllCaps="false" />
+        android:background="@drawable/round_button"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"
+
+
+        />
+
 
     <Button
         android:id="@+id/extuserbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:text="External Sensor Provider"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        android:layout_width="@dimen/welcome_button_width"
+        android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:text="External User"
-        android:textAllCaps="false" />
+        android:background="@drawable/round_button"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"
 
+        />
     <Button
         android:id="@+id/adminbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:text="Administrator"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+        android:layout_width="@dimen/welcome_button_width"
+        android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:onClick="registerMe"
-        android:text="Register my Phone"
-        android:textAllCaps="false" />
+        android:background="@drawable/round_button"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>

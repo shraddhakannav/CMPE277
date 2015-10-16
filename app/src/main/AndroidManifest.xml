@@ -16,7 +16,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/sensor"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -77,6 +77,7 @@
             android:name=".RegisterMeDialog"
             android:label="@string/title_activity_register_me_dialog">
         </activity>
+
     </application>
 
 </manifest>

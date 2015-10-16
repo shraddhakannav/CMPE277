@@ -45,7 +45,7 @@ public class UserEndpoint {
      * @param user The object to be added.
      * @return The object to be added.
      */
-    @ApiMethod(name = "insertUser")
+    @ApiMethod(name = "insertUser", path = "user/insert")
     public User insertUser(User user) {
         logger.info("Calling insertUser method");
         DatabaseConnection.insertUser(user);
@@ -58,7 +58,7 @@ public class UserEndpoint {
      * @param user The object to be added.
      * @return Nothing
      */
-    @ApiMethod(name = "deleteUser")
+    @ApiMethod(name = "deleteUser", path = "user/delete")
     public void deleteUser(User user) {
         logger.info("Calling insertUser method");
         DatabaseConnection.deleteUser(user);
@@ -69,7 +69,7 @@ public class UserEndpoint {
      *
      * @return The list of Users
      */
-    @ApiMethod(name = "list")
+    @ApiMethod(name = "list", path = "user/list")
     public List<User> list() {
         logger.info("Calling listUser method");
         return DatabaseConnection.listAllUsers();
