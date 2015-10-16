@@ -27,7 +27,7 @@ public class UserDisplayList extends ActionBarActivity {
         texts.add("Dashboard");
         texts.add("Maps");
         texts.add("Reports");
-        images.add(R.drawable.sensorregistration);
+        images.add(R.drawable.regsensor);
         images.add(R.drawable.dashboard);
         images.add(R.drawable.maps);
         images.add(R.drawable.reports);
