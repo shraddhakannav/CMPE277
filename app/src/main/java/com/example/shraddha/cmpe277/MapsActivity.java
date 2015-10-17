@@ -13,7 +13,9 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -21,7 +23,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     List<ParseObject> sensors = new ArrayList<ParseObject>();
     List<Double> latitudes = new ArrayList<Double>();
@@ -36,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        getParseData("");
+        getParseData("PRESSURE");
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
@@ -45,6 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void setUpMap() {
         googleMap.setMyLocationEnabled(true);
+        googleMap.setOnMarkerClickListener(this);
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -112,6 +115,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         try {
             ParseQuery<ParseObject> query = ParseQuery.getQuery("SensorData");
+            query.whereContains("sensortype", sensortype);
             if (sensortype != null && !sensortype.isEmpty())
                 query.whereEqualTo("sensortype", sensortype);
             sensors = query.find();
@@ -121,17 +125,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void getNearbyLocation(ParseGeoPoint location, int kilometers) {
+    public List<ParseObject> getNearbyLocation(ParseGeoPoint location, int kilometers) {
         ParseQuery query = new ParseQuery("PlaceObject");
         query.whereNear("location", location);
-        query.setLimit(10);
 
-//        query.findInBackground(new FindCallback() {
-//            @Override
-//            public void done(List list, ParseException e) {
-//
-//            }
-//        });
+        try {
+            return query.find();
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+
+        LatLng latLng = marker.getPosition();
+        double lat = latLng.latitude;
+        double longitude = latLng.longitude;
+        String title = marker.getTitle();
+        String snippet = marker.getSnippet();
+
+        for (ParseObject sensor : sensors) {
+            if (sensor.getParseGeoPoint("location").getLatitude() == lat && sensor.getParseGeoPoint("location").getLongitude() == longitude) {
+                snippet = sensor.getString("sensortype");
+                title = sensor.getString("value") + " hPA";
+            }
+            marker.setTitle(title);
+            marker.setSnippet(snippet);
+            marker.showInfoWindow();
+
+        }
+        return true;
     }
 }
