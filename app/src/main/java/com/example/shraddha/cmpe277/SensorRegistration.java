@@ -53,7 +53,7 @@ public class SensorRegistration extends AppCompatActivity {
             switch (s.getType()) {
                 case Sensor.TYPE_ACCELEROMETER:
                     itemname.add("ACCELEROMETER");
-                    imgid.add(R.drawable.light);//accelerometer
+                    imgid.add(R.drawable.accelerometer);//accelerometer
                     sensors.add(s);
                     break;
                 case Sensor.TYPE_LIGHT:
@@ -68,22 +68,22 @@ public class SensorRegistration extends AppCompatActivity {
                     break;
                 case Sensor.TYPE_PROXIMITY:
                     itemname.add("PROXIMITY");
-                    imgid.add(R.drawable.light);//proximity
+                    imgid.add(R.drawable.proximity);//proximity
                     sensors.add(s);
                     break;
                 case Sensor.TYPE_MAGNETIC_FIELD:
                     itemname.add("MAGNETIC_FIELD");
-                    imgid.add(R.drawable.light);//magnet100
+                    imgid.add(R.drawable.magnet100);//magnet100
                     sensors.add(s);
                     break;
                 case Sensor.TYPE_GYROSCOPE:
                     itemname.add("GYROSCOPE");
-                    imgid.add(R.drawable.light);//filled100
+                    imgid.add(R.drawable.gyroscopefilled100);//filled100
                     sensors.add(s);
                     break;
                 case Sensor.TYPE_GRAVITY:
                     itemname.add("GRAVITY");
-                    imgid.add(R.drawable.light);//gravityfilled100
+                    imgid.add(R.drawable.gravityfilled100);//gravityfilled100
                     sensors.add(s);
                     break;
                 default:

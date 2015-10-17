@@ -11,9 +11,36 @@ public class SensorData {
     private double longitude;
 
     private String value;
+    private String sensorDescription;
+    private String unit;
+    private int drawableImage;
+  private int type;
 
+  public String getSensorDescription() {
+    return sensorDescription;
+  }
 
-    public int getId() {
+  public void setSensorDescription(String sensorDescription) {
+    this.sensorDescription = sensorDescription;
+  }
+
+  public String getUnit() {
+    return unit;
+  }
+
+  public void setUnit(String unit) {
+    this.unit = unit;
+  }
+
+  public int getDrawableImage() {
+    return drawableImage;
+  }
+
+  public void setDrawableImage(int drawableImage) {
+    this.drawableImage = drawableImage;
+  }
+
+  public int getId() {
         return id;
     }
 
@@ -53,4 +80,11 @@ public class SensorData {
         this.value = value;
     }
 
+  public void setType(int type) {
+    this.type = type;
+  }
+
+  public int getType() {
+    return type;
+  }
 }

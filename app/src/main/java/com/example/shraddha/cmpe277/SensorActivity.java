@@ -123,7 +123,7 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         sensordata.setSensortype(type);
         sensordata.setLatitude(latitude);
         sensordata.setLongitude(longitude);
-        sensordata.setValue(value);
+        sensordata.setValue(String.valueOf(value));
 
         new InsertSensorDataAsyncTask().execute(new Pair<TextView, SensorData>(uploadStatus, sensordata));
     }

@@ -1,13 +1,15 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimary">@color/buttoncolor</item>
     </style>
 
-    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/buttoncolor</item>
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/welcomecolor</item>
     </style>
+
 
 </resources>
