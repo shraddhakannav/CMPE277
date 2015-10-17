@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base_popup_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginBottom="124dp"
+    android:layout_marginTop="124dp"
+    android:background="@drawable/bg_layout"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/sensorname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/sensorvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/transparent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="40dp" />
+
+    <Button
+        android:id="@+id/registerbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_layout"
+        android:onClick="registerSensor"
+        android:text="Register your sensor in cloud"
+        android:textSize="30dp" />
+
+
+</LinearLayout>
+
+

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sense</string>
+    <string name="app_name">CMPE277</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -7,11 +7,23 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="TemperatureSensorLabel">Temperature Sensor</string>
-    <string name="title_activity_sensor">SensorActivity</string>
     <string name="PressureSensorLabel">Pressure Sensor</string>
     <string name="LightSensorLabel">Light Sensor</string>
     <string name="HumiditySensorLabel">Humidity Sensor</string>
     <string name="placeholder">Unavailable</string>
+    <string name="signing_in">Signing in...</string>
+    <string name="signedOut">Sucessfully signed out.</string>
+    <string name="signFailed">Signed Failed.</string>
+
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_sensor">Sensor List</string>
+    <string name="title_activity_userdisplay">Welcome to Sensor cloud</string>
+    <string name="title_activity_sensor_registration">SensorRegistration</string>
+    <string name="title_activity_individual_sensor">IndividualSensor</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_sensor_details">SensorDetails</string>
+    <string name="title_activity_register_me_dialog">RegisterMeDialog</string>
+
     <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
     <string name="sampleText">Text goes here</string>
     <string name="user_type">Tell us who you are...</string>
