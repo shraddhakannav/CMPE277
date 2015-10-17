@@ -14,33 +14,33 @@ public class SensorData {
     private String sensorDescription;
     private String unit;
     private int drawableImage;
-  private int type;
+    private int type;
 
-  public String getSensorDescription() {
-    return sensorDescription;
-  }
+    public String getSensorDescription() {
+        return sensorDescription;
+    }
 
-  public void setSensorDescription(String sensorDescription) {
-    this.sensorDescription = sensorDescription;
-  }
+    public void setSensorDescription(String sensorDescription) {
+        this.sensorDescription = sensorDescription;
+    }
 
-  public String getUnit() {
-    return unit;
-  }
+    public String getUnit() {
+        return unit;
+    }
 
-  public void setUnit(String unit) {
-    this.unit = unit;
-  }
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
-  public int getDrawableImage() {
-    return drawableImage;
-  }
+    public int getDrawableImage() {
+        return drawableImage;
+    }
 
-  public void setDrawableImage(int drawableImage) {
-    this.drawableImage = drawableImage;
-  }
+    public void setDrawableImage(int drawableImage) {
+        this.drawableImage = drawableImage;
+    }
 
-  public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -80,11 +80,11 @@ public class SensorData {
         this.value = value;
     }
 
-  public void setType(int type) {
-    this.type = type;
-  }
+    public int getType() {
+        return type;
+    }
 
-  public int getType() {
-    return type;
-  }
+    public void setType(int type) {
+        this.type = type;
+    }
 }
