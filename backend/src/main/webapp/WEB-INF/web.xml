@@ -6,7 +6,8 @@
         <init-param>
             <param-name>services</param-name>
             <param-value>com.example.shraddha.cmpe277.backend.SensorEndpoint,
-                com.example.shraddha.cmpe277.backend.UserEndpoint
+                com.example.shraddha.cmpe277.backend.UserEndpoint,
+                com.example.shraddha.cmpe277.backend.SensorDataEndpoint
             </param-value>
         </init-param>
     </servlet>
