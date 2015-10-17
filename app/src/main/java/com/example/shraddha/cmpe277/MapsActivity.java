@@ -149,15 +149,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String title = marker.getTitle();
         String snippet = marker.getSnippet();
 
-        for (ParseObject sensor : sensors) {
-            if (sensor.getParseGeoPoint("location").getLatitude() == lat && sensor.getParseGeoPoint("location").getLongitude() == longitude) {
-                snippet = sensor.getString("sensortype");
-                title = sensor.getString("value") + " hPA";
-            }
-            marker.setTitle(title);
-            marker.setSnippet(snippet);
-            marker.showInfoWindow();
+        if (!marker.isInfoWindowShown()) {
+            for (ParseObject sensor : sensors) {
+                if (sensor.getParseGeoPoint("location").getLatitude() == lat && sensor.getParseGeoPoint("location").getLongitude() == longitude) {
+                    snippet = sensor.getString("sensortype");
+                    title = sensor.getString("value") + " hPA";
+                }
+                marker.setTitle(title);
+                marker.setSnippet(snippet);
 
+
+            }
+            marker.showInfoWindow();
+        } else {
+            marker.setTitle("");
+            marker.setSnippet("");
+            marker.hideInfoWindow();
         }
         return true;
     }
