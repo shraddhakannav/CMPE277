@@ -3,23 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/welcomecolor">
 
-    >
-
-    <GridView
-        android:id="@+id/gridview"
+    <ListView
+        android:id="@+id/sensorList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="400dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        android:horizontalSpacing="2dp"
-        android:gravity="center"
-        android:layout_gravity="bottom"
-        android:numColumns="2"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:divider="@null" >
 
-        >
-    </GridView>
-
+    </ListView>
 </LinearLayout>
