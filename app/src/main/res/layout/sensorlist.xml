@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/glass"
     android:orientation="horizontal">
 
     <ImageView
@@ -28,7 +29,7 @@
             android:padding="2dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/purple" />
+            android:textColor="@color/buttoncolor" />
 
 
         <TextView

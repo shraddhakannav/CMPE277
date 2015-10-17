@@ -15,4 +15,8 @@
     <color name="darktransparent">#99000000</color>
     <color name="fav_blue">#00BCD4</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gradientstart">#2fDEDEDE</color>
+    <color name="gradientend">#2F000000</color>
+    <color name="lightbuttoncolor">#4DB6AC</color>
+
 </resources>

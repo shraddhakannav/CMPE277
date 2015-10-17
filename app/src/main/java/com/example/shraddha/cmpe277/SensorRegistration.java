@@ -30,7 +30,7 @@ public class SensorRegistration extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         getListOfAvailableSensors();
-        SensorListAdapter adapter = new SensorListAdapter(this, sensors);
+        SensorListAdapter adapter = new SensorListAdapter(this, sensors, itemname, imgid);
         list = (ListView) findViewById(R.id.sensorslist);
         list.setAdapter(adapter);
 
@@ -48,10 +48,48 @@ public class SensorRegistration extends AppCompatActivity {
     }
 
     public List<Sensor> getListOfAvailableSensors() {
-        sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
-        for (Sensor s : sensors) {
-            itemname.add(s.getName());
-            imgid.add(R.drawable.light);
+        List<Sensor> sensors1 = sensorManager.getSensorList(Sensor.TYPE_ALL);
+        for (Sensor s : sensors1) {
+            switch (s.getType()) {
+                case Sensor.TYPE_ACCELEROMETER:
+                    itemname.add("ACCELEROMETER");
+                    imgid.add(R.drawable.light);//accelerometer
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_LIGHT:
+                    itemname.add("LIGHT");
+                    imgid.add(R.drawable.light);
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_PRESSURE:
+                    itemname.add("PRESSURE");
+                    imgid.add(R.drawable.pressure);
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_PROXIMITY:
+                    itemname.add("PROXIMITY");
+                    imgid.add(R.drawable.light);//proximity
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_MAGNETIC_FIELD:
+                    itemname.add("MAGNETIC_FIELD");
+                    imgid.add(R.drawable.light);//magnet100
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_GYROSCOPE:
+                    itemname.add("GYROSCOPE");
+                    imgid.add(R.drawable.light);//filled100
+                    sensors.add(s);
+                    break;
+                case Sensor.TYPE_GRAVITY:
+                    itemname.add("GRAVITY");
+                    imgid.add(R.drawable.light);//gravityfilled100
+                    sensors.add(s);
+                    break;
+                default:
+                    break;
+            }
+
             System.out.println(s.getName());
         }
         return sensors;

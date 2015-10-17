@@ -1,10 +1,9 @@
 package com.example.shraddha.cmpe277;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
@@ -14,17 +13,18 @@ import com.parse.SaveCallback;
 /**
  * Created by Shraddha on 10/14/15.
  */
-public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorData>, Void, SensorData> {
+public class InsertSensorDataAsyncTask extends AsyncTask<Pair<TextView, SensorData>, Void, SensorData> {
 
 
-    private Context context;
+    private TextView uploadedStatus;
+    private SensorData sensorData;
 
     @Override
-    protected SensorData doInBackground(Pair<Context, SensorData>... params) {
+    protected SensorData doInBackground(Pair<TextView, SensorData>... params) {
 
         try {
-            context = params[0].first;
-            SensorData sensorData = params[0].second;
+            uploadedStatus = params[0].first;
+            sensorData = params[0].second;
 
             ParseObject statusDetails = new ParseObject("SensorData");
             statusDetails.put("sensortype", sensorData.getSensortype());
@@ -37,10 +37,10 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
                     if (e == null) {
                         // Saved successfully.
                         Log.d("Upload Data", "uploaded successfully ");
-                        Toast.makeText(context, "Saved Sensor Data", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Saved Sensor Data", Toast.LENGTH_SHORT).show();
                     } else {
                         // The save failed.
-                        Toast.makeText(context, "Failed to Save", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Failed to Save", Toast.LENGTH_SHORT).show();
                         Log.d(getClass().getSimpleName(), "User update error: " + e);
                         e.printStackTrace();
                     }
@@ -58,7 +58,7 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
     @Override
     protected void onPostExecute(SensorData sensorData) {
         super.onPostExecute(sensorData);
-        Toast.makeText(context, sensorData.getSensortype(), Toast.LENGTH_SHORT).show();
+
     }
 }
 

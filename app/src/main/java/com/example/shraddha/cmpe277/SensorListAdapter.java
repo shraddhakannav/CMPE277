@@ -27,12 +27,16 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
     public final static String STORE_PREFERENCES = "SenseProfile.txt";
     private final Activity context;
     private List<Sensor> sensors;
+    private List<String> nameList;
+    private List<Integer> imageList;
     private ParseObject parse;
 
 
-    public SensorListAdapter(Activity context, List<Sensor> sensors) {
+    public SensorListAdapter(Activity context, List<Sensor> sensors, List<String> nameList, List<Integer> imageList) {
         super(context, R.layout.sensorlist, sensors);
         this.sensors = sensors;
+        this.nameList = nameList;
+        this.imageList = imageList;
         this.context = context;
     }
 
@@ -44,6 +48,7 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView extract = (TextView) rowView.findViewById(R.id.desc);
         CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.checkBox);
+
         checkBox.setOnCheckedChangeListener(getOnChangeListener(sensors.get(position)));
 
         Sensor sensor = sensors.get(position);
@@ -57,9 +62,9 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
             checkBox.setText("Register");
         }
 
-        txtTitle.setText(sensor.getName());
-        imageView.setImageResource(R.drawable.pressure);
-        extract.setText("Description: " + sensor.getPower());
+        txtTitle.setText(nameList.get(position));
+        imageView.setImageResource(imageList.get(position));
+        extract.setText("Description: " + sensor.getName());
         return rowView;
 
     }

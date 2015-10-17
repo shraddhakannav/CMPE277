@@ -18,61 +18,45 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.Viewport;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class SensorActivity extends AppCompatActivity implements LocationListener {//implements SensorEventListener
-    private static final Random RANDOM = new Random();
-    TextView mTempSensorValue;
-    TextView mPresSensorValue;
+
     Thread thread;
 
     Boolean threadRunning = false;
     private SensorManager sensorManager;
-    private Sensor mTemperatureSensor;
     private SensorEventListener sensorEventListener;
-    private float mTempValue;
-    private float mPressureValue;
-    private long mTempTimeStamp;
-    private long mPressureTimeStamp;
-    private float mHumidityValue;
-    private long mHumidityTimeStamp;
-    private float mLightValue;
-    private long mLightTimeStamp;
-    private TextView mHumiditySensorValue;
-    private TextView mLightSensorValue;
     private LocationManager locationManager;
     private double latitude;
     private double longitude;
-    private LineGraphSeries<DataPoint> lightSeries;
-    private int lastX = 0;
-    private Viewport viewport;
-    private LineGraphSeries<DataPoint> pressureSeries;
     private ArrayList<Sensor> registeredSensors;
     private float[] values;
     private HashMap<Integer, String> valueString;
+    private HashMap<Integer, String> nameString;
+    private GifView gifView;
+    private TextView uploadStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
 
+        gifView = (GifView) findViewById(R.id.gifView);
+        uploadStatus = (TextView) findViewById(R.id.uploadStatus);
+
         setUpMap();
-//        graphInit();
 
         valueString = new HashMap<Integer, String>();
+        nameString = new HashMap<Integer, String>();
+
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensorEventListener = getSensorEventListener();
 
         getListofSensors();
 
-        registerSensors();
     }
 
 
@@ -91,19 +75,39 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
                     valueString.put(sensor.getType(), "X:" + values[0] + " Y:" + values[1] + " Z:" + values[2]);
                 }
 
-                if (sensor.getType() == Sensor.TYPE_HEART_RATE) {
-                    mTempValue = event.values[0];
-                    mTempTimeStamp = event.timestamp;
-                } else if (sensor.getType() == Sensor.TYPE_PRESSURE) {
-                    mPressureValue = event.values[0];
-                    mPressureTimeStamp = event.timestamp;
-                } else if (sensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY) {
-                    mHumidityValue = event.values[0];
-                    mHumidityTimeStamp = event.timestamp;
-                } else if (sensor.getType() == Sensor.TYPE_LIGHT) {
-                    mLightValue = event.values[0];
-                    mLightTimeStamp = event.timestamp;
+                switch (sensor.getType()) {
+                    case Sensor.TYPE_ACCELEROMETER:
+                        nameString.put(sensor.getType(), "ACCELEROMETER");
+                        valueString.put(sensor.getType(), "X:" + values[0] + " Y:" + values[1] + " Z:" + values[2]);
+                        break;
+                    case Sensor.TYPE_LIGHT:
+                        nameString.put(sensor.getType(), "LIGHT");
+                        valueString.put(sensor.getType(), "" + values[0]);
+                        break;
+                    case Sensor.TYPE_PRESSURE:
+                        nameString.put(sensor.getType(), "PRESSURE");
+                        valueString.put(sensor.getType(), "" + values[0]);
+                        break;
+                    case Sensor.TYPE_PROXIMITY:
+                        nameString.put(sensor.getType(), "PROXIMITY");
+                        valueString.put(sensor.getType(), "" + values[0]);
+                        break;
+                    case Sensor.TYPE_MAGNETIC_FIELD:
+                        nameString.put(sensor.getType(), "MAGNETIC_FIELD");
+                        valueString.put(sensor.getType(), "X:" + values[0] + " Y:" + values[1] + " Z:" + values[2]);
+                        break;
+                    case Sensor.TYPE_GYROSCOPE:
+                        nameString.put(sensor.getType(), "GYROSCOPE");
+                        valueString.put(sensor.getType(), "X:" + values[0] + " Y:" + values[1] + " Z:" + values[2]);
+                        break;
+                    case Sensor.TYPE_GRAVITY:
+                        nameString.put(sensor.getType(), "GRAVITY");
+                        valueString.put(sensor.getType(), "" + values[0]);
+                        break;
+                    default:
+                        break;
                 }
+
             }
 
             @Override
@@ -121,7 +125,7 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         sensordata.setLongitude(longitude);
         sensordata.setValue(value);
 
-        new InsertSensorDataAsyncTask().execute(new Pair<Context, SensorData>(this, sensordata));
+        new InsertSensorDataAsyncTask().execute(new Pair<TextView, SensorData>(uploadStatus, sensordata));
     }
 
     private void getListofSensors() {
@@ -148,7 +152,45 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
 
     private void registerSensors() {
         for (Sensor sensor : registeredSensors) {
+            updateNameString(sensor.getType());
+
+            String s = nameString.get(sensor.getType());
+            String outStr = s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+
+            uploadStatus.setText(uploadStatus.getText() + "\n" + outStr + " sensor data uploading...");
+            uploadStatus.setHorizontallyScrolling(true);
+            uploadStatus.setAllCaps(false);
+
+            //uploadStatus.setText(uploadStatus.getText() + "\n" + "Uploading: " + nameString.get(sensor.getType()));
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(sensor.getType()), SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    private void updateNameString(int type) {
+        switch (type) {
+            case Sensor.TYPE_ACCELEROMETER:
+                nameString.put(type, "ACCELEROMETER");
+                break;
+            case Sensor.TYPE_LIGHT:
+                nameString.put(type, "LIGHT");
+                break;
+            case Sensor.TYPE_PRESSURE:
+                nameString.put(type, "PRESSURE");
+                break;
+            case Sensor.TYPE_PROXIMITY:
+                nameString.put(type, "PROXIMITY");
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                nameString.put(type, "MAGNETIC_FIELD");
+                break;
+            case Sensor.TYPE_GYROSCOPE:
+                nameString.put(type, "GYROSCOPE");
+                break;
+            case Sensor.TYPE_GRAVITY:
+                nameString.put(type, "GRAVITY");
+                break;
+            default:
+                break;
         }
     }
 
@@ -224,15 +266,17 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
             public void run() {
                 // we add 100 new entries
                 for (int i = 0; i < 100; i++) {
-                    // sleep 30 seconds to slow down the add of entries
-                    try {
-                        Thread.sleep(30000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if (threadRunning) {
+
+                        uploadSensorData();
+                        // sleep 30 seconds to slow down the add of entries
+                        try {
+                            Thread.sleep(30000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
 
-                    if (threadRunning)
-                        uploadSensorData();
                 }
 
             }
@@ -241,7 +285,10 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
 
     private void uploadSensorData() {
         for (Sensor sensor : registeredSensors) {
-            insertSensorDataInstance(sensor.getName(), valueString.get(sensor.getType()));
+            final String name = nameString.get(sensor.getType());
+            if (name != null && valueString.get(sensor.getType()) != null)
+                insertSensorDataInstance(name, valueString.get(sensor.getType()));
+
             Log.d("Upload Data", "uploaded: " + sensor.getName());
         }
     }

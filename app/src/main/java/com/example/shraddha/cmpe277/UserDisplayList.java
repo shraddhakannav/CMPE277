@@ -25,8 +25,8 @@ public class UserDisplayList extends ActionBarActivity {
         ArrayList<String> texts = new ArrayList<String>();
         texts.add("Dashboard");
         texts.add("Maps");
-        texts.add("Sensor Registration");
-        texts.add("Upload Sensor Data");
+        texts.add("Register Sensors");
+        texts.add("Upload Data");
         images.add(R.drawable.dashboard);
         images.add(R.drawable.maps);
         images.add(R.drawable.sensorregistration);
