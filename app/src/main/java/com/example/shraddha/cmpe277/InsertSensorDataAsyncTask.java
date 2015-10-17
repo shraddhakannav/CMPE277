@@ -36,6 +36,7 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
                 public void done(ParseException e) {
                     if (e == null) {
                         // Saved successfully.
+                        Log.d("Upload Data", "uploaded successfully ");
                         Toast.makeText(context, "Saved Sensor Data", Toast.LENGTH_SHORT).show();
                     } else {
                         // The save failed.
@@ -57,7 +58,6 @@ public class InsertSensorDataAsyncTask extends AsyncTask<Pair<Context, SensorDat
     @Override
     protected void onPostExecute(SensorData sensorData) {
         super.onPostExecute(sensorData);
-
         Toast.makeText(context, sensorData.getSensortype(), Toast.LENGTH_SHORT).show();
     }
 }

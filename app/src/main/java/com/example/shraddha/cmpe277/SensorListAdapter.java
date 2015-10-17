@@ -1,15 +1,21 @@
 package com.example.shraddha.cmpe277;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.parse.ParseObject;
 
 import java.util.List;
 
@@ -18,12 +24,14 @@ import java.util.List;
  */
 public class SensorListAdapter extends ArrayAdapter<Sensor> {
 
+    public final static String STORE_PREFERENCES = "SenseProfile.txt";
     private final Activity context;
-    private List<Sensor> sensors; // = new ArrayList<Sensor>();
+    private List<Sensor> sensors;
+    private ParseObject parse;
+
 
     public SensorListAdapter(Activity context, List<Sensor> sensors) {
         super(context, R.layout.sensorlist, sensors);
-
         this.sensors = sensors;
         this.context = context;
     }
@@ -35,8 +43,20 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.itemname);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView extract = (TextView) rowView.findViewById(R.id.desc);
+        CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(getOnChangeListener(sensors.get(position)));
 
         Sensor sensor = sensors.get(position);
+
+
+        if (sensorExists(sensor)) {
+            checkBox.setChecked(true);
+            checkBox.setText("Unregister");
+        } else {
+            checkBox.setChecked(false);
+            checkBox.setText("Register");
+        }
+
         txtTitle.setText(sensor.getName());
         imageView.setImageResource(R.drawable.pressure);
         extract.setText("Description: " + sensor.getPower());
@@ -45,16 +65,75 @@ public class SensorListAdapter extends ArrayAdapter<Sensor> {
     }
 
     @NonNull
-    private CompoundButton.OnCheckedChangeListener getOnChangeListener() {
+    private CompoundButton.OnCheckedChangeListener getOnChangeListener(final Sensor sensor) {
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
-
+                    registerSensor(sensor);
+                    buttonView.setText("Unregister");
                 } else {
+                    unregisterSensor(sensor);
+                    buttonView.setText("Register");
                 }
             }
         };
+    }
+
+    private void unregisterSensor(Sensor sensor) {
+
+        Log.d("UnRegister a Button", " Registration of sensor data in cloud");
+
+        if (sensor != null) {
+            try {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(sensor.getName());
+                editor.commit();
+
+                Log.d("Sensor registration", "Saved the sensor in parse table");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
+
+
+    public boolean sensorExists(Sensor sensor) {
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+            int name = sharedPreferences.getInt(sensor.getName(), -1);
+            return name != -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void registerSensor(Sensor sensor) {
+
+        Log.d("Register a Button", " Registration of sensor data in cloud");
+
+        if (sensor != null) {
+            try {
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(sensor.getName(), sensor.getType());
+                editor.commit();
+
+                Log.d("Sensor registration", "Saved the sensor in parse table");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
     }
 }

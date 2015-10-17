@@ -10,7 +10,7 @@ public class SensorData {
     private double latitude;
     private double longitude;
 
-    private double value;
+    private String value;
 
 
     public int getId() {
@@ -45,11 +45,11 @@ public class SensorData {
         this.longitude = longitude;
     }
 
-    public double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

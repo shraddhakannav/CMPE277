@@ -23,16 +23,16 @@ public class UserDisplayList extends ActionBarActivity {
         ListView list = (ListView) findViewById(R.id.list);
         ArrayList<Integer> images = new ArrayList<Integer>();
         ArrayList<String> texts = new ArrayList<String>();
-        texts.add("Sensor Registration");
         texts.add("Dashboard");
         texts.add("Maps");
-        texts.add("Reports");
-        images.add(R.drawable.sensorregistration);
+        texts.add("Sensor Registration");
+        texts.add("Upload Sensor Data");
         images.add(R.drawable.dashboard);
         images.add(R.drawable.maps);
+        images.add(R.drawable.sensorregistration);
         images.add(R.drawable.reports);
 
-        CustomAdapter adapter = new CustomAdapter(this,images,texts);
+        CustomAdapter adapter = new CustomAdapter(this, images, texts);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new ListClickHandler());
 
@@ -46,21 +46,21 @@ public class UserDisplayList extends ActionBarActivity {
             String text = listText.getText().toString();
 
             if (position == 0) {
-
-                Intent i = new Intent(UserDisplayList.this, SensorRegistration.class);
-
-                startActivity(i);
-            }
-            if (position == 1) {
                 Intent i = new Intent(UserDisplayList.this, Dashboard.class);
 
                 startActivity(i);
             }
-            if (position == 2) {
+            if (position == 1) {
                 Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
 
                 startActivity(i);
 
+            }
+            if (position == 2) {
+
+                Intent i = new Intent(UserDisplayList.this, SensorRegistration.class);
+
+                startActivity(i);
             }
             if (position == 3) {
                 Intent i = new Intent(UserDisplayList.this, SensorActivity.class);

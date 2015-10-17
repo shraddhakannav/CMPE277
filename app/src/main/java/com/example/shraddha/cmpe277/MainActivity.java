@@ -3,6 +3,7 @@ package com.example.shraddha.cmpe277;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +22,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        GlobalValues.init(getApplicationContext());
 
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
-
+        try {
+            Parse.enableLocalDatastore(this);
+            Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error", "Starting intializing parse is problem");
+        }
 
         Button button_test = (Button) findViewById(R.id.userbtn);
 
@@ -61,4 +67,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-  }
+}

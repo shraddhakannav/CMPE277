@@ -26,10 +26,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List<ParseObject> sensors = new ArrayList<ParseObject>();
     List<Double> latitudes = new ArrayList<Double>();
     List<Double> longitudes = new ArrayList<Double>();
+    int zoomlevel = 12;
     private GoogleMap googleMap;
     private double latitude;
     private double longitude;
-    int zoomlevel = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

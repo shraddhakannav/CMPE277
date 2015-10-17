@@ -34,8 +34,6 @@ public class SensorRegistration extends AppCompatActivity {
         list = (ListView) findViewById(R.id.sensorslist);
         list.setAdapter(adapter);
 
-//        list.setOnItemClickListener(getItemClickListener());
-
     }
 
     private AdapterView.OnItemClickListener getItemClickListener() {

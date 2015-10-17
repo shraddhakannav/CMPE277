@@ -1,8 +1,7 @@
 package com.example.shraddha.cmpe277;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,18 +11,19 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
-import android.view.View;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -32,8 +32,9 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
     TextView mTempSensorValue;
     TextView mPresSensorValue;
     Thread thread;
+
     Boolean threadRunning = false;
-    private SensorManager mSensorManager;
+    private SensorManager sensorManager;
     private Sensor mTemperatureSensor;
     private SensorEventListener sensorEventListener;
     private float mTempValue;
@@ -53,6 +54,9 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
     private int lastX = 0;
     private Viewport viewport;
     private LineGraphSeries<DataPoint> pressureSeries;
+    private ArrayList<Sensor> registeredSensors;
+    private float[] values;
+    private HashMap<Integer, String> valueString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,42 +64,17 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         setContentView(R.layout.activity_sensor);
 
         setUpMap();
+//        graphInit();
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        // data
-        pressureSeries = new LineGraphSeries<DataPoint>();
+        valueString = new HashMap<Integer, String>();
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorEventListener = getSensorEventListener();
 
-        graph.addSeries(pressureSeries);
-
-        lightSeries = new LineGraphSeries<DataPoint>();
-        lightSeries.setCustomPaint(new Paint(Color.CYAN));
-        graph.addSeries(lightSeries);
-
-        // customize a little bit viewport
-        viewport = graph.getViewport();
-        viewport.setYAxisBoundsManual(true);
-        viewport.setMinY(0);
-        viewport.setMaxY(1200);
-        viewport.setScrollable(true);
-
-
-        // Get the text fields to set the values from the sensors.
-        mPresSensorValue = (TextView) findViewById(R.id.PressureSensorValue);
-        mTempSensorValue = (TextView) findViewById(R.id.TemperatureSensorValue);
-        mLightSensorValue = (TextView) findViewById(R.id.LightSensorValue);
-        mHumiditySensorValue = (TextView) findViewById(R.id.HumiditySensorValue);
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        // Informational : To check the sensors in a device.
         getListofSensors();
 
-        sensorEventListener = getSensorEventListener();
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY), SensorManager.SENSOR_DELAY_NORMAL);
-
+        registerSensors();
     }
+
 
     @NonNull
     private SensorEventListener getSensorEventListener() {
@@ -104,23 +83,26 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
             public void onSensorChanged(SensorEvent event) {
 
                 Sensor sensor = event.sensor;
+                values = event.values;
+
+                if (values.length == 1) {
+                    valueString.put(sensor.getType(), "" + values[0]);
+                } else {
+                    valueString.put(sensor.getType(), "X:" + values[0] + " Y:" + values[1] + " Z:" + values[2]);
+                }
+
                 if (sensor.getType() == Sensor.TYPE_HEART_RATE) {
                     mTempValue = event.values[0];
                     mTempTimeStamp = event.timestamp;
-
                 } else if (sensor.getType() == Sensor.TYPE_PRESSURE) {
                     mPressureValue = event.values[0];
                     mPressureTimeStamp = event.timestamp;
-                    System.out.println("Pressure value" + mPressureValue);
-                    mPresSensorValue.setText(Float.toString(mPressureValue));
                 } else if (sensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY) {
                     mHumidityValue = event.values[0];
                     mHumidityTimeStamp = event.timestamp;
                 } else if (sensor.getType() == Sensor.TYPE_LIGHT) {
                     mLightValue = event.values[0];
                     mLightTimeStamp = event.timestamp;
-                    System.out.println("Illumination" + mLightValue);
-                    mLightSensorValue.setText(Float.toString(mLightValue));
                 }
             }
 
@@ -131,14 +113,7 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         };
     }
 
-
-    public void uploadSensorData(View view) {
-
-        insertSensorDataInstance("LIGHT", mLightValue);
-        insertSensorDataInstance("PRESSURE", mPressureValue);
-    }
-
-    private void insertSensorDataInstance(String type, float value) {
+    private void insertSensorDataInstance(String type, String value) {
 
         SensorData sensordata = new SensorData();
         sensordata.setSensortype(type);
@@ -149,84 +124,58 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
         new InsertSensorDataAsyncTask().execute(new Pair<Context, SensorData>(this, sensordata));
     }
 
-    private String getCurrentLocation() {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        return null;
-    }
-
-
     private void getListofSensors() {
-        List<Sensor> deviceSensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
+        List<Sensor> deviceSensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+        registeredSensors = new ArrayList<Sensor>();
         for (Sensor s : deviceSensors) {
-            System.out.println(s.getName());
+            if (sensorExists(s)) {
+                registeredSensors.add(s);
+            }
+            System.out.println(s.getName() + ":" + s.getType());
         }
     }
 
+    public boolean sensorExists(Sensor sensor) {
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            int name = sharedPreferences.getInt(sensor.getName(), -1);
+            return name != -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void registerSensors() {
+        for (Sensor sensor : registeredSensors) {
+            sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(sensor.getType()), SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
 
     @Override
     public void onResume() {
         super.onResume();
         threadRunning = true;
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE), SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY), SensorManager.SENSOR_DELAY_NORMAL);
 
-        thread = new Thread(new Runnable() {
+        getListofSensors();
+        registerSensors();
 
-            @Override
-            public void run() {
-                // we add 100 new entries
-                for (int i = 0; i < 100; i++) {
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            addEntry();
-                        }
-                    });
-
-                    // sleep to slow down the add of entries
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        // manage error ...
-                    }
-
-                    if (i % 20 == 0 && threadRunning) {
-                        insertSensorDataInstance(Sensor.STRING_TYPE_LIGHT, mLightValue);
-                        insertSensorDataInstance(Sensor.STRING_TYPE_PRESSURE, mPressureValue);
-                    }
-                }
-            }
-        });
-
+        thread = new Thread(getUploadThreadRunnable());
         thread.start();
-    }
-
-
-    // add random data to graph
-    private void addEntry() {
-        // here, we choose to display max 10 points on the viewport and we scroll to end
-        lightSeries.appendData(new DataPoint(lastX++, mLightValue), true, 10);
-        pressureSeries.appendData(new DataPoint(lastX++, mPressureValue), true, 10);
     }
 
 
     @Override
     public void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(sensorEventListener);
+        sensorManager.unregisterListener(sensorEventListener);
         threadRunning = false;
+//        thread.
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-
-        setUpMap();
-
-    }
-
+    /**
+     * Set up the map to get the current location of device
+     */
     private void setUpMap() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -239,6 +188,11 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
             latitude = myLocation.getLatitude();
             longitude = myLocation.getLongitude();
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        setUpMap();
     }
 
     @Override
@@ -257,4 +211,38 @@ public class SensorActivity extends AppCompatActivity implements LocationListene
     }
 
 
+    /**
+     * Thread Object to start uploading of the registered sensors in application
+     *
+     * @return Runnable
+     */
+    @NonNull
+    public Runnable getUploadThreadRunnable() {
+        return new Runnable() {
+
+            @Override
+            public void run() {
+                // we add 100 new entries
+                for (int i = 0; i < 100; i++) {
+                    // sleep 30 seconds to slow down the add of entries
+                    try {
+                        Thread.sleep(30000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (threadRunning)
+                        uploadSensorData();
+                }
+
+            }
+        };
+    }
+
+    private void uploadSensorData() {
+        for (Sensor sensor : registeredSensors) {
+            insertSensorDataInstance(sensor.getName(), valueString.get(sensor.getType()));
+            Log.d("Upload Data", "uploaded: " + sensor.getName());
+        }
+    }
 }
