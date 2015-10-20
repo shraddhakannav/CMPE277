@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static String TAG = "Main Activity";
 
-    private String APPLICATION_ID = "SauyeeY2Qa9qhwldPqG9MOgTokl6uepNliHK4jZE";
-    private String CLIENT_KEY = "3z5vqgwhTRsoo69LkFlLqww9p2nk6ZIa6uIbHc4k";
+    private String APPLICATION_ID = "<<YOUR_APPLICATION_ID>>";
+    private String CLIENT_KEY = "<<YOUR_CLIENT_KEY>>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
