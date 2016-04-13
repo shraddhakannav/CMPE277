@@ -2,23 +2,29 @@ package com.example.shraddha.cmpe277;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
+import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import java.util.ArrayList;
 
-/**
- * Created by Priya on 10/11/2015.
- */
-public class UserDisplayList extends ActionBarActivity {
+public class UserDisplayList extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.listviewsample);
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.listviewsample);
+    initializeUI();
+  }
+
+  private void initializeUI() {
 
         ListView list = (ListView) findViewById(R.id.list);
         ArrayList<Integer> images = new ArrayList<Integer>();

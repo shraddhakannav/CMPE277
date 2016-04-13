@@ -6,7 +6,7 @@
     <color name="welcomecolor">#455A64</color>
     <color name="buttoncolor">#009688</color>
     <color name="primaryColor">#78909C</color>
-    <color name="primaryColorDark">#607D8B</color>
+    <color name="primaryColorDark">#00897B</color>
     <color name="accentColor">#FFFF00</color>
     <color name="red">#EF5350</color>
     <color name="blue">#00BCD4</color>
@@ -19,5 +19,6 @@
     <color name="gradientstart">#2fDEDEDE</color>
     <color name="gradientend">#2F000000</color>
     <color name="lightbuttoncolor">#4DB6AC</color>
+    <color name="ninetyPercentBlack">#424242</color>
 
 </resources>
