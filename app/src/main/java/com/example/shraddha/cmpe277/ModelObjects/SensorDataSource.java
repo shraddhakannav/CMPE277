@@ -1,12 +1,16 @@
 package com.example.shraddha.cmpe277.ModelObjects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.parse.ParseObject;
 
 import org.json.JSONArray;
 
 import java.io.Serializable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class SensorDataSource implements Serializable {
+public class SensorDataSource implements Parcelable {
   private String objectId;
   private String institution;
   private String sourceId;
@@ -14,11 +18,42 @@ public class SensorDataSource implements Serializable {
   private double minLongitude;
   private double maxLatitude;
   private double maxLongitude;
-  private JSONArray variables;
+  private String variables;
   private String infoUrl;
   private String summary;
   private String startTime;
   private String endTime;
+  private static final long serialVersionUID = 1L;
+
+  public SensorDataSource() {
+
+  }
+
+  public SensorDataSource(Parcel in) {
+    objectId = in.readString();
+    institution = in.readString();
+    sourceId = in.readString();
+    minLatitude = in.readDouble();
+    minLongitude = in.readDouble();
+    maxLatitude = in.readDouble();
+    maxLongitude = in.readDouble();
+    infoUrl = in.readString();
+    summary = in.readString();
+    startTime = in.readString();
+    endTime = in.readString();
+    variables = in.readString();
+  }
+
+  public static final Creator<SensorDataSource> CREATOR =
+      new Parcelable.Creator<SensorDataSource>() {
+        @Override public SensorDataSource createFromParcel(Parcel in) {
+          return new SensorDataSource(in);
+        }
+
+        @Override public SensorDataSource[] newArray(int size) {
+          return new SensorDataSource[size];
+        }
+      };
 
   public String getInfoUrl() {
     return infoUrl;
@@ -76,7 +111,7 @@ public class SensorDataSource implements Serializable {
     this.minLongitude = minLongitude;
   }
 
-  public JSONArray getVariables() {
+  public String getVariables() {
     return variables;
   }
 
@@ -109,7 +144,7 @@ public class SensorDataSource implements Serializable {
       }
 
       if (eachObject.has("variables") && eachObject.getJSONArray("variables") != null) {
-        this.variables = eachObject.getJSONArray("variables");
+        this.variables = eachObject.getJSONArray("variables").toString();
       }
 
       if (eachObject.has("infoUrl") && eachObject.getString("infoUrl") != null) {
@@ -129,4 +164,25 @@ public class SensorDataSource implements Serializable {
       }
     }
   }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+
+    dest.writeString(objectId);
+    dest.writeString(institution);
+    dest.writeString(sourceId);
+    dest.writeDouble(minLatitude);
+    dest.writeDouble(minLongitude);
+    dest.writeDouble(maxLatitude);
+    dest.writeDouble(maxLongitude);
+    dest.writeString(infoUrl);
+    dest.writeString(summary);
+    dest.writeString(startTime);
+    dest.writeString(endTime);
+    dest.writeString(variables);
+  }
 }
+

@@ -1,13 +1,17 @@
 package com.example.shraddha.cmpe277.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.shraddha.cmpe277.Adapters.ListViewAdapter;
 import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.R;
 import com.example.shraddha.cmpe277.SenseApplication;
+import com.example.shraddha.cmpe277.VariableActivity;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,7 +38,28 @@ public class MapWithSourceActivity extends AppCompatActivity {
       listView = (ListView) findViewById(R.id.datasourcesList);
       ListViewAdapter listViewAdapter = new ListViewAdapter(sensorDataSources, this);
       listView.setAdapter(listViewAdapter);
+      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+          Intent intent = new Intent(MapWithSourceActivity.this, VariableActivity.class);
+          //intent.putExtra("something", "something");
+          //Bundle bundle = new Bundle();
+          //bundle.putSerializable("SensorSourceDate", sensorDataSources.get(position));
+          intent.putExtra("object",sensorDataSources.get(position));
+          startActivity(intent);
+        }
+      });
     }
+
+    //convertView.setOnClickListener(new View.OnClickListener() {
+    //  @Override public void onClick(View v) {
+    //    Intent intent = new Intent(activity, VariableActivity.class);
+    //    intent.putExtra("something", "something");
+    //    //Bundle bundle = new Bundle();
+    //    //bundle.putSerializable("SensorSourceDate", source);
+    //    //intent.putExtras(bundle);
+    //    activity.startActivity(intent);
+    //  }
+    //});
 
     initializeMaps();
   }

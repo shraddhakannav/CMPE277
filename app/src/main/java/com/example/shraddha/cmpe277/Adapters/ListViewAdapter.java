@@ -2,6 +2,7 @@ package com.example.shraddha.cmpe277.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.R;
 
 import com.example.shraddha.cmpe277.Utils.Constants;
+import com.example.shraddha.cmpe277.VariableActivity;
 import java.util.List;
 
 public class ListViewAdapter extends BaseAdapter {
@@ -61,11 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
       viewHolder.startEndTime.setText(source.getStartTime() + "  to  " + source.getEndTime());
     }
 
-    convertView.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
 
-      }
-    });
 
     return convertView;
   }

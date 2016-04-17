@@ -1,5 +1,6 @@
 package com.example.shraddha.cmpe277.DataAccessors;
 
+import android.os.Parcel;
 import android.util.Log;
 import com.example.shraddha.cmpe277.ModelObjects.SensorCategory;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
