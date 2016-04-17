@@ -1,41 +1,49 @@
 package com.example.shraddha.cmpe277;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.example.shraddha.cmpe277.Adapters.CustomExpandableListAdapter;
+import com.example.shraddha.cmpe277.Adapters.SesnorDataExpandableListAdapter;
+import com.example.shraddha.cmpe277.ModelObjects.SensorData;
 import com.example.shraddha.cmpe277.RESTApi.RemoteFetch;
 import com.example.shraddha.cmpe277.Utils.Constants;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class SensorDataActivity extends AppCompatActivity {
 
     public static OnJSONResponseCallback callback;
     ExpandableListView expListView;
-    CustomExpandableListAdapter listAdapter;
+    SesnorDataExpandableListAdapter listAdapter;
     JSONObject allData;
+    ProgressDialog progress;
+
     private List<String> listDataHeader;
-    private HashMap<String, List<String>> listDataChild;
+    private HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> listDataChild;
 
     /**
      * Requesting Cloud Server for the Data from date till no of days of Sensor variable from Source dataset.
      */
-    private static JSONObject getJsonData(String dataset, String variable, String date, int days) {
+    private JSONObject getJsonData(String dataset, String variable, String date, int days) {
         //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
         try {
             JSONObject jsonData = RemoteFetch.getTrustForData(dataset, variable, date, days);
             System.out.println("The trust values are : " + jsonData);
+            showProgressDialog();
             return jsonData;
         } catch (Exception e) {
             e.printStackTrace();
+            dismissDialog();
         }
         return null;
     }
@@ -45,8 +53,10 @@ public class SensorDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_data);
 
+        progress = new ProgressDialog(this);
+
         getDataFromServer();
-        setExapndableListView();
+        //setExapndableListView();
     }
 
     private void getDataFromServer() {
@@ -56,8 +66,10 @@ public class SensorDataActivity extends AppCompatActivity {
             public void onJSONResponse(boolean success, JSONObject response) {
                 if (success) {
                     allData = response;
-                    prepareListData();
+                    //prepareListData();
+                    setExapndableListView();
 //                    expListView.
+                    dismissDialog();
                 } else
                     System.out.println(response);
             }
@@ -71,7 +83,7 @@ public class SensorDataActivity extends AppCompatActivity {
 
         // preparing list data
         prepareListData();
-        listAdapter = new CustomExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new SesnorDataExpandableListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
@@ -83,7 +95,7 @@ public class SensorDataActivity extends AppCompatActivity {
                                         int childPosition, long id) {
                 // CAll parse for data sets containing this variable
                 String selectedGroup = listDataHeader.get(groupPosition);
-                String selectedValue =
+                SensorData selectedValue =
                         listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                 System.out.println("The selected variable is: " + selectedValue);
                 return false;
@@ -109,33 +121,42 @@ public class SensorDataActivity extends AppCompatActivity {
         });
     }
 
+    private void showProgressDialog() {
+
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.show();
+    }
+
+    private void dismissDialog() {
+        progress.dismiss();
+    }
+
     private void prepareListData() {
         Constants.setCategoriesToVariables();
 
         try {
             listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<SensorData>>();
 
-            for (int index = 0; index < allData.getJSONArray("trust").length(); index++) {
+            JSONObject trust = (JSONObject) allData.get("trust");
+            Iterator keysToCopyIterator = trust.keys();
+            while (keysToCopyIterator.hasNext()) {
+                String key = (String) keysToCopyIterator.next();
+                listDataHeader.add(key);
+                List<SensorData> arrayList = new ArrayList<SensorData>();
 
+                JSONArray array = trust.getJSONArray(key);
+                for (int index = 0; index < array.length(); index++) {
+                    SensorData data = new SensorData();
+                    JSONObject currentValue = (JSONObject) array.get(index);
+                    data.setX(currentValue.getDouble("x"));
+                    data.setTrustValue(currentValue.getDouble("trustValue"));
+                    data.setTime(currentValue.getString("time"));
+                    arrayList.add(data);
+                }
+                listDataChild.put(key, arrayList);
             }
-
-            listDataHeader.add("Something");
-            listDataChild = new HashMap<String, List<String>>();
-            List<String> arrayList = new ArrayList<String>();
-            arrayList.add("Temperature");
-            arrayList.add("Water");
-            arrayList.add("Pressure");
-            arrayList.add("Temperature");
-            arrayList.add("Water");
-            arrayList.add("Pressure");
-            arrayList.add("Temperature");
-            arrayList.add("Water");
-            arrayList.add("Pressure");
-            arrayList.add("Temperature");
-            arrayList.add("Water");
-            arrayList.add("Pressure");
-            listDataChild.put("Something", arrayList);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
