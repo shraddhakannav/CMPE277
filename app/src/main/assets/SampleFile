@@ -1,0 +1,42 @@
+{
+  "table": {
+    "columnNames": ["institution"],
+    "columnTypes": ["String"],
+    "columnUnits": [null],
+    "rows": [
+      ["Axiom Data Science"],
+      ["California Polytechnic State University, Center for Coastal Marine Sciences"],
+      ["California State University East Bay"],
+      ["Caltrans"],
+      ["Carbon Dioxide Information Analysis Center"],
+      ["Center for Operational Oceanographic Products and Services (CO-OPS)"],
+      ["Central & Northern California Ocean Observing System (CeNCOOS)"],
+      ["edu.ucsc"],
+      ["edu.ucsd.cdip"],
+      ["gov.ca.dfg"],
+      ["Humboldt State University"],
+      ["Hydrometeorological Automated Data System (HADS)"],
+      ["Land/Ocean Biogeochemical Observatory (LOBO) in Elkhorn Slough"],
+      ["MesoWest"],
+      ["MiscWebCams"],
+      ["Monterey Bay Aquarium Research Institute"],
+      ["Moss Landing Marine Laboratories (MLML)"],
+      ["National Data Buoy Center (NDBC)"],
+      ["National Estuarine Research Reserve System (NERRS)"],
+      ["Naval Postgraduate School (NPS)"],
+      ["NOAA Earth System Research Laboratory"],
+      ["NOAA Water"],
+      ["NOAA Weather"],
+      ["Ocean Sciences Department, University of California,1156 High Street, Santa Cruz,CA 95064"],
+      ["Oregon State University\nCollege of Earth, Ocean and Atmospheric Sciences\n104 CEOAS Admin Bldg\nCorvallis, OR 97331-5503"],
+      ["Partnership for Interdisciplinary Studies of Coastal Oceans"],
+      ["San Francisco State University CMA"],
+      ["San Francisco State University Romberg Tiburon Center"],
+      ["Scripps Institution of Oceanography"],
+      ["University of California Davis, Bodega Marine Laboratory"],
+      ["USGS Coastal and Marine Geology Program"],
+      ["USGS National Water Information System (NWIS)"],
+      ["USGS Pacific Coastal and Marine Science Center"]
+    ]
+  }
+}

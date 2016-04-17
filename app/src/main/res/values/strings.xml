@@ -1,30 +1,49 @@
 <resources>
-    <string name="app_name">Sense</string>
+  <string name="app_name">Sense</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+  <string name="hello_world">Hello world!</string>
+  <string name="action_settings">Settings</string>
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="TemperatureSensorLabel">Temperature Sensor</string>
-    <string name="PressureSensorLabel">Pressure Sensor</string>
-    <string name="LightSensorLabel">Light Sensor</string>
-    <string name="HumiditySensorLabel">Humidity Sensor</string>
-    <string name="placeholder">Unavailable</string>
-    <string name="signing_in">Signing in...</string>
-    <string name="signedOut">Sucessfully signed out.</string>
-    <string name="signFailed">Signed Failed.</string>
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="TemperatureSensorLabel">Temperature Sensor</string>
+  <string name="PressureSensorLabel">Pressure Sensor</string>
+  <string name="LightSensorLabel">Light Sensor</string>
+  <string name="HumiditySensorLabel">Humidity Sensor</string>
+  <string name="placeholder">Unavailable</string>
+  <string name="signing_in">Signing in...</string>
+  <string name="signedOut">Sucessfully signed out.</string>
+  <string name="signFailed">Signed Failed.</string>
 
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_sensor">Sensor List</string>
-    <string name="title_activity_userdisplay">Welcome to Sensor cloud</string>
-    <string name="title_activity_sensor_registration">SensorRegistration</string>
-    <string name="title_activity_individual_sensor">IndividualSensor</string>
-    <string name="title_activity_dashboard">Dashboard</string>
-    <string name="title_activity_sensor_details">SensorDetails</string>
-    <string name="title_activity_register_me_dialog">RegisterMeDialog</string>
+  <string name="title_activity_maps">Map</string>
+  <string name="title_activity_sensor">Sensor List</string>
+  <string name="title_activity_userdisplay">Welcome to Sensor cloud</string>
+  <string name="title_activity_sensor_registration">SensorRegistration</string>
+  <string name="title_activity_individual_sensor">IndividualSensor</string>
+  <string name="title_activity_dashboard">Dashboard</string>
+  <string name="title_activity_sensor_details">SensorDetails</string>
+  <string name="title_activity_register_me_dialog">RegisterMeDialog</string>
 
-    <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
-    <string name="sampleText">Text goes here</string>
-    <string name="user_type">Tell us who you are...</string>
+  <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
+  <string name="sampleText">Text goes here</string>
+  <string name="user_type">Tell us who you are...</string>
+  <string name="title_activity_map_details_tab">MapDetailsTab</string>
+  <string name="section_format">Hello World from section: %1$d</string>
+  <string name="weekly_analysis_title">Weekly analysis</string>
+  <string name="sensor_type">Sensor type</string>
+  <string name="sources">Source</string>
+
+  <string-array name="planets_array">
+    <item>Mercury</item>
+    <item>Venus</item>
+    <item>Earth</item>
+    <item>Mars</item>
+    <item>Jupiter</item>
+    <item>Saturn</item>
+    <item>Uranus</item>
+    <item>Neptune</item>
+  </string-array>
+  <string name="title_activity_expandable_list">ExpandableListActivity</string>
+
+
 </resources>

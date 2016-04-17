@@ -1,37 +1,45 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+  compileSdkVersion 22
+  buildToolsVersion "22.0.1"
 
-    defaultConfig {
-        applicationId "com.example.shraddha.cmpe277"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-    }
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
+  defaultConfig {
+    applicationId "com.example.shraddha.cmpe277"
+    minSdkVersion 15
+    targetSdkVersion 22
+    versionCode 1
+    versionName "1.0"
+    multiDexEnabled = true
+  }
+  repositories {
+    maven { url "https://jitpack.io" }
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':backend', configuration: 'android-endpoints')
-    compile 'com.parse.bolts:bolts-android:1.+'
-    compile fileTree(include: 'Parse-*.jar', dir: 'libs')
-    compile 'com.jjoe64:graphview:4.0.1'
-    compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:cardview-v7:23.0.1'
-    compile 'com.google.android.gms:play-services-maps:8.1.0'
-    compile files('mysql-connector-java-5.1.36-bin.jar')
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+  compile project(path: ':backend', configuration: 'android-endpoints')
+  compile fileTree(include: 'Parse-*.jar', dir: 'libs')
+  compile files('mysql-connector-java-5.1.36-bin.jar')
+  compile 'com.parse.bolts:bolts-android:1.+'
+  compile 'com.jjoe64:graphview:4.0.1'
+  compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+  compile 'com.android.support:appcompat-v7:22.2.1'
+  compile 'com.android.support:cardview-v7:22.2.1'
+  compile 'com.google.android.gms:play-services-maps:8.4.0'
+  compile 'com.android.support:design:22.2.1'
+  compile 'com.github.lecho:hellocharts-android:v1.5.8'
+  compile 'com.squareup.retrofit2:retrofit:2.0.1'
+  compile 'com.google.code.gson:gson:2.2.4'
+  compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+  compile files('libs/jcalc.jar')
+
 }
