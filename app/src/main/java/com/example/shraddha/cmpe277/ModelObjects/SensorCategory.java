@@ -4,37 +4,37 @@ import com.parse.ParseObject;
 
 public class SensorCategory {
 
-  private String objectId;
-  private String categoryName;
-  private String URL;
+    private String objectId;
+    private String categoryName;
+    private String URL;
 
-  public String getObjectId() {
-    return objectId;
-  }
+    public String getObjectId() {
+        return objectId;
+    }
 
-  public void setObjectId(String objectId) {
-    this.objectId = objectId;
-  }
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-  public String getCategoryName() {
-    return categoryName;
-  }
+    public String getCategoryName() {
+        return categoryName;
+    }
 
-  public void setCategoryName(String categoryName) {
-    this.categoryName = categoryName;
-  }
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-  public String getURL() {
-    return URL;
-  }
+    public String getURL() {
+        return URL;
+    }
 
-  public void setURL(String URL) {
-    this.URL = URL;
-  }
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
 
-  public void populateResult(ParseObject result){
-    this.objectId = result.getObjectId();
-    this.categoryName = result.getString("categoryName");
-    this.URL = result.getString("categoryURL");
-  }
+    public void populateResult(ParseObject result) {
+        this.objectId = result.getObjectId();
+        this.categoryName = result.getString("categoryName");
+        this.URL = result.getString("categoryURL");
+    }
 }

@@ -26,7 +26,7 @@ android {
 
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
-  compile project(path: ':backend', configuration: 'android-endpoints')
+//  compile project(path: ':backend', configuration: 'android-endpoints')
   compile fileTree(include: 'Parse-*.jar', dir: 'libs')
   compile files('mysql-connector-java-5.1.36-bin.jar')
   compile 'com.parse.bolts:bolts-android:1.+'

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,8 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,13 +19,11 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.example.shraddha.cmpe277.Gson.Institution;
+
 import com.example.shraddha.cmpe277.ModelObjects.DataResult;
 import com.example.shraddha.cmpe277.ModelObjects.SensorCategory;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.RESTApi.RemoteFetch;
-import com.example.shraddha.cmpe277.RESTApi.RestHelper;
 import com.example.shraddha.cmpe277.Utils.Constants;
 import com.example.shraddha.cmpe277.Utils.CustomFonts;
 import com.example.shraddha.cmpe277.activities.MapDetailsTab;
@@ -48,16 +43,16 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class MapsActivity extends FragmentActivity
-    implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+        implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+  protected HashMap<Marker, SensorDataSource> allMarkerInfo = new HashMap<>();
   List<ParseObject> sensors = new ArrayList<ParseObject>();
   List<Double> latitudes = new ArrayList<Double>();
   List<Double> longitudes = new ArrayList<Double>();
   int zoomlevel = 12;
+  ProgressDialog progress;
   private GoogleMap googleMap;
   private double latitude;
   private double longitude;
@@ -74,10 +69,9 @@ public class MapsActivity extends FragmentActivity
   private ArrayList<SensorDataSource> resultSourcesFromFilter;
   private Location userLocation;
   private boolean isMarkerPresent = false;
-  ProgressDialog progress;
-  protected HashMap<Marker, SensorDataSource> allMarkerInfo = new HashMap<>();
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_maps);
     sensorCategories = SenseApplication.getParseDAInstance().getCachedCategories();
@@ -102,13 +96,15 @@ public class MapsActivity extends FragmentActivity
     filterOptionsContainer = (LinearLayout) findViewById(R.id.filter_options_container);
 
     filterButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         openFilterOptions();
       }
     });
 
     refreshButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
+      @Override
+      public void onClick(View v) {
         closeFilterOptions();
         getDataForMap();
       }
@@ -127,18 +123,19 @@ public class MapsActivity extends FragmentActivity
       list.addAll(sensorsourcesFromRest);
     }
     ArrayAdapter<String> dataAdapter =
-        new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+            new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     sensorSourceSpinner.setAdapter(dataAdapter);
     sensorSourceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         System.out.println(
-            "Item selected is" + sensorSourceSpinner.getItemAtPosition(position).toString());
+                "Item selected is" + sensorSourceSpinner.getItemAtPosition(position).toString());
         selectedSensorSource = sensorSourceSpinner.getItemAtPosition(position).toString();
       }
 
-      @Override public void onNothingSelected(AdapterView<?> parent) {
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
 
       }
     });
@@ -154,18 +151,19 @@ public class MapsActivity extends FragmentActivity
       }
     }
     ArrayAdapter<String> dataAdapter =
-        new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryLabel);
+            new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryLabel);
     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     sensorTypeSpinner.setAdapter(dataAdapter);
     sensorTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         System.out.println(
-            "Item selected is   :" + sensorTypeSpinner.getItemAtPosition(position).toString());
+                "Item selected is   :" + sensorTypeSpinner.getItemAtPosition(position).toString());
         selectedSensorCategory = sensorTypeSpinner.getItemAtPosition(position).toString();
       }
 
-      @Override public void onNothingSelected(AdapterView<?> parent) {
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
 
       }
     });
@@ -175,13 +173,14 @@ public class MapsActivity extends FragmentActivity
     googleMap.setMyLocationEnabled(true);
     googleMap.setOnMarkerClickListener(this);
     googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-      @Override public void onInfoWindowClick(Marker marker) {
+      @Override
+      public void onInfoWindowClick(Marker marker) {
         String variables = "wind_speed,wind_speed_of_gust,wind_from_direction,depth";
         //allMarkerInfo.get(marker).getVariables();
         //time>=2013-09-05T00:00:00Z&time<=2013-09-12T13:50:00Z
         if (variables != null && variables.length() > 0) {
           getOneWeekDataForVariables("edu_ucsc_lml", variables, "2013-09-12T13:50:00Z",
-              "2013-09-05T00:00:00Z");
+                  "2013-09-05T00:00:00Z");
           //RestHelper.getInstance()
           //    .getOneWeekDataForVariables(variables, "edu_ucsc_lml", "2013-09-12T13:50:00Z",
           //        "2013-09-05T00:00:00Z");
@@ -212,9 +211,9 @@ public class MapsActivity extends FragmentActivity
     userLocation = locationManager.getLastKnownLocation(locationProvider);
 
     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED
-        && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED) {
+            != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
       // TODO: Consider calling
       //    ActivityCompat#requestPermissions
       // here to request the missing permissions, and then overriding
@@ -241,26 +240,29 @@ public class MapsActivity extends FragmentActivity
   }
 
   private void getOneWeekDataForVariables(final String datasetId, final String variables,
-      final String currentDate, final String lastweekday) {
+                                          final String currentDate, final String lastweekday) {
     AsyncTask<String, Integer, DataResult> fetchOneWeekData =
-        new AsyncTask<String, Integer, DataResult>() {
-          @Override protected DataResult doInBackground(String... params) {
-            DataResult fetchedData =
-                RemoteFetch.getOneWeekData(datasetId, variables, currentDate, lastweekday);
-            return fetchedData;
-          }
+            new AsyncTask<String, Integer, DataResult>() {
+              @Override
+              protected DataResult doInBackground(String... params) {
+                DataResult fetchedData =
+                        RemoteFetch.getOneWeekData(datasetId, variables, currentDate, lastweekday);
+                return fetchedData;
+              }
 
-          @Override protected void onPreExecute() {
-            super.onPreExecute();
-            showProgressDialog();
-          }
+              @Override
+              protected void onPreExecute() {
+                super.onPreExecute();
+                showProgressDialog();
+              }
 
-          @Override protected void onPostExecute(DataResult result) {
-            super.onPostExecute(result);
-            //Log.d("Printing all values__", result.toString());
-            dismissDialog();
-          }
-        };
+              @Override
+              protected void onPostExecute(DataResult result) {
+                super.onPostExecute(result);
+                //Log.d("Printing all values__", result.toString());
+                dismissDialog();
+              }
+            };
     fetchOneWeekData.execute(datasetId, variables, currentDate, lastweekday);
   }
 
@@ -287,7 +289,8 @@ public class MapsActivity extends FragmentActivity
     return longitude;
   }
 
-  @Override public void onMapReady(GoogleMap map) {
+  @Override
+  public void onMapReady(GoogleMap map) {
     googleMap = map;
     setUpMap();
     getDataForMap();
@@ -298,7 +301,7 @@ public class MapsActivity extends FragmentActivity
 
   public void addMarker(double latitude, double longitude, int icon) {
     googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
-        .icon(BitmapDescriptorFactory.fromResource(icon)));
+            .icon(BitmapDescriptorFactory.fromResource(icon)));
   }
 
   public List<ParseObject> getNearbyLocation(ParseGeoPoint location, int kilometers) {
@@ -314,7 +317,8 @@ public class MapsActivity extends FragmentActivity
     return null;
   }
 
-  @Override public boolean onMarkerClick(Marker marker) {
+  @Override
+  public boolean onMarkerClick(Marker marker) {
     LatLng latLng = marker.getPosition();
     double lat = latLng.latitude;
     double longitude = latLng.longitude;
@@ -362,15 +366,17 @@ public class MapsActivity extends FragmentActivity
 
   class GetDataForMapTask extends AsyncTask<String, Integer, List<SensorDataSource>> {
 
-    @Override protected List<SensorDataSource> doInBackground(String... params) {
+    @Override
+    protected List<SensorDataSource> doInBackground(String... params) {
 
       System.out.print("In do in background method");
       List<SensorDataSource> sourcesFromParse = SenseApplication.getParseDAInstance()
-          .getSensorLocations(selectedSensorSource, selectedSensorCategory);
+              .getSensorLocations(selectedSensorSource, selectedSensorCategory);
       return sourcesFromParse;
     }
 
-    @Override protected void onPostExecute(List<SensorDataSource> sensorDataSources) {
+    @Override
+    protected void onPostExecute(List<SensorDataSource> sensorDataSources) {
       super.onPostExecute(sensorDataSources);
       System.out.print("IN Post execute");
       try {
@@ -383,10 +389,10 @@ public class MapsActivity extends FragmentActivity
             for (SensorDataSource data : sensorDataSources) {
 
               Marker marker = googleMap.addMarker(
-                  new MarkerOptions().position(new LatLng(data.getLatitude(), data.getLongitude()))
-                      .icon(BitmapDescriptorFactory.fromResource(R.drawable.bluemarker))
-                      .title(data.getSourceId())
-                      .snippet(data.getInstitution()));
+                      new MarkerOptions().position(new LatLng(data.getLatitude(), data.getLongitude()))
+                              .icon(BitmapDescriptorFactory.fromResource(R.drawable.bluemarker))
+                              .title(data.getSourceId())
+                              .snippet(data.getInstitution()));
               allMarkerInfo.put(marker, data);
               isMarkerPresent = true;
             }
@@ -398,7 +404,8 @@ public class MapsActivity extends FragmentActivity
       }
     }
 
-    @Override protected void onPreExecute() {
+    @Override
+    protected void onPreExecute() {
       super.onPreExecute();
       showProgressDialog();
     }
