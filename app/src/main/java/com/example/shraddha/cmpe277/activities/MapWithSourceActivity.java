@@ -23,8 +23,8 @@ public class MapWithSourceActivity extends AppCompatActivity {
     if (!sensorDataSources.isEmpty()) {
       sensorDataSources = dataAccessor.getCachedSourceForOneVariable();
       listView = (ListView) findViewById(R.id.datasourcesList);
-      ListViewAdapter listViewAdapter = new ListViewAdapter(sensorDataSources,this);
-
+      ListViewAdapter listViewAdapter = new ListViewAdapter(sensorDataSources, this);
+      listView.setAdapter(listViewAdapter);
     }
   }
 }
