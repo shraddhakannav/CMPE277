@@ -139,7 +139,6 @@ public class VariableActivity extends AppCompatActivity {
         arrayList.add("Water");
         arrayList.add("Pressure");
         arrayList.add("Temperature");
-
         listDataChild.put(VARIABLE_GROUP_NAME, arrayList);
     }
 

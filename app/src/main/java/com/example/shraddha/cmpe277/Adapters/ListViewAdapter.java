@@ -11,6 +11,7 @@ import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.R;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
 
@@ -24,23 +25,19 @@ public class ListViewAdapter extends BaseAdapter {
     this.activity = activity;
   }
 
-  @Override
-  public int getCount() {
+  @Override public int getCount() {
     return sources.size();
   }
 
-  @Override
-  public Object getItem(int position) {
+  @Override public Object getItem(int position) {
     return sources.get(position);
   }
 
-  @Override
-  public long getItemId(int position) {
+  @Override public long getItemId(int position) {
     return position;
   }
 
-  @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
+  @Override public View getView(int position, View convertView, ViewGroup parent) {
     ViewHolder viewHolder;
     if (convertView == null) {
       LayoutInflater inflater = activity.getLayoutInflater();
@@ -62,8 +59,6 @@ public class ListViewAdapter extends BaseAdapter {
       //endTime = Constants.formatDate(source.getEndTime());
       viewHolder.startEndTime.setText(source.getStartTime() + "  to  " + source.getEndTime());
     }
-
-
     return convertView;
   }
 

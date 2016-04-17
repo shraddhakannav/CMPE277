@@ -33,7 +33,8 @@
         <activity
             android:name=".SensorActivity"
             android:hardwareAccelerated="false"
-            android:label="@string/title_activity_sensor" />
+            android:label="@string/title_activity_sensor"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UserDisplayList"
             android:label="@string/title_activity_userdisplay" />
