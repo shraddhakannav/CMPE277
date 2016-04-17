@@ -67,14 +67,14 @@ public class RemoteFetch {
         }
     }
 
-    public static JSONObject getTrustForData(String datasetID, String variable, String currentDate, int days) {
+    public static JSONObject getTrustForData(String datasetID, String variable, String currentDate, String enddate) {
         try {
 
             datasetID = URLEncoder.encode(datasetID, "utf-8");
             variable = URLEncoder.encode(variable, "utf-8");
             //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
             String url =
-                    SERVER_BASE_URL + "trust/ds/" + datasetID + "/sensor/" + variable + "/startdate/" + currentDate + "/" + days;
+                    SERVER_BASE_URL + "trust/ds/" + datasetID + "/sensor/" + variable + "/startdate/" + currentDate + "/" + enddate;
             // URL url = new URL(buildQuery);
 
             AsyncHttpClient client = new AsyncHttpClient();
@@ -103,7 +103,7 @@ public class RemoteFetch {
                                       String content) {
                     try {
                         // JSON Object
-                        obj = new JSONObject("" + content);
+                        obj = new JSONObject("{ 'content': " + content + " }");
                         // When the JSON response has status boolean value assigned with true
                         System.out.println("The dataset Id is: " + obj);
                         SensorDataActivity.callback.onJSONResponse(false, obj);

@@ -3,6 +3,7 @@ package com.example.shraddha.cmpe277;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -30,14 +31,18 @@ public class SensorDataActivity extends AppCompatActivity {
 
     private List<String> listDataHeader;
     private HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> listDataChild;
+    private String dataset;
+    private String variable;
+    private String startdate;
+    private String enddate;
 
     /**
      * Requesting Cloud Server for the Data from date till no of days of Sensor variable from Source dataset.
      */
-    private JSONObject getJsonData(String dataset, String variable, String date, int days) {
+    private JSONObject getJsonData(String dataset, String variable, String date, String enddate) {
         //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
         try {
-            JSONObject jsonData = RemoteFetch.getTrustForData(dataset, variable, date, days);
+            JSONObject jsonData = RemoteFetch.getTrustForData(dataset, variable, date, enddate);
             System.out.println("The trust values are : " + jsonData);
             showProgressDialog();
             return jsonData;
@@ -52,6 +57,11 @@ public class SensorDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_data);
+
+        dataset = getIntent().getStringExtra("dataset");
+        variable = getIntent().getStringExtra("variable");
+        startdate = getIntent().getStringExtra("startdate");
+        enddate = getIntent().getStringExtra("enddate");
 
         progress = new ProgressDialog(this);
 
@@ -70,12 +80,16 @@ public class SensorDataActivity extends AppCompatActivity {
                     setExapndableListView();
 //                    expListView.
                     dismissDialog();
-                } else
+                } else {
                     System.out.println(response);
+                    Log.d("No Data Available", "No data available");
+                    dismissDialog();
+                    Toast.makeText(SensorDataActivity.this, "No Data Available", Toast.LENGTH_SHORT).show();
+                }
             }
         };
 
-        getJsonData("mlml_mlml_sea", "sea_water_temperature", "2016-04-13T23:36:00Z", 2);
+        getJsonData(dataset, variable, startdate, enddate);
     }
 
     private void setExapndableListView() {
