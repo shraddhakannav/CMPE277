@@ -3,95 +3,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.shraddha.cmpe277.MapsActivity"
-    >
+    tools:context="com.example.shraddha.cmpe277.MapsActivity">
 
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-  </LinearLayout>
+        android:layout_height="match_parent" />
+    </LinearLayout>
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/filter_options_container"
-      android:layout_below="@+id/filter_or_refresh_container"
-      android:orientation="vertical"
-      android:background="@color/white"
-      android:visibility="gone"
-      >
-    <TextView
+    <LinearLayout
+        android:id="@+id/filter_options_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/sensor_type"
-        android:textSize="20sp"
-        android:id="@+id/sensor_type_label"
-        android:gravity="center"
-        />
-    <Spinner
-        android:layout_marginTop="16dp"
-        android:id="@+id/sensor_type_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_below="@+id/filter_or_refresh_container"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-    <TextView
+        <TextView
+            android:id="@+id/sensor_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="@string/sensor_type"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/sensor_type_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/sources_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:text="@string/sources"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/sensor_source_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filter_or_refresh_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/sources"
-        android:textSize="20sp"
-        android:id="@+id/sources_label"
-        android:gravity="center"
-        />
-    <Spinner
-        android:layout_marginTop="16dp"
-        android:id="@+id/sensor_source_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
-  </LinearLayout>
+        <TextView
+            android:id="@+id/filter_button"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@color/buttoncolor"
+            android:gravity="center"
+            android:text="Filter"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:orientation="horizontal"
-      android:id="@+id/filter_or_refresh_container"
-      >
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:text="Filter"
-        android:textSize="20sp"
-        android:layout_weight="0.4"
-        android:gravity="center"
-        android:id="@+id/filter_button"
-        android:background="@color/buttoncolor"
-        android:textColor="@color/white"
-        />
-    <TextView
-        android:layout_marginLeft="3dp"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:text="Refresh"
-        android:textSize="20sp"
-        android:layout_weight="0.4"
-        android:gravity="center"
-        android:id="@+id/refresh_button"
-        android:background="@color/buttoncolor"
-        android:textColor="@color/white"
-        />
-  </LinearLayout>
+        <TextView
+            android:id="@+id/refresh_button"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="0.4"
+            android:background="@color/buttoncolor"
+            android:gravity="center"
+            android:text="Refresh"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
 </RelativeLayout>

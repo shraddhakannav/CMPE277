@@ -2,22 +2,20 @@ package com.example.shraddha.cmpe277;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
-import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.activities.ExpandableListActivity;
+
 import java.util.ArrayList;
 
 public class UserDisplayList extends AppCompatActivity {
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.listviewsample);
     initializeUI();
@@ -46,7 +44,8 @@ public class UserDisplayList extends AppCompatActivity {
   }
 
   public class ListClickHandler implements AdapterView.OnItemClickListener {
-    @Override public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+    @Override
+    public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
       // TODO Auto-generated method stub
       TextView listText = (TextView) view.findViewById(R.id.info_text);
       String text = listText.getText().toString();
