@@ -1,5 +1,6 @@
 package com.example.shraddha.cmpe277.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -66,6 +67,9 @@ public class ExpandableListActivity extends AppCompatActivity {
                 String selectedValue =
                         listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
                 dataAccessor.getSourceForVariable(selectedValue);
+                Intent intent = new Intent(ExpandableListActivity.this, MapWithSourceActivity.class);
+                startActivity(intent);
+
 
                 return false;
             }
