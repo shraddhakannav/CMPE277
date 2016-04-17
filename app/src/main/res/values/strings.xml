@@ -44,6 +44,8 @@
     <item>Neptune</item>
   </string-array>
   <string name="title_activity_expandable_list">ExpandableListActivity</string>
+  <string name="title_activity_variable">VariableActivity</string>
+  <string name="title_activity_sensor_data">SensorDataActivity</string>
 
 
 </resources>

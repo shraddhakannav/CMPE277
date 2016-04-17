@@ -3,8 +3,12 @@ package com.example.shraddha.cmpe277.RESTApi;
 import android.util.Log;
 
 import com.example.shraddha.cmpe277.ModelObjects.DataResult;
+import com.example.shraddha.cmpe277.SensorDataActivity;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,7 +21,9 @@ public class RemoteFetch {
 
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+    static JSONObject obj = new JSONObject();
     private static String ERDDAP_BASE_URL = "http://erddap.cencoos.org/erddap/tabledap/";
+    private static String SERVER_BASE_URL = "http://192.168.1.138:5858/";
 
     public static DataResult getOneWeekData(String datasetID, String variables, String currentDate,
                                             String prevWeekDay) {
@@ -55,6 +61,62 @@ public class RemoteFetch {
                 Log.d("Every row value  ", everyRow.toString());
             }
             return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static JSONObject getTrustForData(String datasetID, String variable, String currentDate, int days) {
+        try {
+
+            datasetID = URLEncoder.encode(datasetID, "utf-8");
+            variable = URLEncoder.encode(variable, "utf-8");
+            //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
+            String url =
+                    SERVER_BASE_URL + "trust/ds/" + datasetID + "/sensor/" + variable + "/startdate/" + currentDate + "/" + days;
+            // URL url = new URL(buildQuery);
+
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.get(url, null, new AsyncHttpResponseHandler() {
+                // When the response returned by REST has Http response code '200'
+                @Override
+                public void onSuccess(String response) {
+                    // Hide Progress Dialog
+                    try {
+                        // JSON Object
+                        obj = new JSONObject(response);
+                        // When the JSON response has status boolean value assigned with true
+                        System.out.println("The dataset Id is: " + obj);
+                        SensorDataActivity.callback.onJSONResponse(true, obj);
+
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+
+                    }
+                }
+
+                // When the response returned by REST has Http response code other than '200'
+                @Override
+                public void onFailure(int statusCode, Throwable error,
+                                      String content) {
+                    try {
+                        // JSON Object
+                        obj = new JSONObject("" + content);
+                        // When the JSON response has status boolean value assigned with true
+                        System.out.println("The dataset Id is: " + obj);
+                        SensorDataActivity.callback.onJSONResponse(false, obj);
+
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            //client.wait();
+            return obj;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
