@@ -1,15 +1,28 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorPrimary">@color/buttoncolor</item>
-    </style>
+  <style name="AppTheme"
+      parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimaryDark">@color/primaryColorDark</item>
+    <item name="colorPrimary">@color/app_color</item>
+  </style>
 
-    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:textColor">@color/welcomecolor</item>
-    </style>
+  <style name="NoActionBar"
+      parent="@android:style/Theme.Holo.Light">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:textColor">@color/app_color</item>
+  </style>
+
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay"
+      parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay"
+      parent="ThemeOverlay.AppCompat.Light"/>
 
 
 </resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Institution Name"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="25dp"
+        android:id="@+id/institution_name"
+        android:textColor="@color/app_color"
+        android:textSize="16sp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data set id "
+        android:id="@+id/data_set_id"
+        android:layout_below="@+id/institution_name"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="16dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/data_set_id"
+        android:id="@+id/start_time_container"
+        >
+
+      <ImageView
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:src="@drawable/calendar_48"
+          android:id="@+id/calendar_icon_start"
+          android:layout_marginLeft="25dp"
+          android:layout_centerVertical="true"
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Start time to End time"
+          android:id="@+id/start_time"
+          android:layout_marginLeft="16dp"
+          android:layout_toRightOf="@+id/calendar_icon_start"
+          android:layout_centerVertical="true"
+
+          />
+
+
+
+    </RelativeLayout>
+
+
+  </RelativeLayout>
+
+
+</LinearLayout>

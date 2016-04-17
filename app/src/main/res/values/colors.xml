@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple">#AB47BC</color>
-    <color name="orange">#FFA000</color>
-    <color name="black">#000000</color>
-    <color name="welcomecolor">#455A64</color>
-    <color name="buttoncolor">#009688</color>
-    <color name="primaryColor">#78909C</color>
-    <color name="primaryColorDark">#607D8B</color>
-    <color name="accentColor">#FFFF00</color>
-    <color name="red">#EF5350</color>
-    <color name="blue">#00BCD4</color>
-    <color name="green">#8BC34A</color>
-    <color name="transparent">#00000000</color>
-    <color name="darktransparent">#99000000</color>
-    <color name="fav_blue">#00BCD4</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="lightgrey">#78909C</color>
-    <color name="gradientstart">#2fDEDEDE</color>
-    <color name="gradientend">#2F000000</color>
-    <color name="lightbuttoncolor">#4DB6AC</color>
+  <color name="purple">#AB47BC</color>
+  <color name="orange">#FFA000</color>
+  <color name="black">#000000</color>
+  <color name="welcomecolor">#455A64</color>
+  <color name="buttoncolor">#009688</color>
+  <color name="app_color">#fd005b</color>
+  <!--<color name="primaryColor">#78909C</color>00897B -->
+  <color name="primaryColorDark">#e40052</color>
+  <color name="primaryColor">#0FC7B7</color>
+
+  <color name="accentColor">#FFFF00</color>
+  <color name="red">#EF5350</color>
+  <color name="blue">#00BCD4</color>
+  <color name="green">#8BC34A</color>
+  <color name="transparent">#00000000</color>
+  <color name="darktransparent">#99000000</color>
+  <color name="fav_blue">#00BCD4</color>
+  <color name="white">#FFFFFFFF</color>
+  <color name="lightgrey">#78909C</color>
+  <color name="gradientstart">#2fDEDEDE</color>
+  <color name="gradientend">#2F000000</color>
+  <color name="lightbuttoncolor">#4DB6AC</color>
+  <color name="ninetyPercentBlack">#424242</color>
 
 </resources>
