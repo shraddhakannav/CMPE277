@@ -1,6 +1,5 @@
 package com.example.shraddha.cmpe277.Utils;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class Constants {
   // time_status_flag
 
   public static HashMap<String, List<String>> categoriesToVariables =
-      new HashMap<String, List<String>>();
+          new HashMap<String, List<String>>();
 
   public static void setCategoriesToVariables() {
     List<String> AtmosphereVariableList = new ArrayList<String>();
@@ -112,7 +111,7 @@ public class Constants {
     CO2variableList.add("dissolved_carbon_dioxide_co2");
     CO2variableList.add("fugacity_of_carbon_dioxide_in_sea_water");
     CO2variableList.add(
-        "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
+            "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_dry_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_wet_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_sea_water_in_dry_gas");
@@ -153,7 +152,7 @@ public class Constants {
     SimpleDateFormat sdfformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
     try {
       date = sdfformat.parse(rawDate);
-      
+
     } catch (ParseException e) {
       e.printStackTrace();
     }

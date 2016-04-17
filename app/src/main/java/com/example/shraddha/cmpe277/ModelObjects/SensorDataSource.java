@@ -2,15 +2,23 @@ package com.example.shraddha.cmpe277.ModelObjects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.parse.ParseObject;
 
-import org.json.JSONArray;
-
-import java.io.Serializable;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class SensorDataSource implements Parcelable {
+  public static final Creator<SensorDataSource> CREATOR =
+          new Parcelable.Creator<SensorDataSource>() {
+            @Override
+            public SensorDataSource createFromParcel(Parcel in) {
+              return new SensorDataSource(in);
+            }
+
+            @Override
+            public SensorDataSource[] newArray(int size) {
+              return new SensorDataSource[size];
+            }
+          };
+  private static final long serialVersionUID = 1L;
   private String objectId;
   private String institution;
   private String sourceId;
@@ -23,7 +31,6 @@ public class SensorDataSource implements Parcelable {
   private String summary;
   private String startTime;
   private String endTime;
-  private static final long serialVersionUID = 1L;
 
   public SensorDataSource() {
 
@@ -43,17 +50,6 @@ public class SensorDataSource implements Parcelable {
     endTime = in.readString();
     variables = in.readString();
   }
-
-  public static final Creator<SensorDataSource> CREATOR =
-      new Parcelable.Creator<SensorDataSource>() {
-        @Override public SensorDataSource createFromParcel(Parcel in) {
-          return new SensorDataSource(in);
-        }
-
-        @Override public SensorDataSource[] newArray(int size) {
-          return new SensorDataSource[size];
-        }
-      };
 
   public String getInfoUrl() {
     return infoUrl;
@@ -165,11 +161,13 @@ public class SensorDataSource implements Parcelable {
     }
   }
 
-  @Override public int describeContents() {
+  @Override
+  public int describeContents() {
     return 0;
   }
 
-  @Override public void writeToParcel(Parcel dest, int flags) {
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
 
     dest.writeString(objectId);
     dest.writeString(institution);

@@ -1,7 +1,7 @@
 package com.example.shraddha.cmpe277.DataAccessors;
 
-import android.os.Parcel;
 import android.util.Log;
+
 import com.example.shraddha.cmpe277.ModelObjects.SensorCategory;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.Utils.Constants;
@@ -45,7 +45,8 @@ public class ParseDataAccessor {
     final ArrayList<SensorDataSource> sensorDataSources = new ArrayList<>();
     ParseQuery<ParseObject> query = ParseQuery.getQuery(SENSOR_DATASOURCE_TABLE);
     query.findInBackground(new FindCallback<ParseObject>() {
-      @Override public void done(List<ParseObject> list, ParseException e) {
+      @Override
+      public void done(List<ParseObject> list, ParseException e) {
         if (e == null) {
           for (ParseObject eachObject : list) {
             SensorDataSource dataSource = new SensorDataSource();
@@ -54,7 +55,7 @@ public class ParseDataAccessor {
           }
         } else {
           System.out.print(
-              "Error in fetching data sources from Parse" + e.getCode() + e.getStackTrace());
+                  "Error in fetching data sources from Parse" + e.getCode() + e.getStackTrace());
         }
       }
     });
@@ -66,7 +67,8 @@ public class ParseDataAccessor {
     final ArrayList<SensorCategory> allCategories = new ArrayList<>();
     ParseQuery<ParseObject> query = ParseQuery.getQuery(SENSOR_CATEGORIES);
     query.findInBackground(new FindCallback<ParseObject>() {
-      @Override public void done(List<ParseObject> list, ParseException e) {
+      @Override
+      public void done(List<ParseObject> list, ParseException e) {
         if (e == null) {
           for (ParseObject eachObject : list) {
             SensorCategory category = new SensorCategory();
@@ -75,7 +77,7 @@ public class ParseDataAccessor {
           }
         } else {
           System.out.print(
-              "Error in fetching data sources from Parse" + e.getCode() + e.getStackTrace());
+                  "Error in fetching data sources from Parse" + e.getCode() + e.getStackTrace());
         }
       }
     });

@@ -6,7 +6,6 @@
     tools:context=".activities.MapWithSourceActivity">
 
 
-
     <fragment
         android:id="@+id/datasourcesMap"
         class="com.google.android.gms.maps.MapFragment"
