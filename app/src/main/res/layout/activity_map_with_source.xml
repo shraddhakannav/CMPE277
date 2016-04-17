@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".activities.MapWithSourceActivity">
 
+
+
     <fragment
         android:id="@+id/datasourcesMap"
         class="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp" />
-
     <ListView
         android:id="@+id/datasourcesList"
         android:layout_width="match_parent"
@@ -18,5 +19,6 @@
         android:layout_below="@id/datasourcesMap">
 
     </ListView>
+
 
 </RelativeLayout>

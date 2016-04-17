@@ -41,8 +41,8 @@ public class ListSensorDataAsyncTask extends AsyncTask<Pair<GoogleMap, String>, 
 //                    for (ParseObject object : list) {
 //                        SensorData sensor = new SensorData();
 //                        sensor.setSensortype(object.getString("sensortype"));
-//                        sensor.setLatitude(object.getParseGeoPoint("location").getLatitude());
-//                        sensor.setLongitude(object.getParseGeoPoint("location").getLatitude());
+//                        sensor.setMinLatitude(object.getParseGeoPoint("location").getMinLatitude());
+//                        sensor.setMinLongitude(object.getParseGeoPoint("location").getMinLatitude());
 //                        sensor.setValue(object.getDouble("value"));
 //                        sensors.add(sensor);
 //                    }

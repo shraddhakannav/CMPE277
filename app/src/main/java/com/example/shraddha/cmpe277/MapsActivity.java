@@ -389,7 +389,7 @@ public class MapsActivity extends FragmentActivity
             for (SensorDataSource data : sensorDataSources) {
 
               Marker marker = googleMap.addMarker(
-                      new MarkerOptions().position(new LatLng(data.getLatitude(), data.getLongitude()))
+                      new MarkerOptions().position(new LatLng(data.getMinLatitude(), data.getMinLongitude()))
                               .icon(BitmapDescriptorFactory.fromResource(R.drawable.bluemarker))
                               .title(data.getSourceId())
                               .snippet(data.getInstitution()));
