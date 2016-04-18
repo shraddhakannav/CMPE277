@@ -47,6 +47,7 @@ public class SensorDataActivity extends AppCompatActivity {
     private String variable;
     private String startdate;
     private String enddate;
+    private String unit;
 
     /**
      * Requesting Cloud Server for the Data from date till no of days of Sensor variable from Source dataset.
@@ -136,8 +137,9 @@ public class SensorDataActivity extends AppCompatActivity {
 
                 //Intent intent = new Intent(SensorDataActivity.this, ChartActivity.class);
                 Intent intent = new Intent(SensorDataActivity.this, DependencyChartActivity.class);
-                intent.putParcelableArrayListExtra("ListOfData", listToPlot);
-
+                //intent.putParcelableArrayListExtra("ListOfData", listToPlot);
+                intent.putExtra("VARIABLE", variable);
+                intent.putExtra("UNIT", unit);
                 startActivity(intent);
 
                 System.out.println("The selected variable is: " + selectedValue);
@@ -182,6 +184,7 @@ public class SensorDataActivity extends AppCompatActivity {
             listDataHeader = new ArrayList<String>();
             listDataChild = new HashMap<String, List<SensorData>>();
 
+            unit = allData.get("unit").toString();
             JSONObject trust = (JSONObject) allData.get("trust");
             Iterator keysToCopyIterator = trust.keys();
             while (keysToCopyIterator.hasNext()) {
@@ -196,6 +199,7 @@ public class SensorDataActivity extends AppCompatActivity {
                     data.setX(currentValue.getDouble("x"));
                     data.setTrustValue(currentValue.getDouble("trustValue"));
                     data.setTime(currentValue.getString("time"));
+                    data.setUnit(unit);
                     arrayList.add(data);
                 }
                 listDataChild.put(key, arrayList);

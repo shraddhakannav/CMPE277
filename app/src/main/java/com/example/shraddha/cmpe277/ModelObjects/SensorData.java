@@ -22,6 +22,7 @@ public class SensorData implements Parcelable {
     private String time;
     private Double x;
     private Double trustValue;
+    private String unit;
 
     public SensorData() {
     }
@@ -30,6 +31,7 @@ public class SensorData implements Parcelable {
         time = in.readString();
         x = in.readDouble();
         trustValue = in.readDouble();
+        unit = in.readString();
     }
 
     public String getTime() {
@@ -56,6 +58,14 @@ public class SensorData implements Parcelable {
         this.trustValue = trustValue;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -76,7 +86,7 @@ public class SensorData implements Parcelable {
         dest.writeString(this.time);
         dest.writeDouble(this.x);
         dest.writeDouble(this.trustValue);
-
+        dest.writeString(this.unit);
     }
 
 

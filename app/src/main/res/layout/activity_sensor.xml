@@ -29,8 +29,7 @@
         android:layout_weight="1"
         android:background="@color/dividerColor"
         android:fontFamily="sans-serif-light"
-        android:text="Status"
-         />
+        android:text="Status" />
 
 
 </RelativeLayout>

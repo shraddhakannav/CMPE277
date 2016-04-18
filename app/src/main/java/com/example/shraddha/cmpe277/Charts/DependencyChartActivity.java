@@ -41,11 +41,16 @@ public class DependencyChartActivity extends AppCompatActivity {
     private ColumnChartData columnData;
     private HashMap<String, List<SensorData>> hashMap;
     private HashMap<Integer, List<SensorData>> columnWiseKey;
+    private String variable;
+    private String unit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dependency_chart);
+
+        variable = getIntent().getStringExtra("VARIABLE");
+        unit = getIntent().getStringExtra("UNIT");
 
         hashMap = Constants.getDataForVariable();
         columnWiseKey = new HashMap<Integer, List<SensorData>>();
@@ -93,8 +98,8 @@ public class DependencyChartActivity extends AppCompatActivity {
 
         columnData = new ColumnChartData(columns);
 
-        columnData.setAxisXBottom(new Axis(axisValues).setHasLines(true).setMaxLabelChars(5));
-        columnData.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2));
+        columnData.setAxisXBottom(new Axis(axisValues).setHasLines(true).setMaxLabelChars(5).setName("Days").setTextColor(ChartUtils.DEFAULT_DARKEN_COLOR));
+        columnData.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2).setName("Avg(" + variable + ")").setTextColor(ChartUtils.DEFAULT_DARKEN_COLOR));
 
         chartBottom.setColumnChartData(columnData);
 
@@ -130,8 +135,8 @@ public class DependencyChartActivity extends AppCompatActivity {
         lines.add(line);
 
         lineData = new LineChartData(lines);
-        lineData.setAxisXBottom(new Axis(axisValues).setHasLines(true));
-        lineData.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(3));
+        lineData.setAxisXBottom(new Axis(axisValues).setHasLines(true).setName("Time of Day").setTextColor(ChartUtils.DEFAULT_DARKEN_COLOR));
+        lineData.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(3).setName(variable + "(" + unit + ")").setTextColor(ChartUtils.DEFAULT_DARKEN_COLOR));
 
         chartTop.setLineChartData(lineData);
 
@@ -173,7 +178,9 @@ public class DependencyChartActivity extends AppCompatActivity {
                 PointValue value = line.getValues().get(i);
                 value.setTarget(value.getX(), Float.parseFloat("" + list.get(i).getX()));
             } else {
+                if (list.get(i).getX() != -9999.99)
                 line.getValues().add(new PointValue(i, Float.parseFloat("" + list.get(i).getX())));
+                else line.getValues().add(new PointValue(i, Float.parseFloat("0.0")));
                 lineData.getAxisXBottom().getValues().add(new AxisValue(i).setLabel(list.get(i).getTime().substring(11, 15)));
             }
         }

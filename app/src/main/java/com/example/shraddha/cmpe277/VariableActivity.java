@@ -126,7 +126,8 @@ public class VariableActivity extends AppCompatActivity {
       latitudeForDisplay = source.getMinLatitude();
       longitudeForDisplay = source.getMinLongitude();
       availableSensorText.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View v) {
+        @Override
+        public void onClick(View v) {
           buildAlertDialog();
         }
       });
@@ -164,6 +165,7 @@ public class VariableActivity extends AppCompatActivity {
       startTimeValue.setText(source.getStartTime());
       endTimeValue.setText(source.getEndTime());
 
+      initializeMaps();
       //createExpandableListView();
     } catch (ParseException e) {
       e.printStackTrace();
@@ -243,16 +245,18 @@ public class VariableActivity extends AppCompatActivity {
 
   private void initializeMaps() {
     MapFragment mapFragment =
-        (MapFragment) getFragmentManager().findFragmentById(R.id.datasourcesMap);
+            (MapFragment) getFragmentManager().findFragmentById(R.id.singleSourceMap);
+
     mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override public void onMapReady(GoogleMap googleMap) {
-        //LatLngBounds latLngBounds =
-        //    new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
+      @Override
+      public void onMapReady(GoogleMap googleMap) {
+//        LatLngBounds latLngBounds =
+//            new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
         googleMap.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
+                CameraUpdateFactory.newLatLngZoom(new LatLng(source.getMinLatitude(), source.getMinLongitude()), 10));
         googleMap.addMarker(new MarkerOptions().position(
-            new LatLng(source.getMinLatitude(), source.getMinLongitude()))
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25)));
+                new LatLng(source.getMinLatitude(), source.getMinLongitude()))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25)));
       }
     });
   }
