@@ -73,7 +73,9 @@ public class ExpandableListActivity extends AppCompatActivity {
         dataAccessor.getSourceForVariable(selectedValue);
         if (dataAccessor.getCachedSourceForOneVariable() != null
                 && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
+
           Intent intent = new Intent(ExpandableListActivity.this, MapWithSourceActivity.class);
+          intent.putExtra("VARIABLE", selectedValue);
           startActivity(intent);
           dismissDialog();
         } else {

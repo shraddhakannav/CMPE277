@@ -38,7 +38,9 @@
             android:layout_height="0dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_weight="1"></lecho.lib.hellocharts.view.ColumnChartView>
+            android:layout_weight="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"></lecho.lib.hellocharts.view.ColumnChartView>
     </LinearLayout>
     <!--</ScrollView>-->
 </LinearLayout>

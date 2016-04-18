@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shraddha.cmpe277.Adapters.CustomExpandableListAdapter;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
@@ -47,6 +48,10 @@ public class VariableActivity extends AppCompatActivity {
   String VARIABLE_GROUP_NAME = "Sensors";
   private String startDate;
   private String endDate;
+
+  private Date startdate;
+  private Date enddate;
+
   private double latitudeForDisplay;
   private double longitudeForDisplay;
   private AlertDialog levelDialog = null;
@@ -62,6 +67,9 @@ public class VariableActivity extends AppCompatActivity {
   private Button infoURLButton;
   private ImageView scenicImage;
   private SensorDataSource source;
+  private String currentVariable;
+  private DatePickerDialog dialog;
+  private DatePickerDialog enddialog;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -78,16 +86,31 @@ public class VariableActivity extends AppCompatActivity {
         Log.d("Summary", source.getSummary());
       }
 
+      currentVariable = bundle.getString("VARIABLE");
       InstitutionLabel = (TextView) findViewById(R.id.txtViewInstitutionName);
       availableSensorText = (TextView) findViewById(R.id.available_sensor_list);
       selectedSensorValue = (TextView) findViewById(R.id.selectedSensorValue);
+      selectedSensorValue.setText(currentVariable);
       locationLabel = (TextView) findViewById(R.id.locationLabel);
       locationValue = (TextView) findViewById(R.id.latlng_value);
       scenicImage = (ImageView) findViewById(R.id.background_image);
 
-      DateFormat format = new SimpleDateFormat("yyyy-mm-dd'T'HH:MM:SS'Z'", Locale.ENGLISH);
-      final Date startdate = format.parse(source.getStartTime());
-      final Date enddate = format.parse(source.getEndTime());
+
+      DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS'Z'", Locale.ENGLISH);
+      startdate = format.parse(source.getStartTime());
+      enddate = format.parse(source.getEndTime());
+
+      dialog =
+              new DatePickerDialog(VariableActivity.this, new mStartDateSetListener(),
+                      startdate.getYear(), startdate.getMonth(), startdate.getDay());
+      dialog.getDatePicker().setMaxDate(enddate.getTime());
+      dialog.getDatePicker().setMinDate(startdate.getTime());
+
+      enddialog =
+              new DatePickerDialog(VariableActivity.this, new mEndDateSetListener(),
+                      enddate.getYear(), enddate.getMonth(), enddate.getDay());
+      enddialog.getDatePicker().setMaxDate(enddate.getTime());
+      enddialog.getDatePicker().setMinDate(startdate.getTime());
 
       txtViewSourceId = (TextView) findViewById(R.id.txtViewSourceId);
       txtViewSourceId.setText(source.getSourceId());
@@ -96,18 +119,11 @@ public class VariableActivity extends AppCompatActivity {
       txtViewSummary.setText(source.getSummary());
 
       infoURLButton = (Button) findViewById(R.id.infoURLButton);
-      //infoURLButton.setOnClickListener(new View.OnClickListener() {
-      //  @Override public void onClick(View v) {
-      //    Intent intent = new Intent(VariableActivity.this, WebViewActivity.class);
-      //    intent.putExtra("url", source.getInfoUrl());
-      //    startActivity(intent);
-      //  }
-      //});
 
       InstitutionLabel.setText(source.getInstitution());
 
       latitudeForDisplay = source.getMinLatitude();
-      latitudeForDisplay = source.getMinLongitude();
+      longitudeForDisplay = source.getMinLongitude();
       availableSensorText.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           buildAlertDialog();
@@ -126,11 +142,6 @@ public class VariableActivity extends AppCompatActivity {
       buttonStartTime = (Button) findViewById(R.id.buttonStartTime);
       buttonStartTime.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          DatePickerDialog dialog =
-              new DatePickerDialog(VariableActivity.this, new mDateSetListener(buttonStartTime),
-                  year, month, day);
-          dialog.getDatePicker().setMaxDate(enddate.getTime());
-          dialog.getDatePicker().setMinDate(startdate.getTime());
           dialog.show();
         }
       });
@@ -138,12 +149,12 @@ public class VariableActivity extends AppCompatActivity {
       buttonEndTime = (Button) findViewById(R.id.buttonEndTime);
       buttonEndTime.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          DatePickerDialog dialog =
-              new DatePickerDialog(VariableActivity.this, new mDateSetListener(buttonEndTime), year,
-                  month, day);
-          dialog.getDatePicker().setMaxDate(enddate.getTime());
-          dialog.getDatePicker().setMinDate(startdate.getTime());
-          dialog.show();
+//          DatePickerDialog dialog =
+//              new DatePickerDialog(VariableActivity.this, new mDateSetListener(buttonEndTime), year,
+//                  month, day);
+//          dialog.getDatePicker().setMaxDate(enddate.getTime());
+//          dialog.getDatePicker().setMinDate(startdate.getTime());
+          enddialog.show();
         }
       });
 
@@ -156,13 +167,24 @@ public class VariableActivity extends AppCompatActivity {
 
 
   public void seeData(View view) {
-    Intent intent = new Intent(VariableActivity.this, SensorDataActivity.class);
-    intent.putExtra("dataset", source.getSourceId());
-    //        "sea_water_temperature", "2016-04-13T23:36:00Z"
-    intent.putExtra("variable", "sea_water_temperature");
-    intent.putExtra("startdate", startDate);
-    intent.putExtra("enddate", endDate);
-    startActivity(intent);
+    try {
+      Date currStartDate = Constants.getStandardDateFormat().parse(startDate);
+      Date currEndDate = Constants.getStandardDateFormat().parse(endDate);
+
+      if (currStartDate.getTime() < currEndDate.getTime()) {
+
+        Intent intent = new Intent(VariableActivity.this, SensorDataActivity.class);
+        intent.putExtra("dataset", source.getSourceId());
+        intent.putExtra("variable", currentVariable);
+        intent.putExtra("startdate", startDate);
+        intent.putExtra("enddate", endDate);
+        startActivity(intent);
+      } else {
+        Toast.makeText(this, "Please Select End Time greater than Start Time", Toast.LENGTH_SHORT).show();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public void moreInfo(View view) {
@@ -195,6 +217,7 @@ public class VariableActivity extends AppCompatActivity {
     String variables = source.getVariables();
     variables = variables.replace("[", "");
     variables = variables.replace("]", "");
+    variables = variables.replace("\"", "");
     final String variablesAsArray[] = variables.split(",");
 
     // Strings to Show In Dialog with Radio Buttons
@@ -206,6 +229,7 @@ public class VariableActivity extends AppCompatActivity {
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
       public void onClick(DialogInterface dialog, int item) {
         levelDialog.dismiss();
+        currentVariable = variablesAsArray[item];
         selectedSensorValue.setText(variablesAsArray[item]);
       }
     });
@@ -229,13 +253,7 @@ public class VariableActivity extends AppCompatActivity {
     });
   }
 
-  class mDateSetListener implements DatePickerDialog.OnDateSetListener {
-
-    Button v;
-
-    public mDateSetListener(Button button) {
-      v = button;
-    }
+  class mStartDateSetListener implements DatePickerDialog.OnDateSetListener {
 
     @Override public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
       int mYear = year;
@@ -255,15 +273,41 @@ public class VariableActivity extends AppCompatActivity {
       try {
         Date date = simpleDateFormat.parse(selectedDate);
 
-        if (v.getId() == R.id.buttonStartTime) {
-          startDate = format.format(date);
-        } else if (v.getId() == R.id.buttonEndTime) {
-          endDate = format.format(date);
-        }
-
+        startDate = format.format(date);
         selectedDate = prettyFormat.format(date);
-        v.setText(selectedDate);
-        System.out.println(v.getText().toString());
+        buttonStartTime.setText(selectedDate);
+        System.out.println(buttonStartTime.getText().toString());
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  class mEndDateSetListener implements DatePickerDialog.OnDateSetListener {
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+      int mYear = year;
+      int mMonth = monthOfYear;
+      int mDay = dayOfMonth;
+
+      String selectedDate = (new StringBuilder().append(mYear)
+              .append("-")
+              .append(mMonth + 1)
+              .append("-")
+              .append(mDay)).toString();
+
+      DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+      DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
+      DateFormat prettyFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+
+      try {
+        Date date = simpleDateFormat.parse(selectedDate);
+
+        endDate = format.format(date);
+        selectedDate = prettyFormat.format(date);
+        buttonEndTime.setText(selectedDate);
+        System.out.println(buttonEndTime.getText().toString());
       } catch (ParseException e) {
         e.printStackTrace();
       }
