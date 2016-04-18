@@ -19,9 +19,6 @@ import com.parse.ParseObject;
 
 import java.util.List;
 
-/**
- * Created by Shraddha on 10/14/15.
- */
 public class SensorListAdapter extends ArrayAdapter<Sensor> {
 
     public final static String STORE_PREFERENCES = "SenseProfile.txt";

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/glass"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/pressure" />
 
     <LinearLayout
@@ -26,10 +26,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-light"
             android:padding="2dp"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/buttoncolor" />
+            android:textColor="@color/app_color" />
 
 
         <TextView
@@ -37,7 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-light"/>
 
 
         <CheckBox
@@ -45,7 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="Register" />
+            android:text="Register"
+            android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -32,6 +32,7 @@
             android:layout_margin="20dp"
             android:gravity="center"
             android:text="@string/sensor_type"
+            android:fontFamily="sans-serif-light"
             android:textSize="20sp" />
 
         <Spinner
@@ -47,6 +48,7 @@
             android:layout_margin="20dp"
             android:gravity="center"
             android:text="@string/sources"
+            android:fontFamily="sans-serif-light"
             android:textSize="20sp" />
 
         <Spinner
@@ -70,6 +72,7 @@
             android:layout_weight="0.4"
             android:background="@color/buttoncolor"
             android:gravity="center"
+            android:fontFamily="sans-serif-light"
             android:text="Filter"
             android:textColor="@color/white"
             android:textSize="20sp" />
@@ -83,6 +86,7 @@
             android:background="@color/buttoncolor"
             android:gravity="center"
             android:text="Refresh"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>

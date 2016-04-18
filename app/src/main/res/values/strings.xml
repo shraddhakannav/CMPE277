@@ -18,11 +18,11 @@
   <string name="title_activity_maps">Map</string>
   <string name="title_activity_sensor">Sensor List</string>
   <string name="title_activity_userdisplay">Welcome to Sensor cloud</string>
-  <string name="title_activity_sensor_registration">SensorRegistration</string>
-  <string name="title_activity_individual_sensor">IndividualSensor</string>
+  <string name="title_activity_sensor_registration">Sensor Registration</string>
+  <string name="title_activity_individual_sensor">Individual Sensor</string>
   <string name="title_activity_dashboard">Dashboard</string>
-  <string name="title_activity_sensor_details">SensorDetails</string>
-  <string name="title_activity_register_me_dialog">RegisterMeDialog</string>
+  <string name="title_activity_sensor_details">Sensor Details</string>
+  <string name="title_activity_register_me_dialog">Register Me Dialog</string>
 
   <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
   <string name="sampleText">Text goes here</string>
@@ -43,12 +43,9 @@
     <item>Uranus</item>
     <item>Neptune</item>
   </string-array>
-  <string name="title_activity_expandable_list">ExpandableListActivity</string>
-  <string name="title_activity_variable">VariableActivity</string>
-  <string name="title_activity_sensor_data">SensorDataActivity</string>
-  <string name="title_activity_chart">ChartActivity</string>
-  <string name="title_activity_data_preview_line_chart">DataPreviewLineChartActivity</string>
-  <string name="title_activity_dependency_chart">DependencyChartActivity</string>
+  <string name="title_activity_expandable_list">Sensor Categories</string>
+  <string name="title_activity_variable">Data Set Information</string>
+  <string name="title_activity_sensor_data">Sensor Data</string>
 
 
 </resources>
