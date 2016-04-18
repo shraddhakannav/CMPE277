@@ -23,5 +23,6 @@
   <color name="gradientend">#2F000000</color>
   <color name="lightbuttoncolor">#4DB6AC</color>
   <color name="ninetyPercentBlack">#424242</color>
+  <color name="dividerColor">#E0E0E0</color>
 
 </resources>

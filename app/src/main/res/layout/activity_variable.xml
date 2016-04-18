@@ -2,112 +2,243 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/dividerColor"
     android:orientation="vertical"
-    tools:context="com.example.shraddha.cmpe277.VariableActivity">
+    tools:context="com.example.shraddha.cmpe277.VariableActivity"
+    >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
 
-        <LinearLayout
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dividerColor"
+        android:orientation="vertical"
+        android:id="@+id/top_container"
+        >
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          android:background="@drawable/coast_img"
+          android:id="@+id/background_image"
+          android:visibility="gone"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/white"
+          android:orientation="vertical"
+          >
+
+        <TextView
+            android:id="@+id/txtViewInstitutionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Institution Name"
+            android:textAlignment="center"
+            android:textColor="@color/app_color"
+            android:textSize="25dp"
+            />
+
+
+        <TextView
+            android:id="@+id/txtViewSourceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Dataset Id"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/txtViewSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dataset id Summary"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="16dp"
+            />
+
+
+      </LinearLayout>
+
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          android:layout_marginTop="10dp"
+          android:background="@color/white"
+          android:id="@+id/available_sensor_container"
+          android:elevation="2dp"
+
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Sensors"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+
+            android:id="@+id/available_sensor_list"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/available_sensor_list"
+            android:text="Select a sensor"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:id="@+id/selectedSensorValue"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:id="@+id/lat_lng_container"
+          android:layout_marginTop="10dp"
+          android:layout_marginRight="16dp"
+          android:layout_marginLeft="16dp"
+          android:background="@color/white"
+          android:elevation="2dp"
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:id="@+id/locationLabel"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/locationLabel"
+            android:text="latitude,longtitude"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:id="@+id/latlng_value"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+      </RelativeLayout>
+
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/white"
+          android:orientation="horizontal"
+          android:layout_marginTop="10dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          android:elevation="2dp"
+          >
+
+        <Button
+            android:id="@+id/buttonStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="selectStartDate"
+            android:text='Select Start Date'
+            android:textColor="@color/app_color"
+            >
+
+        </Button>
+        <View
+            android:layout_width="1dp"
+            android:background="@color/dividerColor"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            />
+
+        <Button
+            android:id="@+id/buttonEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:onClick="selectEndDate"
+            android:text='Select End Date'
+            android:textColor="@color/app_color"
+            />
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/dividerColor"
+          android:orientation="vertical"
+          >
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_button"
+            android:onClick="seeData"
+            android:text="See Data"
+            android:textColor="@color/white"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:orientation="vertical">
+        <fragment
+            android:id="@+id/singleSourceMap"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            class="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
 
-                <TextView
-                    android:id="@+id/txtViewSourceId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Dataset Id"
-                    android:textAlignment="center"
-                    android:textColor="@color/app_color"
-                    android:textSize="40dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_button"
+            android:onClick="moreInfo"
+            android:id="@+id/infoURLButton"
+            android:text="More Information"
+            android:textColor="@color/white"
+            />
 
-                <TextView
-                    android:id="@+id/txtViewSummary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dataset id Summary"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/txtViewInforUrl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dataset id InfoUrl"
-                    android:textColor="@color/fav_blue"
-                    android:textSize="20dp" />
-
-                <ExpandableListView
-                    android:id="@+id/lvExpVariable"
-                    android:layout_width="match_parent"
-                    android:layout_height="266dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/buttonStartTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:onClick="selectStartDate"
-                    android:text='Select Start Date'
-                    android:textColor="@color/app_color">
-
-                </Button>
-
-                <Button
-                    android:id="@+id/buttonEndTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:onClick="selectEndDate"
-                    android:text='Select End Date'
-                    android:textColor="@color/app_color"></Button>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/app_color"
-                    android:onClick="seeData"
-                    android:text="See Data"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+      </LinearLayout>
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
+
+  </ScrollView>
 </LinearLayout>

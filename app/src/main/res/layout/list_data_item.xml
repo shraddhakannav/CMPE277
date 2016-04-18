@@ -2,71 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/value_unit_container"
+      >
 
-        <TextView
-            android:id="@+id/txtVwX"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="10dp"
-            android:text="X"
-            android:textColor="@color/app_color"
-            android:textSize="50dp" />
+    <TextView
+        android:id="@+id/txtVwX"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerVertical="true"
+        android:text="Value"
+        android:textColor="@color/app_color"
+        android:textSize="25dp"
+        />
 
-        <TextView
-            android:id="@+id/txtVwUnit"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_margin="10dp"
-            android:text="unit"
-            android:textSize="30dp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtVwUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="unit"
+        android:layout_toRightOf="@id/txtVwX"
+        android:textSize="15dp"
+        android:layout_marginLeft="16dp"
+        />
+  </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/time_stamp_container"
+      android:layout_marginTop="15dp"
+      >
 
-        <TextView
-            android:id="@+id/txtVwAt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="at "
-            android:textSize="30dp" />
+    <TextView
+        android:id="@+id/txtVwTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="Time"
+        android:textSize="15dp"
+        />
+  </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtVwTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Time"
-            android:textSize="30dp" />
-    </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/txtVwTrustStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="Trust: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
 
-        <TextView
-            android:id="@+id/txtVwTrustStr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Trust: "
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/txtVwTrust"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Trust "
-            android:textSize="30dp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtVwTrust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Trust value"
+        android:textSize="15dp"
+        />
+  </LinearLayout>
 
 
 </LinearLayout>

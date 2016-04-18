@@ -26,7 +26,7 @@
 
   <string name="title_activity_asymmetric_grid">AsymmetricGrid</string>
   <string name="sampleText">Text goes here</string>
-  <string name="user_type">Tell us who you are...</string>
+  <string name="user_type"></string>
   <string name="title_activity_map_details_tab">MapDetailsTab</string>
   <string name="section_format">Hello World from section: %1$d</string>
   <string name="weekly_analysis_title">Weekly analysis</string>
