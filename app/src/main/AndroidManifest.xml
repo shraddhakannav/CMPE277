@@ -89,11 +89,20 @@
         <activity android:name=".activities.MapWithSourceActivity" />
         <activity
             android:name=".VariableActivity"
-            android:label="@string/title_activity_variable"></activity>
+            android:label="@string/title_activity_variable" />
         <activity
             android:name=".SensorDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/title_activity_sensor_data"></activity>
+            android:label="@string/title_activity_sensor_data" />
+        <activity
+            android:name=".Charts.ChartActivity"
+            android:label="@string/title_activity_chart"></activity>
+        <activity
+            android:name=".Charts.DataPreviewLineChartActivity"
+            android:label="@string/title_activity_data_preview_line_chart"></activity>
+        <activity
+            android:name=".Charts.DependencyChartActivity"
+            android:label="@string/title_activity_dependency_chart"></activity>
     </application>
 
 </manifest>

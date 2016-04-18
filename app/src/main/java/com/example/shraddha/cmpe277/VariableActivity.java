@@ -206,9 +206,9 @@ public class VariableActivity extends AppCompatActivity {
 
             String selectedDate = (new StringBuilder().append(mYear).append("-").append(mMonth + 1).append("-").append(mDay)).toString();
 
-            DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
-            DateFormat prettyFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+            DateFormat simpleDateFormat = Constants.getSimpleDateFormat();
+            DateFormat format = Constants.getStandardDateFormat();
+            DateFormat prettyFormat = Constants.getPrettyDateFormat();
 
             try {
                 Date date = simpleDateFormat.parse(selectedDate);

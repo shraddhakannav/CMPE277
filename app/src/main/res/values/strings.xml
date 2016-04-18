@@ -46,6 +46,9 @@
   <string name="title_activity_expandable_list">ExpandableListActivity</string>
   <string name="title_activity_variable">VariableActivity</string>
   <string name="title_activity_sensor_data">SensorDataActivity</string>
+  <string name="title_activity_chart">ChartActivity</string>
+  <string name="title_activity_data_preview_line_chart">DataPreviewLineChartActivity</string>
+  <string name="title_activity_dependency_chart">DependencyChartActivity</string>
 
 
 </resources>

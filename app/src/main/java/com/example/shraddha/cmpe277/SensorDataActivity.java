@@ -1,6 +1,7 @@
 package com.example.shraddha.cmpe277;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.shraddha.cmpe277.Adapters.SesnorDataExpandableListAdapter;
+import com.example.shraddha.cmpe277.Charts.DependencyChartActivity;
 import com.example.shraddha.cmpe277.ModelObjects.SensorData;
 import com.example.shraddha.cmpe277.RESTApi.RemoteFetch;
 import com.example.shraddha.cmpe277.Utils.Constants;
@@ -78,7 +80,6 @@ public class SensorDataActivity extends AppCompatActivity {
                     allData = response;
                     //prepareListData();
                     setExapndableListView();
-//                    expListView.
                     dismissDialog();
                 } else {
                     System.out.println(response);
@@ -109,8 +110,18 @@ public class SensorDataActivity extends AppCompatActivity {
                                         int childPosition, long id) {
                 // CAll parse for data sets containing this variable
                 String selectedGroup = listDataHeader.get(groupPosition);
+
+                ArrayList<SensorData> listToPlot = (ArrayList<SensorData>) listDataChild.get(selectedGroup);
+
                 SensorData selectedValue =
                         listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+
+                //Intent intent = new Intent(SensorDataActivity.this, ChartActivity.class);
+                Intent intent = new Intent(SensorDataActivity.this, DependencyChartActivity.class);
+                intent.putParcelableArrayListExtra("ListOfData", listToPlot);
+
+                startActivity(intent);
+
                 System.out.println("The selected variable is: " + selectedValue);
                 return false;
             }
@@ -171,6 +182,8 @@ public class SensorDataActivity extends AppCompatActivity {
                 }
                 listDataChild.put(key, arrayList);
             }
+
+            Constants.setDataForVariable(listDataChild);
         } catch (Exception e) {
             e.printStackTrace();
         }
