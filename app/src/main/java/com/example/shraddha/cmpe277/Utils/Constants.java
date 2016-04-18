@@ -1,7 +1,10 @@
 package com.example.shraddha.cmpe277.Utils;
 
+import android.graphics.Color;
 import com.example.shraddha.cmpe277.ModelObjects.SensorData;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,7 @@ import java.util.Locale;
 public class Constants {
   public static String ALL_SENSORS = "All Sensors";
   public static String ALL_SOURCES = "All Sources";
+  public static HashMap<String, Float> institutionToColorMapping = new HashMap<>();
 
   // Miscellaneous
   //* depth_status_flag
@@ -24,11 +28,13 @@ public class Constants {
   // time_status_flag
 
   public static HashMap<String, List<String>> categoriesToVariables =
-          new HashMap<String, List<String>>();
+      new HashMap<String, List<String>>();
   static DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-  static DateFormat standardDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
+  static DateFormat standardDateFormat =
+      new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
   static DateFormat prettyDateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-  private static HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> dataForVariable;
+  private static HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>>
+      dataForVariable;
 
   public static HashMap<String, List<SensorData>> getDataForVariable() {
     return dataForVariable;
@@ -61,9 +67,7 @@ public class Constants {
   public static void setPrettyDateFormat(DateFormat prettyDateFormat) {
     Constants.prettyDateFormat = prettyDateFormat;
   }
-  
-  
-  
+
   public static void setCategoriesToVariables() {
     List<String> AtmosphereVariableList = new ArrayList<String>();
     AtmosphereVariableList.add("air_pressure");
@@ -198,5 +202,84 @@ public class Constants {
     }
 
     return date.toString();
+  }
+
+  //public float getHue(String institution) {
+  //  BitmapDescriptorFactory.
+  //  BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+  //}
+
+  public static void prepareInsitutitionHashMap() {
+
+    institutionToColorMapping.put("Axiom Data Science", BitmapDescriptorFactory.HUE_BLUE);
+    institutionToColorMapping.put("California State University East Bay",
+        BitmapDescriptorFactory.HUE_AZURE);
+    institutionToColorMapping.put("Caltrans", BitmapDescriptorFactory.HUE_CYAN);
+    institutionToColorMapping.put("Carbon Dioxide Information Analysis Center",
+        BitmapDescriptorFactory.HUE_GREEN);
+    institutionToColorMapping.put("USGS Pacific Coastal and Marine Science Center",
+        BitmapDescriptorFactory.HUE_MAGENTA);
+    institutionToColorMapping.put("USGS National Water Information System (NWIS)",
+        BitmapDescriptorFactory.HUE_ORANGE);
+    institutionToColorMapping.put("USGS Coastal and Marine Geology Program",
+        BitmapDescriptorFactory.HUE_RED);
+    institutionToColorMapping.put("University of California Davis, Bodega Marine Laboratory",
+        BitmapDescriptorFactory.HUE_ROSE);
+    institutionToColorMapping.put("Scripps Institution of Oceanography",
+        BitmapDescriptorFactory.HUE_VIOLET);
+    institutionToColorMapping.put("San Francisco State University Romberg Tiburon Center",
+        BitmapDescriptorFactory.HUE_YELLOW);
+    institutionToColorMapping.put("San Francisco State University CMA", getMarkerIcon("#FFAEB9"));
+    institutionToColorMapping.put("Partnership for Interdisciplinary Studies of Coastal Oceans",
+        getMarkerIcon("#5F9EA0"));
+    institutionToColorMapping.put(
+        "Oregon State University\n" + "College of Earth, Ocean and Atmospheric Sciences\n"
+            + "104 CEOAS Admin Bldg\n" + "Corvallis, OR 97331-5503", getMarkerIcon("#7CFC00"));
+    institutionToColorMapping.put(
+        "Ocean Sciences Department, University of California,1156 High Street, Santa Cruz,CA 95064",
+        getMarkerIcon("#EEB422"));
+    institutionToColorMapping.put("NOAA Weather", getMarkerIcon("#F4A460"));
+    institutionToColorMapping.put("NOAA Water", getMarkerIcon("#F4A460"));
+    institutionToColorMapping.put("NOAA Earth System Research Laboratory",
+        getMarkerIcon("#FFA07A"));
+    institutionToColorMapping.put("Naval Postgraduate School (NPS)", getMarkerIcon("#FFA07A"));
+    institutionToColorMapping.put("National Estuarine Research Reserve System (NERRS)",
+        getMarkerIcon("#FF6A6A"));
+    institutionToColorMapping.put("National Data Buoy Center (NDBC)", getMarkerIcon("#E066FF"));
+    institutionToColorMapping.put("Moss Landing Marine Laboratories (MLML)",
+        getMarkerIcon("#DC143C"));
+    institutionToColorMapping.put("Monterey Bay Aquarium Research Institute",
+        getMarkerIcon("#3D59AB"));
+    institutionToColorMapping.put("MiscWebCams", getMarkerIcon("#20B2AA"));
+    institutionToColorMapping.put("MesoWest", getMarkerIcon("#00C957"));
+    institutionToColorMapping.put("Land/Ocean Biogeochemical Observatory (LOBO) in Elkhorn Slough",
+        getMarkerIcon("#C0FF3E"));
+    institutionToColorMapping.put("Hydrometeorological Automated Data System (HADS)",
+        getMarkerIcon("#00CED1"));
+    institutionToColorMapping.put("Humboldt State University", getMarkerIcon("#EEE685"));
+    institutionToColorMapping.put("gov.ca.dfg", getMarkerIcon("#CDB38B"));
+    institutionToColorMapping.put("edu.ucsd.cdip", getMarkerIcon("#CD3278"));
+    institutionToColorMapping.put("edu.ucsc", getMarkerIcon("#EE7AE9"));
+    institutionToColorMapping.put("Central & Northern California Ocean Observing System (CeNCOOS)",
+        getMarkerIcon("#9370DB"));
+    institutionToColorMapping.put(
+        "Center for Operational Oceanographic Products and Services (CO-OPS)",
+        getMarkerIcon("#FF7F50"));
+  }
+
+  public static float getMarkerIcon(String color) {
+    float[] hsv = new float[3];
+    Color.colorToHSV(Color.parseColor(color), hsv);
+    return hsv[0];
+  }
+
+  public static float getIconColorForInstitution(String institution) {
+
+    Float color = institutionToColorMapping.get(institution);
+    if (color != null) {
+      return color;
+    } else {
+      return BitmapDescriptorFactory.HUE_BLUE;
+    }
   }
 }

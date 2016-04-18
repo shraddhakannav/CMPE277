@@ -11,7 +11,7 @@
   <LinearLayout
       android:id="@+id/custom_grid_item_table"
       android:layout_width="match_parent"
-      android:layout_height="70dp"
+      android:layout_height="150dp"
       android:background="@color/white"
       android:orientation="horizontal"
       android:layout_marginBottom="10dp"

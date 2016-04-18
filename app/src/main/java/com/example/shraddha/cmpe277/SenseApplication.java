@@ -39,6 +39,7 @@ public class SenseApplication extends Application {
 
         ParseDataAccessor.initInstance();
         RestHelper.initInstance();
+
     }
 
 

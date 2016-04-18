@@ -22,9 +22,15 @@
           android:layout_height="200dp"
           android:background="@drawable/coast_img"
           android:id="@+id/background_image"
-          android:visibility="gone"
+          android:visibility="visible"
           />
 
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/white"
+          android:orientation="vertical"
+          >
 
         <TextView
             android:id="@+id/txtViewInstitutionName"
@@ -72,7 +78,6 @@
       </LinearLayout>
 
                 
-
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="50dp"
@@ -313,6 +318,7 @@
 
     </LinearLayout>
 
+    </ScrollView>
 
-  </ScrollView>
+
 </LinearLayout>

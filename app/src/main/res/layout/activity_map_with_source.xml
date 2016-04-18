@@ -6,13 +6,22 @@
     tools:context=".activities.MapWithSourceActivity">
 
 
-    <fragment
+    m<fragment
         android:id="@+id/datasourcesMap"
         class="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dividerColor"
+        android:layout_below="@+id/datasourcesMap"/>
+    
     <ListView
         android:id="@+id/datasourcesList"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/datasourcesMap">

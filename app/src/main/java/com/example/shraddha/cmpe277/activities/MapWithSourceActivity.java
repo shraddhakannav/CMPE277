@@ -1,6 +1,10 @@
 package com.example.shraddha.cmpe277.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,13 +16,17 @@ import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.R;
 import com.example.shraddha.cmpe277.SenseApplication;
+import com.example.shraddha.cmpe277.Utils.Constants;
 import com.example.shraddha.cmpe277.VariableActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -76,15 +84,25 @@ public class MapWithSourceActivity extends AppCompatActivity {
       @Override public void onMapReady(GoogleMap googleMap) {
         //LatLngBounds latLngBounds =
         //    new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
+        //Drawable mDrawable = getResources().getDrawable(R.drawable.map_pin_25);
+        //mDrawable.setColorFilter(new PorterDuffColorFilter(0xffff00, PorterDuff.Mode.MULTIPLY));
+
         googleMap.animateCamera(
             CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
         for (SensorDataSource source : sensorDataSources) {
+
           googleMap.addMarker(new MarkerOptions().position(
               new LatLng(source.getMinLatitude(), source.getMinLongitude()))
-              .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25))
+              .icon(BitmapDescriptorFactory.defaultMarker(
+                  Constants.getIconColorForInstitution(source.getInstitution())))
               .title(source.getSourceId())
               .snippet(source.getInstitution()));
         }
+
+        //GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+        //    .image(BitmapDescriptorFactory.fromResource(R.drawable.dashboard))
+        //    .position(new LatLng(37.7749, -122.4194), 8600f, 6500f);
+        //googleMap.addGroundOverlay(newarkMap);
       }
     });
   }

@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
 import com.example.shraddha.cmpe277.RESTApi.RestHelper;
+import com.example.shraddha.cmpe277.Utils.Constants;
 import com.example.shraddha.cmpe277.activities.ExpandableListActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
+
+    Constants.prepareInsitutitionHashMap();
   }
 
   @Override
