@@ -39,130 +39,150 @@ public class SensorDataActivity extends AppCompatActivity {
   private List<String> listDataHeader;
   private HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> listDataChild;
 
-  /**
-   * Requesting Cloud Server for the Data from date till no of days of Sensor variable from Source
-   * dataset.
-   */
-  private JSONObject getJsonData(String dataset, String variable, String date, int days) {
-    //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
-    try {
-      JSONObject jsonData = RemoteFetch.getTrustForData(dataset, variable, date, days);
-      System.out.println("The trust values are : " + jsonData);
-      showProgressDialog();
-      return jsonData;
-    } catch (Exception e) {
-      e.printStackTrace();
-      dismissDialog();
-    }
-    return null;
-  }
+    private List<String> listDataHeader;
+    private HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> listDataChild;
+    private String dataset;
+    private String variable;
+    private String startdate;
+    private String enddate;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sensor_data);
-    progress = new ProgressDialog(this);
-
-    getDataFromServer();
-    downloadButton = (TextView) findViewById(R.id.downloadButton);
-    downloadButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        saveDownloadedData();
-      }
-    });
-  }
-
-  private void getDataFromServer() {
-
-    callback = new OnJSONResponseCallback() {
-      @Override public void onJSONResponse(boolean success, JSONObject response) {
-        if (success) {
-          allData = response;
-          //prepareListData();
-          setExapndableListView();
-          //                    expListView.
-          dismissDialog();
-        } else {
-          System.out.println(response);
+    /**
+     * Requesting Cloud Server for the Data from date till no of days of Sensor variable from Source dataset.
+     */
+    private JSONObject getJsonData(String dataset, String variable, String date, String enddate) {
+        //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
+        try {
+            JSONObject jsonData = RemoteFetch.getTrustForData(dataset, variable, date, enddate);
+            System.out.println("The trust values are : " + jsonData);
+            showProgressDialog();
+            return jsonData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            dismissDialog();
         }
-      }
-    };
+        return null;
+    }
 
-    getJsonData("mlml_mlml_sea", "sea_water_temperature", "2016-04-13T23:36:00Z", 2);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sensor_data);
 
-  private void setExapndableListView() {
-    expListView = (ExpandableListView) findViewById(R.id.lvExpVariable);
+        dataset = getIntent().getStringExtra("dataset");
+        variable = getIntent().getStringExtra("variable");
+        startdate = getIntent().getStringExtra("startdate");
+        enddate = getIntent().getStringExtra("enddate");
 
-    // preparing list data
-    prepareListData();
-    listAdapter = new SesnorDataExpandableListAdapter(this, listDataHeader, listDataChild);
+        progress = new ProgressDialog(this);
 
-    // setting list adapter
-    expListView.setAdapter(listAdapter);
+        getDataFromServer();
+        //setExapndableListView();
+    }
 
-    expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+    private void getDataFromServer() {
 
-      @Override public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-          int childPosition, long id) {
-        // CAll parse for data sets containing this variable
-        String selectedGroup = listDataHeader.get(groupPosition);
-        SensorData selectedValue =
-            listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-        System.out.println("The selected variable is: " + selectedValue);
-        return false;
-      }
-    });
+        callback = new OnJSONResponseCallback() {
+            @Override
+            public void onJSONResponse(boolean success, JSONObject response) {
+                if (success) {
+                    allData = response;
+                    //prepareListData();
+                    setExapndableListView();
+//                    expListView.
+                    dismissDialog();
+                } else {
+                    System.out.println(response);
+                    Log.d("No Data Available", "No data available");
+                    dismissDialog();
+                    Toast.makeText(SensorDataActivity.this, "No Data Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
 
-    expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        getJsonData(dataset, variable, startdate, enddate);
+    }
+  
+    private void setExapndableListView() {
+        expListView = (ExpandableListView) findViewById(R.id.lvExpVariable);
 
-      @Override public void onGroupExpand(int groupPosition) {
-        Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Expanded",
-            Toast.LENGTH_SHORT).show();
-      }
-    });
+        // preparing list data
+        prepareListData();
+        listAdapter = new SesnorDataExpandableListAdapter(this, listDataHeader, listDataChild);
 
-    expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
 
-      @Override public void onGroupCollapse(int groupPosition) {
-        Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Collapsed",
-            Toast.LENGTH_SHORT).show();
-      }
-    });
-  }
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-  private void showProgressDialog() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                        int childPosition, long id) {
+                // CAll parse for data sets containing this variable
+                String selectedGroup = listDataHeader.get(groupPosition);
+                SensorData selectedValue =
+                        listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                System.out.println("The selected variable is: " + selectedValue);
+                return false;
+            }
+        });
 
-    progress.setTitle("Loading");
-    progress.setMessage("Wait while loading...");
-    progress.show();
-  }
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-  private void dismissDialog() {
-    progress.dismiss();
-  }
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Expanded",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-  private void prepareListData() {
-    Constants.setCategoriesToVariables();
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 
-    try {
-      listDataHeader = new ArrayList<String>();
-      listDataChild = new HashMap<String, List<SensorData>>();
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Collapsed",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-      JSONObject trust = (JSONObject) allData.get("trust");
-      Iterator keysToCopyIterator = trust.keys();
-      while (keysToCopyIterator.hasNext()) {
-        String key = (String) keysToCopyIterator.next();
-        listDataHeader.add(key);
-        List<SensorData> arrayList = new ArrayList<SensorData>();
+    private void showProgressDialog() {
 
-        JSONArray array = trust.getJSONArray(key);
-        for (int index = 0; index < array.length(); index++) {
-          SensorData data = new SensorData();
-          JSONObject currentValue = (JSONObject) array.get(index);
-          data.setX(currentValue.getDouble("x"));
-          data.setTrustValue(currentValue.getDouble("trustValue"));
-          data.setTime(currentValue.getString("time"));
-          arrayList.add(data);
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.show();
+    }
+
+    private void dismissDialog() {
+        progress.dismiss();
+    }
+
+    private void prepareListData() {
+        Constants.setCategoriesToVariables();
+
+        try {
+            listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<SensorData>>();
+
+            JSONObject trust = (JSONObject) allData.get("trust");
+            Iterator keysToCopyIterator = trust.keys();
+            while (keysToCopyIterator.hasNext()) {
+                String key = (String) keysToCopyIterator.next();
+                listDataHeader.add(key);
+                List<SensorData> arrayList = new ArrayList<SensorData>();
+
+                JSONArray array = trust.getJSONArray(key);
+                for (int index = 0; index < array.length(); index++) {
+                    SensorData data = new SensorData();
+                    JSONObject currentValue = (JSONObject) array.get(index);
+                    data.setX(currentValue.getDouble("x"));
+                    data.setTrustValue(currentValue.getDouble("trustValue"));
+                    data.setTime(currentValue.getString("time"));
+                    arrayList.add(data);
+                }
+                listDataChild.put(key, arrayList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         listDataChild.put(key, arrayList);
       }

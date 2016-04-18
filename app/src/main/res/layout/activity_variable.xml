@@ -32,14 +32,23 @@
                     android:text="Dataset Id"
                     android:textAlignment="center"
                     android:textColor="@color/app_color"
-                    android:textSize="50dp" />
+                    android:textSize="40dp" />
 
                 <TextView
                     android:id="@+id/txtViewSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dataset id Summary"
-                    android:textSize="30dp" />
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/txtViewInforUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dataset id InfoUrl"
+                    android:textColor="@color/fav_blue"
+                    android:textSize="20dp" />
 
                 <ExpandableListView
                     android:id="@+id/lvExpVariable"
@@ -84,24 +93,6 @@
                 android:layout_height="68dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/app_color"
-                    android:text="Download"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/app_color"
-                    android:text="Trust Calculation"
-                    android:textColor="@color/white" />
 
                 <Button
                     android:layout_width="wrap_content"
