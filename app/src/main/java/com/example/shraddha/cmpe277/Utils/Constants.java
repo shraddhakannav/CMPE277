@@ -250,7 +250,7 @@ public class Constants {
   public static void setPrettyDateFormat(DateFormat prettyDateFormat) {
     Constants.prettyDateFormat = prettyDateFormat;
   }
-  public static float getIconColorForInstitution(String institution) {
+
 
   public static DateFormat getPrettyLongDateFormat() {
     return prettyLongDateFormat;
@@ -284,6 +284,8 @@ public class Constants {
 
     return date.toString();
   }
+
+  public static float getIconColorForInstitution(String institution) {
     Float color = institutionToColorMapping.get(institution);
     if (color != null) {
       return color;

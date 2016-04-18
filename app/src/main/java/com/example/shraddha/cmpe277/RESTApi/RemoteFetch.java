@@ -24,7 +24,7 @@ public class RemoteFetch {
   static JSONObject obj = new JSONObject();
   private static String ERDDAP_BASE_URL = "http://erddap.cencoos.org/erddap/tabledap/";
   //private static String SERVER_BASE_URL = "http://192.168.1.138:5858/";// Shraddha
-  private static String SERVER_BASE_URL = "http://10.250.89.206:5858/";// Shraddha
+  private static String SERVER_BASE_URL = "http://10.250.89.206:5858/";// SJSU
   //10.250.89.206
   //private static String SERVER_BASE_URL="http://192.168.1.144:5858/";
 
