@@ -29,10 +29,14 @@ public class MapWithSourceActivity extends AppCompatActivity {
   private ParseDataAccessor dataAccessor = SenseApplication.getParseDAInstance();
   private List<SensorDataSource> sensorDataSources = new ArrayList<>();
   private ListView listView;
+  private String currentVariable;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_map_with_source);
+
+    currentVariable = getIntent().getStringExtra("VARIABLE");
+
     sensorDataSources = dataAccessor.getCachedSourceForOneVariable();
     if (!sensorDataSources.isEmpty()) {
       listView = (ListView) findViewById(R.id.datasourcesList);
@@ -45,6 +49,7 @@ public class MapWithSourceActivity extends AppCompatActivity {
           //Bundle bundle = new Bundle();
           //bundle.putSerializable("SensorSourceDate", sensorDataSources.get(position));
           intent.putExtra("object", sensorDataSources.get(position));
+          intent.putExtra("VARIABLE", currentVariable);
           startActivity(intent);
         }
       });

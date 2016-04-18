@@ -47,5 +47,9 @@
   <string name="title_activity_variable">Data Set Information</string>
   <string name="title_activity_sensor_data">Sensor Data</string>
 
+  <string name="title_activity_chart">ChartActivity</string>
+  <string name="title_activity_data_preview_line_chart">DataPreviewLineChartActivity</string>
+  <string name="title_activity_dependency_chart">DependencyChartActivity</string>
+
 
 </resources>

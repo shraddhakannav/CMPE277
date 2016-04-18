@@ -4,15 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/dividerColor"
     android:orientation="vertical"
-    tools:context="com.example.shraddha.cmpe277.VariableActivity"
-    >
+    tools:context="com.example.shraddha.cmpe277.VariableActivity">
 
   <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       >
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,12 +25,6 @@
           android:visibility="gone"
           />
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="vertical"
-          >
 
         <TextView
             android:id="@+id/txtViewInstitutionName"
@@ -69,18 +60,18 @@
             android:id="@+id/txtViewSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dataset id Summary"
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="16dp"
+            android:text="Dataset id Summary"
             android:textSize="16dp"
-            android:fontFamily="sans-serif-light"
-            />
+            android:fontFamily="sans-serif-light"/>
 
 
       </LinearLayout>
 
+                
 
       <RelativeLayout
           android:layout_width="match_parent"

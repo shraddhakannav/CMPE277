@@ -1,5 +1,8 @@
 package com.example.shraddha.cmpe277.Utils;
 
+import com.example.shraddha.cmpe277.ModelObjects.SensorData;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,8 +24,46 @@ public class Constants {
   // time_status_flag
 
   public static HashMap<String, List<String>> categoriesToVariables =
-      new HashMap<String, List<String>>();
+          new HashMap<String, List<String>>();
+  static DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+  static DateFormat standardDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
+  static DateFormat prettyDateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+  private static HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> dataForVariable;
 
+  public static HashMap<String, List<SensorData>> getDataForVariable() {
+    return dataForVariable;
+  }
+
+  public static void setDataForVariable(HashMap<String, List<SensorData>> dataForVariableTemp) {
+    dataForVariable = dataForVariableTemp;
+  }
+
+  public static DateFormat getSimpleDateFormat() {
+    return simpleDateFormat;
+  }
+
+  public static void setSimpleDateFormat(DateFormat simpleDateFormat) {
+    Constants.simpleDateFormat = simpleDateFormat;
+  }
+
+  public static DateFormat getStandardDateFormat() {
+    return standardDateFormat;
+  }
+
+  public static void setStandardDateFormat(DateFormat standardDateFormat) {
+    Constants.standardDateFormat = standardDateFormat;
+  }
+
+  public static DateFormat getPrettyDateFormat() {
+    return prettyDateFormat;
+  }
+
+  public static void setPrettyDateFormat(DateFormat prettyDateFormat) {
+    Constants.prettyDateFormat = prettyDateFormat;
+  }
+  
+  
+  
   public static void setCategoriesToVariables() {
     List<String> AtmosphereVariableList = new ArrayList<String>();
     AtmosphereVariableList.add("air_pressure");

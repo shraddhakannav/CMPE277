@@ -1,122 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.shraddha.cmpe277"
-    >
+    package="com.example.shraddha.cmpe277">
 
     <uses-sdk
         android:minSdkVersion="18"
-        android:targetSdkVersion="23"
-        />
+        android:targetSdkVersion="23" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".SenseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/sensor"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SensorActivity"
             android:hardwareAccelerated="false"
-            android:label="@string/title_activity_sensor"
-            android:screenOrientation="portrait"
-            />
+            android:label="@string/title_activity_sensor" />
         <activity
             android:name=".UserDisplayList"
-            android:label="@string/title_activity_userdisplay"
-            />
+            android:label="@string/title_activity_userdisplay" />
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"
-            />
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/new_google_maps_key"
-            />
+            android:value="@string/new_google_maps_key" />
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            >
+            android:label="@string/title_activity_maps">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.shraddha.cmpe277.UserDisplayList"
-                />
+                android:value="com.example.shraddha.cmpe277.UserDisplayList" />
         </activity>
         <activity
             android:name=".SensorRegistration"
             android:label="@string/title_activity_sensor_registration"
-            android:parentActivityName=".UserDisplayList"
-            >
+            android:parentActivityName=".UserDisplayList">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.shraddha.cmpe277.UserDisplayList"
-                />
+                android:value="com.example.shraddha.cmpe277.UserDisplayList" />
         </activity>
         <activity
             android:name=".IndividualSensor"
             android:label="@string/title_activity_individual_sensor"
-            android:parentActivityName=".SensorRegistration"
-            >
+            android:parentActivityName=".SensorRegistration">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.shraddha.cmpe277.SensorRegistration"
-                />
+                android:value="com.example.shraddha.cmpe277.SensorRegistration" />
         </activity>
         <activity
             android:name=".Dashboard"
-            android:label="@string/title_activity_dashboard"
-            />
+            android:label="@string/title_activity_dashboard" />
         <activity
             android:name=".SensorDetails"
             android:label="@string/title_activity_sensor_details"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".RegisterMeDialog"
-            android:label="@string/title_activity_register_me_dialog"
-            />
+            android:label="@string/title_activity_register_me_dialog" />
         <activity
             android:name=".activities.MapDetailsTab"
             android:label="@string/title_activity_map_details_tab"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ExpandableListActivity"
             android:label="@string/title_activity_expandable_list"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
-        <activity android:name=".activities.MapWithSourceActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.MapWithSourceActivity" />
         <activity
             android:name=".VariableActivity"
-            android:label="@string/title_activity_variable"
-            />
+            android:label="@string/title_activity_variable"></activity>
         <activity
             android:name=".SensorDataActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/title_activity_sensor_data"
-            />
+            android:label="@string/title_activity_sensor_data" />
+        <activity
+            android:name=".Charts.ChartActivity"
+            android:label="@string/title_activity_chart"></activity>
+        <activity
+            android:name=".Charts.DataPreviewLineChartActivity"
+            android:label="@string/title_activity_data_preview_line_chart"></activity>
+        <activity
+            android:name=".Charts.DependencyChartActivity"
+            android:label="@string/title_activity_dependency_chart"></activity>
         <!-- <provider -->
         <!-- android:name="android.support.v4.content.FileProvider" -->
         <!-- android:authorities="com.myfileprovider" -->
@@ -127,8 +114,7 @@
         <!-- android:resource="@xml/file_provider_paths" /> -->
         <!-- </provider> -->
 
-        <activity android:name=".activities.WebViewActivity">
-        </activity>
+        <activity android:name=".activities.WebViewActivity"></activity>
     </application>
 
 </manifest>

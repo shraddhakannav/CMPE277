@@ -33,7 +33,8 @@ public class ExpandableListActivity extends AppCompatActivity {
   ParseDataAccessor dataAccessor = SenseApplication.getParseDAInstance();
   private ProgressDialog progress;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_expandable_list);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,17 +61,20 @@ public class ExpandableListActivity extends AppCompatActivity {
 
     expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-      @Override public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-          int childPosition, long id) {
+      @Override
+      public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                  int childPosition, long id) {
         // CAll parse for data sets containing this variable
         showProgressDialog();
         String selectedGroup = listDataHeader.get(groupPosition);
         String selectedValue =
-            listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
         dataAccessor.getSourceForVariable(selectedValue);
         if (dataAccessor.getCachedSourceForOneVariable() != null
-            && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
+                && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
+
           Intent intent = new Intent(ExpandableListActivity.this, MapWithSourceActivity.class);
+          intent.putExtra("VARIABLE", selectedValue);
           startActivity(intent);
           dismissDialog();
         } else {

@@ -1,13 +1,36 @@
 package com.example.shraddha.cmpe277.ModelObjects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Shraddha on 4/17/16.
  */
-public class SensorData {
+public class SensorData implements Parcelable {
 
+    public static final Creator<SensorData> CREATOR = new Creator<SensorData>() {
+        @Override
+        public SensorData createFromParcel(Parcel in) {
+            return new SensorData(in);
+        }
+
+        @Override
+        public SensorData[] newArray(int size) {
+            return new SensorData[size];
+        }
+    };
     private String time;
     private Double x;
     private Double trustValue;
+
+    public SensorData() {
+    }
+
+    protected SensorData(Parcel in) {
+        time = in.readString();
+        x = in.readDouble();
+        trustValue = in.readDouble();
+    }
 
     public String getTime() {
         return time;
@@ -42,4 +65,19 @@ public class SensorData {
         sb.append("}");
         return super.toString();
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.time);
+        dest.writeDouble(this.x);
+        dest.writeDouble(this.trustValue);
+
+    }
+
+
 }
