@@ -10,70 +10,65 @@ import android.widget.Button;
 
 import com.example.shraddha.cmpe277.DataAccessors.ParseDataAccessor;
 import com.example.shraddha.cmpe277.RESTApi.RestHelper;
+import com.example.shraddha.cmpe277.activities.ExpandableListActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static String TAG = "Main Activity";
-    ParseDataAccessor dataAccessor;
-    RestHelper restHelper;
-    //// Mine
-    //    private String APPLICATION_ID = "MijqctrNfaJUf85RhA3yBgeRPPNJ4CLIPHE5mrLm";
-    //    private String CLIENT_KEY = "Sn1ExIwvI1Gvoj8HzplnikS9eoJe3HKj0vVPnupx";
+  private static String TAG = "Main Activity";
+  ParseDataAccessor dataAccessor;
+  RestHelper restHelper;
+  //// Mine
+  //    private String APPLICATION_ID = "MijqctrNfaJUf85RhA3yBgeRPPNJ4CLIPHE5mrLm";
+  //    private String CLIENT_KEY = "Sn1ExIwvI1Gvoj8HzplnikS9eoJe3HKj0vVPnupx";
 
-    //Old
-    //private String APPLICATION_ID = "SauyeeY2Qa9qhwldPqG9MOgTokl6uepNliHK4jZE";
-    //private String CLIENT_KEY = "3z5vqgwhTRsoo69LkFlLqww9p2nk6ZIa6uIbHc4k";
+  //Old
+  //private String APPLICATION_ID = "SauyeeY2Qa9qhwldPqG9MOgTokl6uepNliHK4jZE";
+  //private String CLIENT_KEY = "3z5vqgwhTRsoo69LkFlLqww9p2nk6ZIa6uIbHc4k";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        GlobalValues.init(getApplicationContext());
-        dataAccessor = SenseApplication.getParseDAInstance();
-        dataAccessor.getSensorCategoriesFromParse();
-        restHelper = SenseApplication.getRestHelperInstance();
-        restHelper.getInstitutionFromErrdap();
-        Button button_test = (Button) findViewById(R.id.userbtn);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        button_test.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserDisplayList.class);
-                startActivity(intent); //<<< start Activity here
-            }
-        });
+    GlobalValues.init(getApplicationContext());
+    dataAccessor = SenseApplication.getParseDAInstance();
+    dataAccessor.getSensorCategoriesFromParse();
+    restHelper = SenseApplication.getRestHelperInstance();
+    restHelper.getInstitutionFromErrdap();
+    Button crowdsourcedButton = (Button) findViewById(R.id.crowdsourcedBtn);
 
+    crowdsourcedButton.setOnClickListener(new View.OnClickListener() {
+      public void onClick(View v) {
+        Intent intent = new Intent(MainActivity.this, ExpandableListActivity.class);
+        startActivity(intent); //<<< start Activity here
+      }
+    });
 
-        Button buttonAdmin = (Button) findViewById(R.id.adminbtn);
-        buttonAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, VariableActivity.class);
-                startActivity(intent);
-            }
-        });
+    Button sensorProviderButton = (Button) findViewById(R.id.sensorProviderBtn);
+    sensorProviderButton.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        Intent intent = new Intent(MainActivity.this, UserDisplayList.class);
+        startActivity(intent);
+      }
+    });
+  }
 
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
 
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
+
+    //noinspection SimplifiableIfStatement
+    if (id == R.id.action_settings) {
+      return true;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+    return super.onOptionsItemSelected(item);
+  }
 }
