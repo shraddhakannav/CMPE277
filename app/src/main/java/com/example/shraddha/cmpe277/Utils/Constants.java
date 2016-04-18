@@ -21,7 +21,7 @@ public class Constants {
   // time_status_flag
 
   public static HashMap<String, List<String>> categoriesToVariables =
-          new HashMap<String, List<String>>();
+      new HashMap<String, List<String>>();
 
   public static void setCategoriesToVariables() {
     List<String> AtmosphereVariableList = new ArrayList<String>();
@@ -35,35 +35,35 @@ public class Constants {
 
     // Sea water
     List<String> SWvariableList = new ArrayList<String>();
-    SWvariableList.add("sea_water_density");
-    SWvariableList.add("sea_water_density_status_flag");
-    SWvariableList.add("sea_water_electrical_conductivity");
-    SWvariableList.add("sea_water_electrical_conductivity_status_flag");
+    //SWvariableList.add("sea_water_density");
+    //SWvariableList.add("sea_water_density_status_flag");
+    //SWvariableList.add("sea_water_electrical_conductivity");
+    //SWvariableList.add("sea_water_electrical_conductivity_status_flag");
     SWvariableList.add("sea_water_ph_reported_on_total_scale");
     SWvariableList.add("sea_water_practical_salinity");
     SWvariableList.add("sea_water_pressure");
-    SWvariableList.add("sea_water_pressure_status_flag");
-    SWvariableList.add("sea_water_salinity");
-    SWvariableList.add("sea_water_salinity_status_flag");
-    SWvariableList.add("sea_water_sigma_theta");
+    //  SWvariableList.add("sea_water_pressure_status_flag");
+    ///SWvariableList.add("sea_water_salinity");
+    // SWvariableList.add("sea_water_salinity_status_flag");
+    //SWvariableList.add("sea_water_sigma_theta");
     SWvariableList.add("sea_water_speed");
     SWvariableList.add("sea_water_temperature");
-    SWvariableList.add("sea_water_temperature_status_flag");
+    //SWvariableList.add("sea_water_temperature_status_flag");
     SWvariableList.add("direction_of_sea_water_velocity");
-    SWvariableList.add("eastward_sea_water_velocity");
-    SWvariableList.add("eastward_sea_water_velocity_status_flag");
-    SWvariableList.add("northward_sea_water_velocity");
-    SWvariableList.add("upward_sea_water_velocity");
-    SWvariableList.add("northward_sea_water_velocity_status_flag");
+    //SWvariableList.add("eastward_sea_water_velocity");
+    //SWvariableList.add("eastward_sea_water_velocity_status_flag");
+    //SWvariableList.add("northward_sea_water_velocity");
+    //SWvariableList.add("upward_sea_water_velocity");
+    //SWvariableList.add("northward_sea_water_velocity_status_flag");
     SWvariableList.add("fractional_saturation_of_oxygen_in_sea_water");
-    SWvariableList.add("volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water");
+    //SWvariableList.add("volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water");
     SWvariableList.add("percent_oxygen_ratio_between_air_and_sea_water");
     SWvariableList.add("mass_concentration_of_chlorophyll_in_sea_water");
     categoriesToVariables.put("Sea Water", SWvariableList);
 
     // Sea surface
     List<String> SSvariableList = new ArrayList<String>();
-    SSvariableList.add("sea_water_density");
+    //SSvariableList.add("sea_water_density");
     SSvariableList.add("sea_surface_dominant_wave_period");
     SSvariableList.add("sea_surface_height");
     SSvariableList.add("sea_surface_height_above_sea_level");
@@ -91,8 +91,8 @@ public class Constants {
     WindvariableList.add("wind_gust_from_direction");
     WindvariableList.add("wind_speed");
     WindvariableList.add("wind_speed_of_gust");
-    WindvariableList.add("eastward_wind");
-    WindvariableList.add("northward_wind");
+    //WindvariableList.add("eastward_wind");
+    //WindvariableList.add("northward_wind");
 
     categoriesToVariables.put("Wind", WindvariableList);
     // Temperature
@@ -100,7 +100,7 @@ public class Constants {
     TempvariableList.add("dew_point_temperature");
     TempvariableList.add("fuel_temperature");
     TempvariableList.add("soil_temperature");
-    TempvariableList.add("temperuature_status_flag");
+    //TempvariableList.add("temperuature_status_flag");
 
     categoriesToVariables.put("Temperature", TempvariableList);
 
@@ -111,7 +111,7 @@ public class Constants {
     CO2variableList.add("dissolved_carbon_dioxide_co2");
     CO2variableList.add("fugacity_of_carbon_dioxide_in_sea_water");
     CO2variableList.add(
-            "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
+        "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_dry_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_wet_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_sea_water_in_dry_gas");
@@ -120,25 +120,25 @@ public class Constants {
 
     List<String> MiscvariableList = new ArrayList<String>();
     MiscvariableList.add("battery_voltage");
-    MiscvariableList.add("depth");
+    //MiscvariableList.add("depth");
     MiscvariableList.add("depth_to_water_level");
     MiscvariableList.add("fluorescence");
-    MiscvariableList.add("latitude");
-    MiscvariableList.add("longitude");
+    //MiscvariableList.add("latitude");
+    //MiscvariableList.add("longitude");
     MiscvariableList.add("lwe_thickness_of_precipitation_amount");
     MiscvariableList.add("height");
-    MiscvariableList.add("pco2");
+    //MiscvariableList.add("pco2");
     MiscvariableList.add("photosynthetically_active_radiation");
     MiscvariableList.add("precipitation_increment");
-    MiscvariableList.add("pressure_status_flag");
+    //MiscvariableList.add("pressure_status_flag");
     MiscvariableList.add("relative_humidity");
     MiscvariableList.add("river_discharge");
     MiscvariableList.add("solar_radiation");
-    MiscvariableList.add("speed_of_sound_in_sea_water");
+    //MiscvariableList.add("speed_of_sound_in_sea_water");
     MiscvariableList.add("toa_incoming_shortwave_flux");
     MiscvariableList.add("total_alkalinity");
     MiscvariableList.add("turbidity");
-    MiscvariableList.add("webcam");
+    // MiscvariableList.add("webcam");
     categoriesToVariables.put("Miscellaneous", MiscvariableList);
   }
 
@@ -152,7 +152,6 @@ public class Constants {
     SimpleDateFormat sdfformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
     try {
       date = sdfformat.parse(rawDate);
-
     } catch (ParseException e) {
       e.printStackTrace();
     }

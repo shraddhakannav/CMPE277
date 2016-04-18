@@ -39,8 +39,7 @@ public class MapWithSourceActivity extends AppCompatActivity {
       ListViewAdapter listViewAdapter = new ListViewAdapter(sensorDataSources, this);
       listView.setAdapter(listViewAdapter);
       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
           Intent intent = new Intent(MapWithSourceActivity.this, VariableActivity.class);
           //intent.putExtra("something", "something");
           //Bundle bundle = new Bundle();
@@ -67,18 +66,19 @@ public class MapWithSourceActivity extends AppCompatActivity {
 
   private void initializeMaps() {
     MapFragment mapFragment =
-            (MapFragment) getFragmentManager().findFragmentById(R.id.datasourcesMap);
+        (MapFragment) getFragmentManager().findFragmentById(R.id.datasourcesMap);
     mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(GoogleMap googleMap) {
+      @Override public void onMapReady(GoogleMap googleMap) {
         //LatLngBounds latLngBounds =
         //    new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
         googleMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
+            CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
         for (SensorDataSource source : sensorDataSources) {
           googleMap.addMarker(new MarkerOptions().position(
-                  new LatLng(source.getMinLatitude(), source.getMinLongitude()))
-                  .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25)));
+              new LatLng(source.getMinLatitude(), source.getMinLongitude()))
+              .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25))
+              .title(source.getSourceId())
+              .snippet(source.getInstitution()));
         }
       }
     });

@@ -44,6 +44,7 @@
             android:layout_marginRight="16dp"
             android:text="Institution Name"
             android:textAlignment="center"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/app_color"
             android:textSize="25dp"
             />
@@ -61,6 +62,7 @@
             android:textAlignment="center"
             android:textStyle="bold"
             android:textSize="20dp"
+            android:fontFamily="sans-serif-light"
             />
 
         <TextView
@@ -73,6 +75,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="16dp"
             android:textSize="16dp"
+            android:fontFamily="sans-serif-light"
             />
 
 
@@ -97,7 +100,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-
+            android:fontFamily="sans-serif-light"
             android:id="@+id/available_sensor_list"
             />
 
@@ -111,6 +114,7 @@
             android:id="@+id/selectedSensorValue"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-light"
             />
       </RelativeLayout>
 
@@ -132,6 +136,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:id="@+id/locationLabel"
+            android:fontFamily="sans-serif-light"
             />
 
         <TextView
@@ -144,6 +149,79 @@
             android:id="@+id/latlng_value"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-light"
+            />
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          android:layout_marginTop="10dp"
+          android:background="@color/white"
+          android:id="@+id/_start_time_limit_container"
+          android:elevation="2dp"
+
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Time"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/start_time_label"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/start_time_label"
+            android:text="Start Time Value"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:id="@+id/start_time_value"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-light"
+            />
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          android:layout_marginTop="10dp"
+          android:background="@color/white"
+          android:id="@+id/end_time_limit_container"
+          android:elevation="2dp"
+
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Time"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/end_time_label"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/end_time_label"
+            android:text="End Time Value"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:id="@+id/end_time_value"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-light"
             />
       </RelativeLayout>
 
@@ -169,6 +247,7 @@
             android:onClick="selectStartDate"
             android:text='Select Start Date'
             android:textColor="@color/app_color"
+            android:fontFamily="sans-serif-light"
             >
 
         </Button>
@@ -189,6 +268,7 @@
             android:onClick="selectEndDate"
             android:text='Select End Date'
             android:textColor="@color/app_color"
+            android:fontFamily="sans-serif-light"
             />
       </LinearLayout>
 
@@ -208,6 +288,7 @@
             android:background="@drawable/round_button"
             android:onClick="seeData"
             android:text="See Data"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/white"
             />
 
@@ -231,7 +312,9 @@
             android:onClick="moreInfo"
             android:id="@+id/infoURLButton"
             android:text="More Information"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/white"
+            android:layout_marginBottom="40dp"
             />
 
       </LinearLayout>

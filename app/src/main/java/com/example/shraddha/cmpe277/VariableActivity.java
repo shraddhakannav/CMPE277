@@ -63,6 +63,7 @@ public class VariableActivity extends AppCompatActivity {
   private TextView txtViewSummary;
   private Button infoURLButton;
   private ImageView scenicImage;
+  private TextView startTimeValue, endTimeValue;
   private SensorDataSource source;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -149,13 +150,16 @@ public class VariableActivity extends AppCompatActivity {
         }
       });
 
+      startTimeValue = (TextView) findViewById(R.id.start_time_value);
+      endTimeValue = (TextView) findViewById(R.id.end_time_value);
+      startTimeValue.setText(source.getStartTime());
+      endTimeValue.setText(source.getEndTime());
+
       //createExpandableListView();
     } catch (ParseException e) {
       e.printStackTrace();
     }
   }
-
-
 
   public void seeData(View view) {
     Intent intent = new Intent(VariableActivity.this, SensorDataActivity.class);

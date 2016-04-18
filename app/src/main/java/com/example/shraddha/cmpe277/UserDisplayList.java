@@ -14,8 +14,7 @@ import java.util.ArrayList;
 
 public class UserDisplayList extends AppCompatActivity {
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.listviewsample);
     initializeUI();
@@ -28,15 +27,14 @@ public class UserDisplayList extends AppCompatActivity {
     ArrayList<String> texts = new ArrayList<String>();
 
     texts.add("Dashboard");
-    texts.add("Maps");
+   // texts.add("Maps");
     texts.add("Register Sensors");
     texts.add("Upload Data");
-    texts.add("Filter");
+   // texts.add("Filter");
     images.add(R.drawable.dashboard);
-    images.add(R.drawable.maps);
+    // images.add(R.drawable.maps);
     images.add(R.drawable.sensorregistration);
     images.add(R.drawable.reports);
-    images.add(R.drawable.dashboard);
 
     CustomAdapter adapter = new CustomAdapter(this, images, texts);
     list.setAdapter(adapter);
@@ -44,8 +42,7 @@ public class UserDisplayList extends AppCompatActivity {
   }
 
   public class ListClickHandler implements AdapterView.OnItemClickListener {
-    @Override
-    public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+    @Override public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
       // TODO Auto-generated method stub
       TextView listText = (TextView) view.findViewById(R.id.info_text);
       String text = listText.getText().toString();
@@ -54,23 +51,23 @@ public class UserDisplayList extends AppCompatActivity {
         Intent i = new Intent(UserDisplayList.this, Dashboard.class);
         startActivity(i);
       }
+      //if (position == 1) {
+      //  Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
+      //  startActivity(i);
+      //}
       if (position == 1) {
-        Intent i = new Intent(UserDisplayList.this, MapsActivity.class);
-        startActivity(i);
-      }
-      if (position == 2) {
 
         Intent i = new Intent(UserDisplayList.this, SensorRegistration.class);
         startActivity(i);
       }
-      if (position == 3) {
+      if (position == 2) {
         Intent i = new Intent(UserDisplayList.this, SensorActivity.class);
         startActivity(i);
       }
-      if (position == 4) {
-        Intent i = new Intent(UserDisplayList.this, ExpandableListActivity.class);
-        startActivity(i);
-      }
+      //if (position == 4) {
+      //  Intent i = new Intent(UserDisplayList.this, ExpandableListActivity.class);
+      //  startActivity(i);
+      //}
     }
   }
 }
