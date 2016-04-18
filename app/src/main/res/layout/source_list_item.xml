@@ -2,71 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      >
-
-    <TextView
-        android:id="@+id/institution_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:paddingLeft="25dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Institution Name"
-        android:textColor="@color/app_color"
-        android:textSize="16sp"
-        />
-
-
-    <TextView
-        android:id="@+id/data_set_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/institution_name"
-        android:layout_marginTop="16dp"
-        android:paddingLeft="25dp"
-        android:text="Data set id "
-        android:textStyle="bold"
-        />
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/start_time_container"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/data_set_id"
-        >
+        android:layout_height="wrap_content">
 
-      <ImageView
-          android:id="@+id/calendar_icon_start"
-          android:layout_width="30dp"
-          android:layout_height="30dp"
-          android:layout_centerVertical="true"
-          android:layout_marginLeft="25dp"
-          android:src="@drawable/calendar_48"
-          />
+        <TextView
+            android:id="@+id/institution_name"
+        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-light"
+            android:paddingLeft="25dp"
+            android:text="Institution Name"
+            android:textColor="@color/app_color"
+            android:textSize="16sp" />
 
-      <TextView
-          android:id="@+id/start_time"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
-          android:layout_marginLeft="16dp"
-          android:layout_toRightOf="@+id/calendar_icon_start"
-          android:text="Start time to End time"
-          android:fontFamily="sans-serif-light"
-          />
+
+        <TextView
+            android:id="@+id/data_set_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/institution_name"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="25dp"
+            android:text="Data set id "
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/start_time_container"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/data_set_id">
+
+            <ImageView
+                android:id="@+id/calendar_icon_start"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/calendar_48" />
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/calendar_icon_start"
+                android:fontFamily="sans-serif-light"
+                android:text="Start time to End time" />
+
+
+        </RelativeLayout>
 
 
     </RelativeLayout>
-
-
-  </RelativeLayout>
 
 
 </LinearLayout>

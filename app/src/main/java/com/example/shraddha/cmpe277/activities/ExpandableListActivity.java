@@ -3,8 +3,6 @@ package com.example.shraddha.cmpe277.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -72,7 +70,6 @@ public class ExpandableListActivity extends AppCompatActivity {
         dataAccessor.getSourceForVariable(selectedValue);
         if (dataAccessor.getCachedSourceForOneVariable() != null
                 && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
-
           Intent intent = new Intent(ExpandableListActivity.this, MapWithSourceActivity.class);
           intent.putExtra("VARIABLE", selectedValue);
           startActivity(intent);

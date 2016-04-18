@@ -27,46 +27,15 @@ public class Constants {
   //* time
   // time_status_flag
 
-  public static HashMap<String, List<String>> categoriesToVariables =
-      new HashMap<String, List<String>>();
-  static DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-  static DateFormat standardDateFormat =
-      new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
+    public static HashMap<String, List<String>> categoriesToVariables =
+            new HashMap<String, List<String>>();
+    static DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    static DateFormat standardDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
   static DateFormat prettyDateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-  private static HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>>
-      dataForVariable;
+  static DateFormat prettyLongDateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss", Locale.US);
+  static DateFormat prettyDayNDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.US);
 
-  public static HashMap<String, List<SensorData>> getDataForVariable() {
-    return dataForVariable;
-  }
-
-  public static void setDataForVariable(HashMap<String, List<SensorData>> dataForVariableTemp) {
-    dataForVariable = dataForVariableTemp;
-  }
-
-  public static DateFormat getSimpleDateFormat() {
-    return simpleDateFormat;
-  }
-
-  public static void setSimpleDateFormat(DateFormat simpleDateFormat) {
-    Constants.simpleDateFormat = simpleDateFormat;
-  }
-
-  public static DateFormat getStandardDateFormat() {
-    return standardDateFormat;
-  }
-
-  public static void setStandardDateFormat(DateFormat standardDateFormat) {
-    Constants.standardDateFormat = standardDateFormat;
-  }
-
-  public static DateFormat getPrettyDateFormat() {
-    return prettyDateFormat;
-  }
-
-  public static void setPrettyDateFormat(DateFormat prettyDateFormat) {
-    Constants.prettyDateFormat = prettyDateFormat;
-  }
+  private static HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> dataForVariable;
 
   public static void setCategoriesToVariables() {
     List<String> AtmosphereVariableList = new ArrayList<String>();
@@ -156,7 +125,7 @@ public class Constants {
     CO2variableList.add("dissolved_carbon_dioxide_co2");
     CO2variableList.add("fugacity_of_carbon_dioxide_in_sea_water");
     CO2variableList.add(
-        "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
+            "surface_carbon_dioxide_partial_pressure_difference_between_air_and_sea_water");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_dry_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_air_in_wet_gas");
     CO2variableList.add("mole_fraction_of_carbon_dioxide_in_sea_water_in_dry_gas");
@@ -187,29 +156,28 @@ public class Constants {
     categoriesToVariables.put("Miscellaneous", MiscvariableList);
   }
 
-  public static String formatDate(String rawDate) {
-    Date date = new Date();
-    //2016-04-04T23:36:00Z
-
-    //String year = rawDate.substring(0,3);
-    //String month = rawDate.substring(5,6);
-    //String day = rawDate.substring(8,9);
-    SimpleDateFormat sdfformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
-    try {
-      date = sdfformat.parse(rawDate);
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-    return date.toString();
+  public static HashMap<String, List<SensorData>> getDataForVariable() {
+    return dataForVariable;
   }
 
-  //public float getHue(String institution) {
-  //  BitmapDescriptorFactory.
-  //  BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
-  //}
+  public static void setDataForVariable(HashMap<String, List<SensorData>> dataForVariableTemp) {
+    dataForVariable = dataForVariableTemp;
+  }
 
+  public static DateFormat getSimpleDateFormat() {
+    return simpleDateFormat;
+  }
+
+  public static void setSimpleDateFormat(DateFormat simpleDateFormat) {
+    Constants.simpleDateFormat = simpleDateFormat;
+  }
+
+  public static DateFormat getStandardDateFormat() {
+    return standardDateFormat;
+  }
+  
   public static void prepareInsitutitionHashMap() {
+  
 
     institutionToColorMapping.put("Axiom Data Science", BitmapDescriptorFactory.HUE_BLUE);
     institutionToColorMapping.put("California State University East Bay",
@@ -266,15 +234,56 @@ public class Constants {
         "Center for Operational Oceanographic Products and Services (CO-OPS)",
         getMarkerIcon("#FF7F50"));
   }
+  public static void setStandardDateFormat(DateFormat standardDateFormat) {
+    Constants.standardDateFormat = standardDateFormat;
+  }
 
+  public static DateFormat getPrettyDateFormat() {
+    return prettyDateFormat;
+  }
   public static float getMarkerIcon(String color) {
     float[] hsv = new float[3];
     Color.colorToHSV(Color.parseColor(color), hsv);
     return hsv[0];
   }
 
+  public static void setPrettyDateFormat(DateFormat prettyDateFormat) {
+    Constants.prettyDateFormat = prettyDateFormat;
+  }
   public static float getIconColorForInstitution(String institution) {
 
+  public static DateFormat getPrettyLongDateFormat() {
+    return prettyLongDateFormat;
+  }
+
+  public static void setPrettyLongDateFormat(DateFormat prettyLongDateFormat) {
+    Constants.prettyLongDateFormat = prettyLongDateFormat;
+  }
+
+  public static DateFormat getPrettyDayNDateFormat() {
+    return prettyDayNDateFormat;
+  }
+
+  public static void setPrettyDayNDateFormat(DateFormat prettyDayNDateFormat) {
+    Constants.prettyDayNDateFormat = prettyDayNDateFormat;
+  }
+
+  public static String formatDate(String rawDate) {
+    Date date = new Date();
+    //2016-04-04T23:36:00Z
+
+    //String year = rawDate.substring(0,3);
+    //String month = rawDate.substring(5,6);
+    //String day = rawDate.substring(8,9);
+    SimpleDateFormat sdfformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
+    try {
+      date = sdfformat.parse(rawDate);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+    return date.toString();
+  }
     Float color = institutionToColorMapping.get(institution);
     if (color != null) {
       return color;
