@@ -33,7 +33,8 @@ public class ExpandableListActivity extends AppCompatActivity {
   ParseDataAccessor dataAccessor = SenseApplication.getParseDAInstance();
   private ProgressDialog progress;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_expandable_list);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -41,10 +42,11 @@ public class ExpandableListActivity extends AppCompatActivity {
 
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View view) {
+      @Override
+      public void onClick(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null)
-            .show();
+                .setAction("Action", null)
+                .show();
       }
     });
 
@@ -60,24 +62,25 @@ public class ExpandableListActivity extends AppCompatActivity {
 
     expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
-      @Override public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-          int childPosition, long id) {
+      @Override
+      public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                  int childPosition, long id) {
         // CAll parse for data sets containing this variable
         showProgressDialog();
         String selectedGroup = listDataHeader.get(groupPosition);
         String selectedValue =
-            listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
+                listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
         dataAccessor.getSourceForVariable(selectedValue);
         if (dataAccessor.getCachedSourceForOneVariable() != null
-            && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
+                && dataAccessor.getCachedSourceForOneVariable().size() > 0) {
           Intent intent = new Intent(ExpandableListActivity.this, MapWithSourceActivity.class);
           startActivity(intent);
           dismissDialog();
         } else {
           dismissDialog();
           Toast.makeText(ExpandableListActivity.this,
-              "No matching datasets found, please select another variable", Toast.LENGTH_SHORT)
-              .show();
+                  "No matching datasets found, please select another variable", Toast.LENGTH_SHORT)
+                  .show();
         }
 
         return false;
@@ -86,7 +89,8 @@ public class ExpandableListActivity extends AppCompatActivity {
 
     expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-      @Override public void onGroupExpand(int groupPosition) {
+      @Override
+      public void onGroupExpand(int groupPosition) {
         //Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Expanded",
         //    Toast.LENGTH_SHORT).show();
       }
@@ -94,7 +98,8 @@ public class ExpandableListActivity extends AppCompatActivity {
 
     expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 
-      @Override public void onGroupCollapse(int groupPosition) {
+      @Override
+      public void onGroupCollapse(int groupPosition) {
         //Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Collapsed",
         //    Toast.LENGTH_SHORT).show();
       }

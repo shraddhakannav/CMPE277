@@ -13,13 +13,10 @@ import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.shraddha.cmpe277.Adapters.CustomExpandableListAdapter;
-import com.example.shraddha.cmpe277.Gson.Institution;
 import com.example.shraddha.cmpe277.ModelObjects.SensorDataSource;
 import com.example.shraddha.cmpe277.Utils.Constants;
-
 import com.example.shraddha.cmpe277.activities.WebViewActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -192,6 +190,45 @@ public class VariableActivity extends AppCompatActivity {
     listDataChild.put(VARIABLE_GROUP_NAME, arrayList);
   }
 
+  private void buildAlertDialog() {
+
+    String variables = source.getVariables();
+    variables = variables.replace("[", "");
+    variables = variables.replace("]", "");
+    final String variablesAsArray[] = variables.split(",");
+
+    // Strings to Show In Dialog with Radio Buttons
+    final CharSequence[] items = variablesAsArray;
+
+    // Creating and Building the Dialog
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Available variables for this dataset");
+    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface dialog, int item) {
+        levelDialog.dismiss();
+        selectedSensorValue.setText(variablesAsArray[item]);
+      }
+    });
+    levelDialog = builder.create();
+    levelDialog.show();
+  }
+
+  private void initializeMaps() {
+    MapFragment mapFragment =
+        (MapFragment) getFragmentManager().findFragmentById(R.id.datasourcesMap);
+    mapFragment.getMapAsync(new OnMapReadyCallback() {
+      @Override public void onMapReady(GoogleMap googleMap) {
+        //LatLngBounds latLngBounds =
+        //    new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
+        googleMap.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
+        googleMap.addMarker(new MarkerOptions().position(
+            new LatLng(source.getMinLatitude(), source.getMinLongitude()))
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25)));
+      }
+    });
+  }
+
   class mDateSetListener implements DatePickerDialog.OnDateSetListener {
 
     Button v;
@@ -231,44 +268,5 @@ public class VariableActivity extends AppCompatActivity {
         e.printStackTrace();
       }
     }
-  }
-
-  private void buildAlertDialog() {
-
-    String variables = source.getVariables();
-    variables = variables.replace("[", "");
-    variables = variables.replace("]", "");
-    final String variablesAsArray[] = variables.split(",");
-
-    // Strings to Show In Dialog with Radio Buttons
-    final CharSequence[] items = variablesAsArray;
-
-    // Creating and Building the Dialog
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Available variables for this dataset");
-    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface dialog, int item) {
-        levelDialog.dismiss();
-        selectedSensorValue.setText(variablesAsArray[item]);
-      }
-    });
-    levelDialog = builder.create();
-    levelDialog.show();
-  }
-
-  private void initializeMaps() {
-    MapFragment mapFragment =
-        (MapFragment) getFragmentManager().findFragmentById(R.id.datasourcesMap);
-    mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override public void onMapReady(GoogleMap googleMap) {
-        //LatLngBounds latLngBounds =
-        //    new LatLngBounds(new LatLng(37.7749, 122.4194), new LatLng(37.836213, -123.254866));
-        googleMap.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(new LatLng(37.7749, -122.4194), 6));
-        googleMap.addMarker(new MarkerOptions().position(
-            new LatLng(source.getMinLatitude(), source.getMinLongitude()))
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin_25)));
-      }
-    });
   }
 }

@@ -20,25 +20,25 @@ import java.net.URLEncoder;
 public class RemoteFetch {
 
   private static final String OPEN_WEATHER_MAP_API =
-      "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+          "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
   static JSONObject obj = new JSONObject();
   private static String ERDDAP_BASE_URL = "http://erddap.cencoos.org/erddap/tabledap/";
   private static String SERVER_BASE_URL = "http://192.168.1.138:5858/";// Shraddha
   //private static String SERVER_BASE_URL="http://192.168.1.144:5858/";
 
   public static DataResult getOneWeekData(String datasetID, String variables, String currentDate,
-      String prevWeekDay) {
+                                          String prevWeekDay) {
     try {
       datasetID = URLEncoder.encode(datasetID, "utf-8");
       variables = URLEncoder.encode(variables, "utf-8");
       String buildQuery =
-          ERDDAP_BASE_URL + datasetID + ".json?" + variables + "&" + "time>=" + prevWeekDay + "&"
-              + "time<=" + currentDate;
+              ERDDAP_BASE_URL + datasetID + ".json?" + variables + "&" + "time>=" + prevWeekDay + "&"
+                      + "time<=" + currentDate;
       URL url = new URL(buildQuery);
       HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
       BufferedReader reader =
-          new BufferedReader(new InputStreamReader(connection.getInputStream()));
+              new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
       StringBuffer json = new StringBuffer(1024);
       String tmp = "";
@@ -69,20 +69,21 @@ public class RemoteFetch {
   }
 
   public static JSONObject getTrustForData(String datasetID, String variable, String currentDate,
-      String enddate) {
+                                           String enddate) {
     try {
 
       datasetID = URLEncoder.encode(datasetID, "utf-8");
       variable = URLEncoder.encode(variable, "utf-8");
       //http://192.168.1.138:5858/trust/ds/mlml_mlml_sea/sensor/sea_water_temperature/startdate/2016-04-04T23:36:00Z/7
       String url = SERVER_BASE_URL + "trust/ds/" + datasetID + "/sensor/" + variable + "/startdate/"
-          + currentDate + "/" + enddate;
+              + currentDate + "/" + enddate;
       // URL url = new URL(buildQuery);
 
       AsyncHttpClient client = new AsyncHttpClient();
       client.get(url, null, new AsyncHttpResponseHandler() {
         // When the response returned by REST has Http response code '200'
-        @Override public void onSuccess(String response) {
+        @Override
+        public void onSuccess(String response) {
           // Hide Progress Dialog
           try {
             // JSON Object
@@ -97,7 +98,8 @@ public class RemoteFetch {
         }
 
         // When the response returned by REST has Http response code other than '200'
-        @Override public void onFailure(int statusCode, Throwable error, String content) {
+        @Override
+        public void onFailure(int statusCode, Throwable error, String content) {
           try {
             // JSON Object
             obj = new JSONObject("{ 'content': " + content + " }");

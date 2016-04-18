@@ -4,241 +4,224 @@
     android:layout_height="match_parent"
     android:background="@color/dividerColor"
     android:orientation="vertical"
-    tools:context="com.example.shraddha.cmpe277.VariableActivity"
-    >
+    tools:context="com.example.shraddha.cmpe277.VariableActivity">
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dividerColor"
-        android:orientation="vertical"
-        android:id="@+id/top_container"
-        >
-      <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="200dp"
-          android:background="@drawable/coast_img"
-          android:id="@+id/background_image"
-          android:visibility="gone"
-          />
+        android:layout_height="match_parent">
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="vertical"
-          >
 
-        <TextView
-            android:id="@+id/txtViewInstitutionName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/top_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Institution Name"
-            android:textAlignment="center"
-            android:textColor="@color/app_color"
-            android:textSize="25dp"
-            />
-
-
-        <TextView
-            android:id="@+id/txtViewSourceId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Dataset Id"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            />
-
-        <TextView
-            android:id="@+id/txtViewSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dataset id Summary"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="16dp"
-            />
-
-
-      </LinearLayout>
-
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
-          android:layout_marginTop="10dp"
-          android:background="@color/white"
-          android:id="@+id/available_sensor_container"
-          android:elevation="2dp"
-
-          >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Available Sensors"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-
-            android:id="@+id/available_sensor_list"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/available_sensor_list"
-            android:text="Select a sensor"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:id="@+id/selectedSensorValue"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-      </RelativeLayout>
-
-      <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:id="@+id/lat_lng_container"
-          android:layout_marginTop="10dp"
-          android:layout_marginRight="16dp"
-          android:layout_marginLeft="16dp"
-          android:background="@color/white"
-          android:elevation="2dp"
-          >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Location"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:id="@+id/locationLabel"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/locationLabel"
-            android:text="latitude,longtitude"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:id="@+id/latlng_value"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-      </RelativeLayout>
-
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="horizontal"
-          android:layout_marginTop="10dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
-          android:elevation="2dp"
-          >
-
-        <Button
-            android:id="@+id/buttonStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:onClick="selectStartDate"
-            android:text='Select Start Date'
-            android:textColor="@color/app_color"
-            >
-
-        </Button>
-        <View
-            android:layout_width="1dp"
             android:background="@color/dividerColor"
-            android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonEndTime"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/background_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/coast_img"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtViewInstitutionName"
+                    android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:onClick="selectEndDate"
-            android:text='Select End Date'
-            android:textColor="@color/app_color"
-            />
-      </LinearLayout>
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/dividerColor"
-          android:orientation="vertical"
-          >
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_button"
-            android:onClick="seeData"
-            android:text="See Data"
-            android:textColor="@color/white"
-            />
-
-        <fragment
-            android:id="@+id/singleSourceMap"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            class="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_button"
-            android:onClick="moreInfo"
-            android:id="@+id/infoURLButton"
-            android:text="More Information"
-            android:textColor="@color/white"
-            />
-
-      </LinearLayout>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Institution Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/app_color"
+                    android:textSize="25dp" />
 
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/txtViewSourceId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:text="Dataset Id"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtViewSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="25dp"
+                    android:text="Dataset id Summary"
+                    android:textSize="16dp" />
 
 
-  </ScrollView>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/available_sensor_container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:elevation="2dp"
+
+                >
+
+                <TextView
+                    android:id="@+id/available_sensor_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+
+                    android:text="Available Sensors" />
+
+                <TextView
+                    android:id="@+id/selectedSensorValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@+id/available_sensor_list"
+                    android:gravity="right"
+                    android:text="Select a sensor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/lat_lng_container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/locationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Location" />
+
+                <TextView
+                    android:id="@+id/latlng_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@+id/locationLabel"
+                    android:gravity="right"
+                    android:text="latitude,longtitude" />
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:elevation="2dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:onClick="selectStartDate"
+                    android:text='Select Start Date'
+                    android:textColor="@color/app_color">
+
+                </Button>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:background="@color/dividerColor" />
+
+                <Button
+                    android:id="@+id/buttonEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:onClick="selectEndDate"
+                    android:text='Select End Date'
+                    android:textColor="@color/app_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dividerColor"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_button"
+                    android:onClick="seeData"
+                    android:text="See Data"
+                    android:textColor="@color/white" />
+
+                <fragment
+                    android:id="@+id/singleSourceMap"
+                    class="com.google.android.gms.maps.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp" />
+
+                <Button
+                    android:id="@+id/infoURLButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_button"
+                    android:onClick="moreInfo"
+                    android:text="More Information"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 </LinearLayout>

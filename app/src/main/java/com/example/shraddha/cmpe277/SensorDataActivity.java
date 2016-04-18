@@ -2,8 +2,6 @@ package com.example.shraddha.cmpe277;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,31 +18,29 @@ import com.example.shraddha.cmpe277.ModelObjects.SensorData;
 import com.example.shraddha.cmpe277.RESTApi.RemoteFetch;
 import com.example.shraddha.cmpe277.Utils.Constants;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class SensorDataActivity extends AppCompatActivity {
 
-  public static OnJSONResponseCallback callback;
-  ExpandableListView expListView;
-  SesnorDataExpandableListAdapter listAdapter;
-  JSONObject allData;
-  ProgressDialog progress;
-  private String directoryName = "MSC_DATA";
-  private String filename = "Data";
-  TextView downloadButton;
-  File dataFile;
-
+    public static OnJSONResponseCallback callback;
+    ExpandableListView expListView;
+    SesnorDataExpandableListAdapter listAdapter;
+    JSONObject allData;
+    ProgressDialog progress;
+    TextView downloadButton;
+    File dataFile;
+    private String directoryName = "MSC_DATA";
+    private String filename = "Data";
     private List<String> listDataHeader;
     private HashMap<String, List<com.example.shraddha.cmpe277.ModelObjects.SensorData>> listDataChild;
     private String dataset;
@@ -81,15 +77,16 @@ public class SensorDataActivity extends AppCompatActivity {
 
         progress = new ProgressDialog(this);
 
-    getDataFromServer();
-    downloadButton = (TextView) findViewById(R.id.downloadButton);
-    downloadButton.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        saveDownloadedData();
-      }
-    });
-    //setExapndableListView();
-  }
+        getDataFromServer();
+        downloadButton = (TextView) findViewById(R.id.downloadButton);
+        downloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveDownloadedData();
+            }
+        });
+        //setExapndableListView();
+    }
 
     private void getDataFromServer() {
 
@@ -148,69 +145,67 @@ public class SensorDataActivity extends AppCompatActivity {
             }
         });
 
-    expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
-      @Override public void onGroupExpand(int groupPosition) {
-        Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Expanded",
-            Toast.LENGTH_SHORT).show();
-      }
-    });
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Expanded",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-    expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 
-      @Override public void onGroupCollapse(int groupPosition) {
-        Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Collapsed",
-            Toast.LENGTH_SHORT).show();
-      }
-    });
-  }
-
-  private void showProgressDialog() {
-
-    progress.setTitle("Loading");
-    progress.setMessage("Wait while loading...");
-    progress.show();
-  }
-
-  private void dismissDialog() {
-    progress.dismiss();
-  }
-
-  private void prepareListData() {
-    Constants.setCategoriesToVariables();
-
-    try {
-      listDataHeader = new ArrayList<String>();
-      listDataChild = new HashMap<String, List<SensorData>>();
-
-      JSONObject trust = (JSONObject) allData.get("trust");
-      Iterator keysToCopyIterator = trust.keys();
-      while (keysToCopyIterator.hasNext()) {
-        String key = (String) keysToCopyIterator.next();
-        listDataHeader.add(key);
-        List<SensorData> arrayList = new ArrayList<SensorData>();
-
-        JSONArray array = trust.getJSONArray(key);
-        for (int index = 0; index < array.length(); index++) {
-          SensorData data = new SensorData();
-          JSONObject currentValue = (JSONObject) array.get(index);
-          data.setX(currentValue.getDouble("x"));
-          data.setTrustValue(currentValue.getDouble("trustValue"));
-          data.setTime(currentValue.getString("time"));
-          arrayList.add(data);
-        }
-        listDataChild.put(key, arrayList);
-      }
-        Constants.setDataForVariable(listDataChild);
-    } catch (Exception e) {
-      e.printStackTrace();
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getApplicationContext(), listDataHeader.get(groupPosition) + " Collapsed",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-  }
 
-  public interface OnJSONResponseCallback {
-    void onJSONResponse(boolean success, JSONObject response);
-  }
-    
+    private void showProgressDialog() {
+
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.show();
+    }
+
+    private void dismissDialog() {
+        progress.dismiss();
+    }
+
+    private void prepareListData() {
+        Constants.setCategoriesToVariables();
+
+        try {
+            listDataHeader = new ArrayList<String>();
+            listDataChild = new HashMap<String, List<SensorData>>();
+
+            JSONObject trust = (JSONObject) allData.get("trust");
+            Iterator keysToCopyIterator = trust.keys();
+            while (keysToCopyIterator.hasNext()) {
+                String key = (String) keysToCopyIterator.next();
+                listDataHeader.add(key);
+                List<SensorData> arrayList = new ArrayList<SensorData>();
+
+                JSONArray array = trust.getJSONArray(key);
+                for (int index = 0; index < array.length(); index++) {
+                    SensorData data = new SensorData();
+                    JSONObject currentValue = (JSONObject) array.get(index);
+                    data.setX(currentValue.getDouble("x"));
+                    data.setTrustValue(currentValue.getDouble("trustValue"));
+                    data.setTime(currentValue.getString("time"));
+                    arrayList.add(data);
+                }
+                listDataChild.put(key, arrayList);
+            }
+            Constants.setDataForVariable(listDataChild);
+        } catch (Exception e) {
+            e.printStackTrace();
+    }
+    }
+
     public void saveDownloadedData() {
         Log.d("Download", "Trying to save data");
         if (allData != null) {
@@ -273,20 +268,18 @@ public class SensorDataActivity extends AppCompatActivity {
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     /* Checks if external storage is available to at least read */
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(
-                state)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(
+                state);
+    }
+
+    public interface OnJSONResponseCallback {
+        void onJSONResponse(boolean success, JSONObject response);
     }
 }
 
